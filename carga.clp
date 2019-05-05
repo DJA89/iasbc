@@ -1,5 +1,5 @@
 ; Tue Apr 30 15:31:18 CEST 2019
-; 
+;
 ;+ (version "3.5")
 ;+ (build "Build 663")
 
@@ -385,10 +385,10 @@
 ;+		(allowed-classes Plato)
 ;+		(cardinality 0 1)
 		(create-accessor read-write)))
-		
+
 (definstances instancies
 ; Tue Apr 30 14:59:46 CEST 2019
-; 
+;
 ;+ (version "3.5")
 ;+ (build "Build 663")
 )
