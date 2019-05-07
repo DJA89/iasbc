@@ -412,7 +412,7 @@
 	(format t "%s [%d, %d] " ?pregunta ?rangini ?rangfi)
 	(bind ?respuesta (read))
 	(while (not(and(>= ?respuesta ?rangini)(<= ?respuesta ?rangfi))) do
-		(format t "�%s? [%d, %d] " ?pregunta ?rangini ?rangfi)
+		(format t "%s? [%d, %d] " ?pregunta ?rangini ?rangfi)
 		(bind ?respuesta (read))
 	)
 	?respuesta
@@ -450,31 +450,31 @@
 (defrule say-hello
   =>
   (printout t "Bienvenido/a al sistema de Menú Semanales" crlf "Favor responda algunas preguntas para que podamos ayudarle" crlf)
-  (assert (welcome-given true)))
+  (assert (welcome-given TRUE)))
 
 (defrule ask-age
-  (welcome-given true)
+  (welcome-given TRUE)
   =>
   (printout t "Cuál es su edad?" crlf)
 	(bind ?answer (read))
 	(while (not (integerp ?answer)) do
-	(printout t "Cuál es su edad?" crlf)
-	(bind ?answer (read)))
+		(printout t "Cuál es su edad?" crlf)
+		(bind ?answer (read))
+	)
   (assert (edad ?answer))
-(printout t crlf)
-(if (< ?answer 65)
-	then (printout t "Este programa es sólo para mayores de 64 años" crlf)(halt) (reset)))
+	(printout t crlf)
+	(if (< ?answer 65)
+		then (printout t "Este programa es sólo para mayores de 64 años" crlf)(halt) (reset)))
 
 (defrule ask-sex
-  (welcome-given true)
+  (welcome-given TRUE)
   =>
   (bind ?res (pregunta-lista "Es usted hombre o mujer?" hombre mujer))
   (assert (sexo ?res)))
 
 ;Esta quizá habría que desglozarla en diferentes preguntas? Como por ejemplo, cuántas veces a la semana camina? Practica algún deporte? Etc.
 (defrule ask-actividad-fisicas
-  (sexo ?)
-  (edad ?)
+  (welcome-given TRUE)
   =>
   (bind ?res (pregunta-lista-imprimiendo-opciones "Qué nivel de actividad física tiene?" sedentario moderadamente-activo activo  muy-activo))
   (assert (actividad-fisica ?res))
@@ -482,24 +482,21 @@
 
 
 (defrule ask-sickness
-  (sexo ?)
-  (edad ?)
+  (welcome-given TRUE)
   =>
   (bind ?res (pregunta-lista-imprimiendo-opciones "Sufre de alguna de estas enfermedades? Cuáles?" diabetes hipertension osteoporosis problemas-articulares ninguna))
   (assert (nueva-enfermedad ?res))
 (printout t crlf))
 
 (defrule ask-diet
-  (sexo ?)
-  (edad ?)
+  (welcome-given TRUE)
   =>
   (bind ?res (pregunta-lista-imprimiendo-opciones "Sigue alguna de las siguientes dietas?" vegano vegetariano ninguna))
   (assert (dieta ?res))
 (printout t crlf))
 
 (defrule ask-temp
-  (sexo ?)
-  (edad ?)
+  (welcome-given TRUE)
   =>
   (bind ?res (pregunta-lista-imprimiendo-opciones "Para qué momento del año es el menú?" primavera verano otoño invierno))
   (assert (temporada ?res))
