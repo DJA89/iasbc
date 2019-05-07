@@ -419,12 +419,33 @@
 )
 
 ;;; Funcion para hacer una pregunta con un conjunto definido de valores de repuesta
-(deffunction pregunta-lista (?pregunta $?valores_posibles)
-	(printout t ?pregunta crlf)
-	(bind ?resposta (readline))
-	(bind ?res (str-explode ?resposta))
-	?res
-)
+(deffunction pregunta-lista (?question $?allowed-values)
+   (printout t ?question crlf)
+   (bind ?answer (read))
+   (if (lexemep ?answer)
+       then (bind ?answer (lowcase ?answer)))
+   (while (not (member ?answer ?allowed-values)) do
+      (printout t ?question crlf)
+      (bind ?answer (read))
+      (if (lexemep ?answer)
+          then (bind ?answer (lowcase ?answer))))
+   ?answer)
+
+	 (deffunction pregunta-lista-imprimiendo-opciones (?question $?allowed-values)
+	    (printout t ?question crlf)
+			(progn$ (?value ?allowed-values) (printout t ?value crlf))
+			(printout t crlf "--> ")
+	    (bind ?answer (read))
+	    (if (lexemep ?answer)
+	        then (bind ?answer (lowcase ?answer)))
+	    (while (not (member ?answer ?allowed-values)) do
+  	 	   (printout t ?question crlf)
+	 			 (progn$ (?value ?allowed-values) (printout t ?value crlf))
+	 			(printout t crlf "--> ")
+	       (bind ?answer (read))
+	       (if (lexemep ?answer)
+	           then (bind ?answer (lowcase ?answer))))
+	    ?answer)
 
 (defrule say-hello
   =>
@@ -435,7 +456,14 @@
   (welcome-given true)
   =>
   (printout t "Cuál es su edad?" crlf)
-  (assert (edad (read))))
+	(bind ?answer (read))
+	(while (not (integerp ?answer)) do
+	(printout t "Cuál es su edad?" crlf)
+	(bind ?answer (read)))
+  (assert (edad ?answer))
+(printout t crlf)
+(if (< ?answer 65)
+	then (printout t "Este programa es sólo para mayores de 64 años" crlf)(halt) (reset)))
 
 (defrule ask-sex
   (welcome-given true)
@@ -448,27 +476,31 @@
   (sexo ?)
   (edad ?)
   =>
-  (bind ?res (pregunta-lista "Qué nivel de actividad física tiene?" sedentario moderadamente-activo activo  muy-activo))
-  (assert (actividad-fisica ?res)))
+  (bind ?res (pregunta-lista-imprimiendo-opciones "Qué nivel de actividad física tiene?" sedentario moderadamente-activo activo  muy-activo))
+  (assert (actividad-fisica ?res))
+(printout t crlf))
 
 
 (defrule ask-sickness
   (sexo ?)
   (edad ?)
   =>
-  (bind ?res (pregunta-lista "Sufre de alguna de estas enfermedades? Cuáles?" diabetes hipertension osteoporosis problemas-articulares))
-  (assert (nueva-enfermedad ?res)))
+  (bind ?res (pregunta-lista-imprimiendo-opciones "Sufre de alguna de estas enfermedades? Cuáles?" diabetes hipertension osteoporosis problemas-articulares ninguna))
+  (assert (nueva-enfermedad ?res))
+(printout t crlf))
 
 (defrule ask-diet
   (sexo ?)
   (edad ?)
   =>
-  (bind ?res (pregunta-lista "Sigue alguna de las siguientes dietas?" vegano vegetariano ninguna))
-  (assert (dieta ?res)))
+  (bind ?res (pregunta-lista-imprimiendo-opciones "Sigue alguna de las siguientes dietas?" vegano vegetariano ninguna))
+  (assert (dieta ?res))
+(printout t crlf))
 
 (defrule ask-temp
   (sexo ?)
   (edad ?)
   =>
-  (bind ?res (pregunta-lista "Para qué momento del año es el menú?" primavera verano otoño invierno))
-  (assert (temporada ?res)))
+  (bind ?res (pregunta-lista-imprimiendo-opciones "Para qué momento del año es el menú?" primavera verano otoño invierno))
+  (assert (temporada ?res))
+(printout t crlf))
