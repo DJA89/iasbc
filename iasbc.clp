@@ -887,6 +887,11 @@
   =>
 	(bind ?res (pregunta-integer "Cuál es su edad?"))
 	(assert (edad ?res))
+	(if (< ?res 65) then
+	(printout t "Esta ayuda es para mayores de 64" crlf)
+	(halt)
+	(reset)
+	)
 )
 
 (defrule ask-sex
