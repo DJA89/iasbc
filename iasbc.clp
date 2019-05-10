@@ -533,6 +533,37 @@
 ;	)
 ;)
 
+(deftemplate Plato
+	(slot nombre (type STRING))
+	(slot carbos (type FLOAT))
+	(slot calorias (type FLOAT))
+	(slot grasas (type FLOAT))
+	(slot fibras (type FLOAT))
+	(multislot ingredientes (type STRING))
+)
+
+(deftemplate Requisitos
+	(slot calorias (type FLOAT))
+	(slot minGrasas (type FLOAT))
+	(slot maxGrasas (type FLOAT))
+	(slot fibras (type FLOAT))
+	(slot minCarbos (type FLOAT))
+	(slot maxCarbos (type FLOAT))
+)
+
+(deftemplate SolucionDia
+	(slot dia (type STRING))
+	(slot grasas (type FLOAT))
+	(slot carbos (type FLOAT))
+	(slot fibras (type FLOAT))
+	(slot calorias (type FLOAT))
+	(slot desayuno (type STRING))
+	(slot comida (type STRING))
+	(slot postreComida (type STRING))
+	(slot cena (type STRING))
+	(slot postreCena (type STRING))
+)
+
 
 ;;PREGUNTAS
 
@@ -586,7 +617,7 @@
 (defrule say-hello
   =>
   (printout t "Bienvenido/a al sistema de Menú Semanales" crlf "Favor responda algunas preguntas para que podamos ayudarle" crlf)
-  (assert (welcome-given true))
+  (assert (welcome-given TRUE))
 	(assert (preguntar-enfermedad)))
 
 (defrule ask-age
@@ -611,7 +642,8 @@
 
 ;Esta quizá habría que desglozarla en diferentes preguntas? Como por ejemplo, cuántas veces a la semana camina? Practica algún deporte? Etc.
 (defrule ask-actividad-fisicas
-  (welcome-given TRUE)
+  (sexo ?)
+  (edadAprox ?)
   =>
   (bind ?res (pregunta-lista-imprimiendo-opciones "Qué nivel de actividad física tiene?" sedentario moderadamente-activo activo  muy-activo))
   (assert (actividad-fisica ?res))
@@ -620,7 +652,7 @@
 
 (defrule ask-sickness
   (sexo ?)
-  (edad ?)
+  (edadAprox ?)
 	?var <- (preguntar-enfermedad)
   =>
   (bind ?res (pregunta-lista-imprimiendo-opciones "Sufre de alguna de estas enfermedades? Cuál?" diabetes hipertension osteoporosis problemas-articulares ninguna))
@@ -631,7 +663,7 @@
 
 (defrule more-sickness
 	(sexo ?)
-	(edad ?)
+  (edadAprox ?)
 	;(not (preguntar-enfermedad))
 	(enfermedad ?qual)
 =>
@@ -641,15 +673,76 @@
 	then (assert (preguntar-enfermedad))))
 
 (defrule ask-diet
-  (welcome-given TRUE)
+  (sexo ?)
+  (edadAprox ?)
   =>
   (bind ?res (pregunta-lista-imprimiendo-opciones "Sigue alguna de las siguientes dietas?" vegano vegetariano ninguna))
   (assert (dieta ?res))
 (printout t crlf))
 
 (defrule ask-temp
-  (welcome-given TRUE)
+  (sexo ?)
+  (edadAprox ?)
   =>
   (bind ?res (pregunta-lista-imprimiendo-opciones "Para qué momento del año es el menú?" primavera verano otoño invierno))
   (assert (temporada ?res))
 (printout t crlf))
+
+(defrule eliminarPlatosNoVeganos
+	(dieta vegano)
+	?plato <-(object (is-a Plato)(Compatibilidad ?compt))
+	(test (or (eq(str-compare ?compt "NoAptoV") 0) (eq(str-compare ?compt "AptoVegetariano") 0) ))
+	=>
+	(send ?plato delete))
+
+(defrule eliminarPlatosNoVegetarianos
+	(dieta vegano)
+	?plato <- (object (is-a Plato)(Compatibilidad ?compt))
+	(test (eq(str-compare ?compt "NoAptoV") 0) )
+	=>
+	(send ?plato delete))
+
+(defrule eliminarPlatosNoTemporada
+	(temp ?t)
+	?plato <-(object (is-a Plato)(Temporada ?temp))
+	(test (not(eq(str-compare ?temp ?t) 0) ))
+	=>
+	(send ?plato delete)
+)
+
+
+(defrule abstraccionEdad
+	?fe <- (edad ?e)
+	=>
+	(if (>= ?e 70)
+		then (assert (edadAprox 70-79))
+		else
+		(assert (edadAprox 60-69))
+	)
+	(retract ?fe)
+)
+
+
+;Escribir los facts igual que los valores de la ontologia para que funcione
+(defrule calculaRequisitosDiarios
+	?perfil <-(object (is-a PerfilPersona)(Edad ?e) (Genero ?g) (NivelActividad ?nA) (EnergiaNecesaria ?calorias))
+	(edadAprox ?e2)
+	(sexo ?g2)
+	(actividad-fisica ?nA2)
+	(test ( and (eq ?e ?e2) (eq ?g ?g2) (eq ?nA nA2) ))
+	=>
+
+	(bind ?rec (send ?perfil recomendaciones))
+	(bind ?minCratio (send ?rec minCarbohidratos%))
+	(bind ?maxCratio (send ?rec maxCarbohidratos%))
+	(bind ?minGratio (send ?rec minGrasasTotales%))
+	(bind ?maxGratio (send ?rec maxGrasasTotales%))
+
+	(bind ?fibras (send ?rec fibras))
+	(bind ?minC ( * (/ ?minCratio 100) ?calorias))
+	(bind ?maxC ( * (/ ?maxCratio 100) ?calorias))
+	(bind ?minG ( * (/ ?minGratio 100) ?calorias))
+	(bind ?maxG ( * (/ ?maxGratio 100) ?calorias))
+
+	(assert (Requisitos (calorias ?calorias) (minGrasas ?minG) (maxGrasas ?maxC) (fibras ?fibras) (minCarbos ?minC) (maxCarbos ?maxC)))
+)
