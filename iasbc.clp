@@ -5,7 +5,7 @@
 
 ;Comienza pegado de .pont
 
-; Tue Apr 30 14:59:02 CEST 2019
+; Thu May 09 20:41:54 CEST 2019
 ;
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -14,9 +14,14 @@
 (defclass %3ACLIPS_TOP_LEVEL_SLOT_CLASS "Fake class to save top-level slot information"
 	(is-a USER)
 	(role abstract)
-	(single-slot NAF
+	(single-slot Compatibilidad
 		(type SYMBOL)
-		(allowed-values Sedentario PocoActivo Activo MuyActivo)
+		(allowed-values AptoVegano AptoVegetariano NoAptoV)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot MaxGrasasTotales%25
+		(type INTEGER)
+		(range 0 100)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
 	(single-slot Domingo
@@ -39,16 +44,12 @@
 		(create-accessor read-write))
 	(single-slot RestriccionesDiarias
 		(type INSTANCE)
-;+		(allowed-classes RestriccionDiaria)
+;+		(allowed-classes)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
 	(single-slot Enfermedad
 		(type SYMBOL)
 		(allowed-values Diabetes Osteoporosis)
-;+		(cardinality 0 1)
-		(create-accessor read-write))
-	(single-slot Nombre
-		(type STRING)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
 	(single-slot MenuRecomendado
@@ -59,7 +60,7 @@
 	(single-slot Comida
 		(type INSTANCE)
 ;+		(allowed-classes Plato)
-;+		(cardinality 0 1)
+;+		(cardinality 1 1)
 		(create-accessor read-write))
 	(single-slot Lunes
 		(type INSTANCE)
@@ -69,11 +70,15 @@
 	(single-slot Cena
 		(type INSTANCE)
 ;+		(allowed-classes Plato)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(single-slot alimento
+		(type STRING)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
 	(single-slot Sexo
-		(type SYMBOL)
-		(allowed-values Hombre Mujer)
+		(type INSTANCE)
+;+		(allowed-classes)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
 	(single-slot Merienda
@@ -83,7 +88,7 @@
 		(create-accessor read-write))
 	(single-slot Temporada
 		(type SYMBOL)
-		(allowed-values Oto%C3%B1o Primavera Verano Invierno)
+		(allowed-values Otono Primavera Verano Invierno)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
 	(single-slot Proteinas
@@ -93,15 +98,31 @@
 	(single-slot Desayuno
 		(type INSTANCE)
 ;+		(allowed-classes Plato)
-;+		(cardinality 0 1)
+;+		(cardinality 1 1)
 		(create-accessor read-write))
 	(single-slot Azucares
+		(type FLOAT)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot Cantidad
 		(type FLOAT)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
 	(single-slot Recomendaciones
 		(type INSTANCE)
 ;+		(allowed-classes)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot MaxSal
+		(type FLOAT)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot ontology_Class5
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot Fibra
+		(type FLOAT)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
 	(single-slot Jueves
@@ -113,13 +134,13 @@
 		(type FLOAT)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
-	(single-slot ontology_Class25
+	(single-slot ontology_Class10019
 		(type STRING)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
 	(single-slot Edad
-		(type INTEGER)
-		(range 65 100)
+		(type SYMBOL)
+		(allowed-values 60-69 70-79)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
 	(single-slot Total+Carbohidratos
@@ -136,12 +157,27 @@
 ;+		(allowed-classes MenuDia)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
+	(single-slot Plato+Principal
+		(type INSTANCE)
+;+		(allowed-classes Plato)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
 	(single-slot Total+Grasas
 		(type FLOAT)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
+	(single-slot MinGrasasTotales%25
+		(type INTEGER)
+		(range 0 100)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
 	(single-slot Hierro
 		(type FLOAT)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot MaxCarbohidratos%25
+		(type INTEGER)
+		(range 0 100)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
 	(single-slot Martes
@@ -161,6 +197,48 @@
 		(type FLOAT)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
+	(single-slot requisitosEnfermedades
+		(type INSTANCE)
+;+		(allowed-classes)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot RecomendacionesParticulares
+		(type INSTANCE)
+;+		(allowed-classes)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot ontology_Class14
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot recomendaciones
+		(type INSTANCE)
+;+		(allowed-classes RecomendacionesGenerales)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(single-slot Contiene
+		(type INSTANCE)
+;+		(allowed-classes Alimento)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot Genero
+		(type SYMBOL)
+		(allowed-values Hombre Mujer)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot ontology_Class17
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot Postre
+		(type INSTANCE)
+;+		(allowed-classes Plato)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot ontology_Class19
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
 	(single-slot Fibra+dietetica
 		(type FLOAT)
 ;+		(cardinality 0 1)
@@ -170,17 +248,35 @@
 		(allowed-values plancha hervido)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
+	(single-slot EnergiaNecesaria
+		(type FLOAT)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
 	(single-slot Vitamina+A
 ;+		(comment "cantidad en %")
 		(type FLOAT)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot MinCarbohidratos%25
+		(type INTEGER)
+		(range 0 100)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
 	(single-slot Vitamina+C
 		(type FLOAT)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
+	(single-slot NivelActividad
+		(type SYMBOL)
+		(allowed-values Sedentario PocoActivo Activo MuyActivo)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
 	(single-slot Calorias
 		(type FLOAT)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot plato
+		(type STRING)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
 	(multislot Ingredientes
@@ -194,57 +290,18 @@
 ;+		(cardinality 0 1)
 		(create-accessor read-write)))
 
-(defclass Persona
-	(is-a USER)
-	(role concrete)
-	(single-slot Nombre
-		(type STRING)
-;+		(cardinality 0 1)
-		(create-accessor read-write))
-	(single-slot MenuRecomendado
-		(type INSTANCE)
-;+		(allowed-classes MenuSemanal)
-;+		(cardinality 0 1)
-		(create-accessor read-write))
-	(single-slot Edad
-		(type INTEGER)
-		(range 65 100)
-;+		(cardinality 0 1)
-		(create-accessor read-write))
-	(single-slot Recomendaciones
-		(type INSTANCE)
-;+		(allowed-classes)
-;+		(cardinality 0 1)
-		(create-accessor read-write))
-	(single-slot NAF
-		(type SYMBOL)
-		(allowed-values Sedentario PocoActivo Activo MuyActivo)
-;+		(cardinality 0 1)
-		(create-accessor read-write))
-	(single-slot Dieta
-		(type SYMBOL)
-		(allowed-values Vegano Vegetariano Todo)
-;+		(cardinality 0 1)
-		(create-accessor read-write))
-	(single-slot RestriccionesDiarias
-		(type INSTANCE)
-;+		(allowed-classes RestriccionDiaria)
-;+		(cardinality 0 1)
-		(create-accessor read-write))
-	(single-slot Enfermedad
-		(type SYMBOL)
-		(allowed-values Diabetes Osteoporosis)
-;+		(cardinality 0 1)
-		(create-accessor read-write))
-	(single-slot Sexo
-		(type SYMBOL)
-		(allowed-values Hombre Mujer)
-;+		(cardinality 0 1)
-		(create-accessor read-write)))
-
 (defclass Plato
 	(is-a USER)
 	(role concrete)
+	(single-slot plato
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot Compatibilidad
+		(type SYMBOL)
+		(allowed-values AptoVegano AptoVegetariano NoAptoV)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
 	(multislot Ingredientes
 		(type INSTANCE)
 ;+		(allowed-classes Ingrediente)
@@ -252,7 +309,7 @@
 		(create-accessor read-write))
 	(single-slot Temporada
 		(type SYMBOL)
-		(allowed-values Oto%C3%B1o Primavera Verano Invierno)
+		(allowed-values Otono Primavera Verano Invierno)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
 	(single-slot Coccion
@@ -261,15 +318,7 @@
 ;+		(cardinality 0 1)
 		(create-accessor read-write)))
 
-(defclass RestriccionDiaria
-	(is-a USER)
-	(role concrete)
-	(single-slot Vitamina+A+requerida
-		(type FLOAT)
-;+		(cardinality 0 1)
-		(create-accessor read-write)))
-
-(defclass Ingrediente "La cantidad de nutrientes esta expreseda en %"
+(defclass Alimento "La cantidad de nutrientes esta expreseda en %"
 	(is-a USER)
 	(role concrete)
 	(single-slot Vitamina+A
@@ -319,6 +368,10 @@
 		(create-accessor read-write))
 	(single-slot Total+Carbohidratos
 		(type FLOAT)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot alimento
+		(type STRING)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
 	(single-slot Fibra+dietetica
@@ -375,32 +428,347 @@
 	(single-slot Desayuno
 		(type INSTANCE)
 ;+		(allowed-classes Plato)
-;+		(cardinality 0 1)
+;+		(cardinality 1 1)
 		(create-accessor read-write))
 	(single-slot Comida
 		(type INSTANCE)
 ;+		(allowed-classes Plato)
-;+		(cardinality 0 1)
+;+		(cardinality 1 1)
 		(create-accessor read-write))
 	(single-slot Cena
 		(type INSTANCE)
 ;+		(allowed-classes Plato)
+;+		(cardinality 1 1)
+		(create-accessor read-write)))
+
+(defclass Ingrediente
+	(is-a USER)
+	(role concrete)
+	(single-slot Cantidad
+		(type FLOAT)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
-	(single-slot Merienda
+	(single-slot Contiene
 		(type INSTANCE)
-;+		(allowed-classes Plato)
+;+		(allowed-classes Alimento)
 ;+		(cardinality 0 1)
 		(create-accessor read-write)))
 
+(defclass PerfilPersona
+	(is-a USER)
+	(role concrete)
+	(single-slot EnergiaNecesaria
+		(type FLOAT)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot Edad
+		(type SYMBOL)
+		(allowed-values 60-69 70-79)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot requisitosEnfermedades
+		(type INSTANCE)
+;+		(allowed-classes)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot recomendaciones
+		(type INSTANCE)
+;+		(allowed-classes RecomendacionesGenerales)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(single-slot Genero
+		(type SYMBOL)
+		(allowed-values Hombre Mujer)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot NivelActividad
+		(type SYMBOL)
+		(allowed-values Sedentario PocoActivo Activo MuyActivo)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot Enfermedad
+		(type SYMBOL)
+		(allowed-values Diabetes Osteoporosis)
+;+		(cardinality 0 1)
+		(create-accessor read-write)))
+
+(defclass RecomendacionesGenerales "% de los nutrientes necesarios en funcion de la energia"
+	(is-a USER)
+	(role concrete)
+	(single-slot MinCarbohidratos%25
+		(type INTEGER)
+		(range 0 100)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot MaxGrasasTotales%25
+		(type INTEGER)
+		(range 0 100)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot Fibra
+		(type FLOAT)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot MinGrasasTotales%25
+		(type INTEGER)
+		(range 0 100)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot MaxCarbohidratos%25
+		(type INTEGER)
+		(range 0 100)
+;+		(cardinality 0 1)
+		(create-accessor read-write)))
+
+(defclass Hipertension
+	(is-a USER)
+	(role concrete)
+	(single-slot MaxSal
+		(type FLOAT)
+;+		(cardinality 0 1)
+		(create-accessor read-write)))
 ;Termina pegado de .pont
 
 (definstances instancies
 
-	; Tue Apr 30 14:59:02 CEST 2019
+	; Thu May 09 20:41:54 CEST 2019
 	;
 	;+ (version "3.5")
 	;+ (build "Build 663")
+
+	([ontology_Class0] of  Plato
+
+		(Coccion plancha)
+		(Compatibilidad NoAptoV)
+		(Ingredientes
+			[ontology_Class10001]
+			[ontology_Class10003])
+		(plato "Patatas fritas con Pollo")
+		(Temporada Verano))
+
+	([ontology_Class1] of  Alimento
+
+		(alimento "Patata")
+		(Azucares 2.0)
+		(Calcio 2.0)
+		(Calorias 161.0)
+		(Colesterol 0.0)
+		(Fibra+dietetica 3.8)
+		(Hierro 10.0)
+		(Peso+Total 173.0)
+		(Potasio 0.926)
+		(Proteinas 4.3)
+		(Sodio 0.017)
+		(Total+Carbohidratos 37.0)
+		(Total+Grasas 0.2)
+		(Vitamina+A 0.3)
+		(Vitamina+C 28.0))
+
+	([ontology_Class10001] of  Ingrediente
+
+		(Cantidad 200.0)
+		(Contiene [ontology_Class1]))
+
+	([ontology_Class10003] of  Ingrediente
+
+		(Cantidad 100.0)
+		(Contiene [ontology_Class10008]))
+
+	([ontology_Class10004] of  Plato
+
+		(Coccion plancha)
+		(Compatibilidad AptoVegano)
+		(Ingredientes [ontology_Class10001])
+		(plato "Patatas fritas")
+		(Temporada Verano))
+
+	([ontology_Class10005] of  Alimento
+
+		(alimento "Carne")
+		(Azucares 0.0)
+		(Calcio 1.2)
+		(Calorias 256.0)
+		(Colesterol 0.104)
+		(Fibra+dietetica 0.0)
+		(Hierro 9.9)
+		(Peso+Total 113.0)
+		(Potasio 0.329)
+		(Proteinas 31.0)
+		(Sodio 0.08)
+		(Total+Carbohidratos 0.0)
+		(Total+Grasas 14.0)
+		(Vitamina+A 0.4)
+		(Vitamina+C 0.2))
+
+	([ontology_Class10008] of  Alimento
+
+		(alimento "Pollo")
+		(Azucares 0.0)
+		(Calcio 0.8)
+		(Calorias 187.0)
+		(Colesterol 0.08)
+		(Fibra+dietetica 0.0)
+		(Hierro 7.6)
+		(Peso+Total 85.0)
+		(Potasio 0.173)
+		(Proteinas 20.0)
+		(Sodio 0.06)
+		(Total+Carbohidratos 0.0)
+		(Total+Grasas 11.0)
+		(Vitamina+A 10.0)
+		(Vitamina+C 0.6))
+
+	([ontology_Class10009] of  Alimento
+
+		(alimento "Cerdo")
+		(Azucares 0.0)
+		(Calcio 1.3)
+		(Calorias 202.0)
+		(Colesterol 0.075)
+		(Fibra+dietetica 0.0)
+		(Hierro 5.2)
+		(Peso+Total 85.0)
+		(Potasio 0.29)
+		(Proteinas 22.0)
+		(Sodio 0.048)
+		(Total+Carbohidratos 0.0)
+		(Total+Grasas 12.0)
+		(Vitamina+A 0.1)
+		(Vitamina+C 0.1))
+
+	([ontology_Class10010] of  Alimento
+
+		(alimento "Fideo")
+		(Azucares 0.7)
+		(Calcio 0.7)
+		(Calorias 196.0)
+		(Colesterol 0.0)
+		(Fibra+dietetica 2.2)
+		(Hierro 8.8)
+		(Peso+Total 124.0)
+		(Potasio 0.055)
+		(Proteinas 7.2)
+		(Sodio 0.0012)
+		(Total+Carbohidratos 38.0)
+		(Total+Grasas 1.2)
+		(Vitamina+A 0.0)
+		(Vitamina+C 0.0))
+
+	([ontology_Class10011] of  Alimento
+
+		(alimento "Huevo")
+		(Azucares 0.2)
+		(Calcio 2.2)
+		(Calorias 72.0)
+		(Colesterol 0.186)
+		(Fibra+dietetica 0.0)
+		(Hierro 4.9)
+		(Peso+Total 50.0)
+		(Potasio 0.069)
+		(Proteinas 6.3)
+		(Sodio 0.071)
+		(Total+Carbohidratos 0.4)
+		(Total+Grasas 4.8)
+		(Vitamina+A 5.4)
+		(Vitamina+C 0.0))
+
+	([ontology_Class10012] of  Alimento
+
+		(alimento "Pan")
+		(Azucares 1.6)
+		(Calcio 3.2)
+		(Calorias 77.0)
+		(Colesterol 0.0)
+		(Fibra+dietetica 0.8)
+		(Hierro 3.2)
+		(Peso+Total 29.0)
+		(Potasio 0.037)
+		(Proteinas 2.6)
+		(Sodio 0.142)
+		(Total+Carbohidratos 14.0)
+		(Total+Grasas 1.0)
+		(Vitamina+A 0.0)
+		(Vitamina+C 0.0))
+
+	([ontology_Class10013] of  Plato
+
+		(Coccion hervido)
+		(Compatibilidad NoAptoV)
+		(Ingredientes
+			[ontology_Class10014]
+			[ontology_Class10016]
+			[ontology_Class10017])
+		(plato "Pasta")
+		(Temporada Verano))
+
+	([ontology_Class10014] of  Ingrediente
+
+		(Cantidad 100.0)
+		(Contiene [ontology_Class10010]))
+
+	([ontology_Class10016] of  Ingrediente
+
+		(Cantidad 50.0)
+		(Contiene [ontology_Class10005]))
+
+	([ontology_Class10017] of  Ingrediente
+
+		(Cantidad 35.0)
+		(Contiene [ontology_Class2]))
+
+	([ontology_Class2] of  Alimento
+
+		(alimento "Tomate")
+		(Azucares 3.2)
+		(Calcio 0.9)
+		(Calorias 22.0)
+		(Colesterol 0.0)
+		(Fibra+dietetica 1.5)
+		(Hierro 1.8)
+		(Peso+Total 123.0)
+		(Potasio 0.292)
+		(Proteinas 1.1)
+		(Sodio 0.0062)
+		(Total+Carbohidratos 4.8)
+		(Total+Grasas 0.3)
+		(Vitamina+A 20.0)
+		(Vitamina+C 28.0))
+
+	([ontology_Class3] of  Alimento
+
+		(alimento "Arroz")
+		(Azucares 0.1)
+		(Calcio 1.2)
+		(Calorias 205.0)
+		(Colesterol 0.0)
+		(Fibra+dietetica 0.6)
+		(Hierro 1.8)
+		(Peso+Total 158.0)
+		(Potasio 0.055)
+		(Proteinas 4.3)
+		(Sodio 0.0016)
+		(Total+Carbohidratos 45.0)
+		(Total+Grasas 0.4)
+		(Vitamina+A 0.0)
+		(Vitamina+C 0.0))
+
+	([ontology_Class4] of  Alimento
+
+		(alimento "Cebolla")
+		(Azucares 4.4)
+		(Calcio 1.6)
+		(Calorias 41.0)
+		(Colesterol 0.0)
+		(Fibra+dietetica 1.3)
+		(Hierro 1.3)
+		(Peso+Total 94.0)
+		(Potasio 0.156)
+		(Proteinas 1.3)
+		(Sodio 0.0028)
+		(Total+Carbohidratos 9.5)
+		(Total+Grasas 0.2)
+		(Vitamina+A 0.0)
+		(Vitamina+C 8.1))
 
 
 ;Termina pegado de .pins
@@ -490,16 +858,23 @@
 			(progn$ (?value ?allowed-values) (printout t ?value crlf))
 			(printout t crlf "--> ")
 	    (bind ?answer (read))
-	    (if (lexemep ?answer)
-	        then (bind ?answer (lowcase ?answer)))
 	    (while (not (member ?answer ?allowed-values)) do
   	 	   (printout t ?question crlf)
 	 			 (progn$ (?value ?allowed-values) (printout t ?value crlf))
 	 			(printout t crlf "--> ")
-	       (bind ?answer (read))
-	       (if (lexemep ?answer)
-	           then (bind ?answer (lowcase ?answer))))
+	       (bind ?answer (read)))
 	    ?answer)
+
+(deffunction pregunta-integer (?question)
+(printout t ?question crlf )
+(printout t crlf "--> ")
+(bind ?answer (read))
+(while (not (integerp ?answer)) do
+	(printout t ?question crlf)
+	(printout t crlf "--> ")
+	(bind ?answer (read))
+	)
+	?answer)
 
 (defrule say-hello
   =>
@@ -510,16 +885,9 @@
 (defrule ask-age
   (welcome-given TRUE)
   =>
-  (printout t "Cuál es su edad?" crlf)
-	(bind ?answer (read))
-	(while (not (integerp ?answer)) do
-		(printout t "Cuál es su edad?" crlf)
-		(bind ?answer (read))
-	)
-  (assert (edad ?answer))
-	(printout t crlf)
-	(if (< ?answer 65)
-		then (printout t "Este programa es sólo para mayores de 64 años" crlf)(halt) (reset)))
+	(bind ?res (pregunta-integer "Cuál es su edad?"))
+	(assert (edad ?res))
+)
 
 (defrule ask-sex
   (welcome-given TRUE)
@@ -563,17 +931,25 @@
   (sexo ?)
   (edadAprox ?)
   =>
-  (bind ?res (pregunta-lista-imprimiendo-opciones "Sigue alguna de las siguientes dietas?" vegano vegetariano ninguna))
-  (assert (dieta ?res))
+  (bind ?res (pregunta-lista-imprimiendo-opciones "Sigue alguna de las siguientes dietas?" Vegano Vegetariano Ninguna))
+  (assert (Dieta ?res))
 (printout t crlf))
 
 (defrule ask-temp
   (sexo ?)
   (edadAprox ?)
   =>
-  (bind ?res (pregunta-lista-imprimiendo-opciones "Para qué momento del año es el menú?" primavera verano otoño invierno))
-  (assert (temporada ?res))
+  (bind ?res (pregunta-lista-imprimiendo-opciones "Para qué momento del año es el menú?" Primavera Verano Otono Invierno))
+  (assert (temp ?res))
 (printout t crlf))
+
+(defrule ask-weight
+	(sexo ?)
+	(edadAprox ?)
+	=>
+	(bind ?res (pregunta-integer "Cuánto pesa?"))
+	(assert (peso ?res))
+)
 
 (defrule eliminarPlatosNoVeganos
 	(dieta vegano)
