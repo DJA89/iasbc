@@ -564,6 +564,24 @@
 		(Vitamina+A 0.3)
 		(Vitamina+C 28.0))
 
+	([ontology_Class10000] of  Alimento
+
+		(alimento "Zanahoria")
+		(Azucares 1.6)
+		(Calcio 1.1)
+		(Calorias 16.0)
+		(Colesterol 0.0)
+		(Fibra+dietetica 1.4)
+		(Hierro 0.9)
+		(Peso+Total 46.0)
+		(Potasio 0.108)
+		(Proteinas 0.3)
+		(Sodio 0.027)
+		(Total+Carbohidratos 3.8)
+		(Total+Grasas 0.1)
+		(Vitamina+A 157.0)
+		(Vitamina+C 2.8))
+
 	([ontology_Class10001] of  Ingrediente
 
 		(Cantidad 200.0)
@@ -698,7 +716,7 @@
 			[ontology_Class10014]
 			[ontology_Class10016]
 			[ontology_Class10017])
-		(plato "Pasta")
+		(plato "Pasta con tuco")
 		(Temporada Verano))
 
 	([ontology_Class10014] of  Ingrediente
@@ -734,6 +752,142 @@
 		(Vitamina+A 20.0)
 		(Vitamina+C 28.0))
 
+	([ontology_Class20000] of  Plato
+
+		(Coccion hervido)
+		(Compatibilidad NoAptoV)
+		(Ingredientes
+			[ontology_Class30001]
+			[ontology_Class30003])
+		(plato "Ensalada de atun")
+		(Temporada Verano))
+
+	([ontology_Class20001] of  Alimento
+
+		(alimento "Queso")
+		(Azucares 0.1)
+		(Calcio 15.0)
+		(Calorias 113.0)
+		(Colesterol 0.028)
+		(Fibra+dietetica 0.0)
+		(Hierro 0.2)
+		(Peso+Total 28.0)
+		(Potasio 0.021)
+		(Proteinas 6.4)
+		(Sodio 0.183)
+		(Total+Carbohidratos 0.9)
+		(Total+Grasas 9.3)
+		(Vitamina+A 7.0)
+		(Vitamina+C 0.0))
+
+	([ontology_Class20002] of  Alimento
+
+		(alimento "Lechuga")
+		(Azucares 1.1)
+		(Calcio 2.4)
+		(Calorias 16.0)
+		(Colesterol 0.0)
+		(Fibra+dietetica 2.0)
+		(Hierro 5.1)
+		(Peso+Total 94.0)
+		(Potasio 0.232)
+		(Proteinas 1.2)
+		(Sodio 7.5)
+		(Total+Carbohidratos 3.1)
+		(Total+Grasas 0.3)
+		(Vitamina+A 164.0)
+		(Vitamina+C 6.3))
+
+	([ontology_Class20003] of  Alimento
+
+		(alimento "Atun")
+		(Azucares 0.0)
+		(Calcio 0.3)
+		(Calorias 111.0)
+		(Colesterol 0.04)
+		(Fibra+dietetica 0.0)
+		(Hierro 4.3)
+		(Peso+Total 85.0)
+		(Potasio 0.448)
+		(Proteinas 25.0)
+		(Sodio 0.046)
+		(Total+Carbohidratos 0.0)
+		(Total+Grasas 0.5)
+		(Vitamina+A 1.1)
+		(Vitamina+C 0.0))
+
+	([ontology_Class20004] of  Alimento
+
+		(alimento "Leche")
+		(Azucares 0.0)
+		(Calcio 24.0)
+		(Calorias 125.0)
+		(Colesterol 0.02)
+		(Fibra+dietetica 0.0)
+		(Hierro 0.7)
+		(Peso+Total 245.0)
+		(Potasio 0.397)
+		(Proteinas 8.5)
+		(Sodio 0.127)
+		(Total+Carbohidratos 12.0)
+		(Total+Grasas 4.7)
+		(Vitamina+A 10.0)
+		(Vitamina+C 4.1))
+
+	([ontology_Class20005] of  Alimento
+
+		(alimento "Frankfurter")
+		(Azucares 0.6)
+		(Calcio 0.4)
+		(Calorias 155.0)
+		(Colesterol 0.028)
+		(Fibra+dietetica 0.0)
+		(Hierro 3.3)
+		(Peso+Total 48.0)
+		(Potasio 0.121)
+		(Proteinas 5.6)
+		(Sodio 0.409)
+		(Total+Carbohidratos 1.3)
+		(Total+Grasas 14.0)
+		(Vitamina+A 0.0)
+		(Vitamina+C 0.0))
+
+	([ontology_Class20006] of  Alimento
+
+		(alimento "Jamón")
+		(Azucares 1.4)
+		(Calcio 0.4)
+		(Calorias 186.0)
+		(Colesterol 0.086)
+		(Fibra+dietetica 0.0)
+		(Hierro 6.2)
+		(Peso+Total 134.0)
+		(Potasio 0.462)
+		(Proteinas 30.0)
+		(Sodio 1.309)
+		(Total+Carbohidratos 1.4)
+		(Total+Grasas 6.8)
+		(Vitamina+A 1.2)
+		(Vitamina+C 0.0))
+
+	([ontology_Class20007] of  Alimento
+
+		(alimento "Maiz")
+		(Azucares 4.7)
+		(Calcio 0.2)
+		(Calorias 99.0)
+		(Colesterol 0.0)
+		(Fibra+dietetica 2.5)
+		(Hierro 2.6)
+		(Peso+Total 103.0)
+		(Potasio 0.225)
+		(Proteinas 3.5)
+		(Sodio 0.001)
+		(Total+Carbohidratos 22.0)
+		(Total+Grasas 1.5)
+		(Vitamina+A 5.4)
+		(Vitamina+C 9.4))
+
 	([ontology_Class3] of  Alimento
 
 		(alimento "Arroz")
@@ -751,6 +905,143 @@
 		(Total+Grasas 0.4)
 		(Vitamina+A 0.0)
 		(Vitamina+C 0.0))
+
+	([ontology_Class30001] of  Ingrediente
+
+		(Cantidad 100.0)
+		(Contiene [ontology_Class10000]))
+
+	([ontology_Class30003] of  Ingrediente
+
+		(Cantidad 250.0)
+		(Contiene [ontology_Class10000]))
+
+	([ontology_Class30004] of  Plato
+
+		(Coccion hervido)
+		(Compatibilidad AptoVegano)
+		(Ingredientes
+			[ontology_Class30005]
+			[ontology_Class30006]
+			[ontology_Class30007])
+		(plato "Ensalada de casa")
+		(Temporada Verano))
+
+	([ontology_Class30005] of  Ingrediente
+
+		(Cantidad 100.0)
+		(Contiene [ontology_Class10005]))
+
+	([ontology_Class30006] of  Ingrediente
+
+		(Cantidad 100.0)
+		(Contiene [ontology_Class10008]))
+
+	([ontology_Class30007] of  Ingrediente
+
+		(Cantidad 100.0)
+		(Contiene [ontology_Class10009]))
+
+	([ontology_Class30008] of  Plato
+
+		(Coccion hervido)
+		(Compatibilidad NoAptoV)
+		(Ingredientes
+			[ontology_Class30009]
+			[ontology_Class10016]
+			[ontology_Class30010])
+		(plato "Paella")
+		(Temporada Verano))
+
+	([ontology_Class30009] of  Ingrediente
+
+		(Cantidad 150.0)
+		(Contiene [ontology_Class10010]))
+
+	([ontology_Class30010] of  Ingrediente
+
+		(Cantidad 100.0)
+		(Contiene [ontology_Class2]))
+
+	([ontology_Class30011] of  Plato
+
+		(Coccion plancha)
+		(Compatibilidad NoAptoV)
+		(Ingredientes
+			[ontology_Class30012]
+			[ontology_Class30013])
+		(plato "Frankfurter con patatas")
+		(Temporada Verano))
+
+	([ontology_Class30012] of  Ingrediente
+
+		(Cantidad 120.0)
+		(Contiene [ontology_Class20001]))
+
+	([ontology_Class30013] of  Ingrediente
+
+		(Cantidad 120.0)
+		(Contiene [ontology_Class20002]))
+
+	([ontology_Class30014] of  Plato
+
+		(Coccion plancha)
+		(Compatibilidad NoAptoV)
+		(Ingredientes
+			[ontology_Class30015]
+			[ontology_Class30016])
+		(plato "Arroz con pollo")
+		(Temporada Verano))
+
+	([ontology_Class30015] of  Ingrediente
+
+		(Cantidad 150.0)
+		(Contiene [ontology_Class20004]))
+
+	([ontology_Class30016] of  Ingrediente
+
+		(Cantidad 250.0)
+		(Contiene [ontology_Class20006]))
+
+	([ontology_Class30017] of  Plato
+
+		(Coccion hervido)
+		(Compatibilidad AptoVegano)
+		(Ingredientes
+			[ontology_Class30018]
+			[ontology_Class30019])
+		(plato "Pasta simple")
+		(Temporada Verano))
+
+	([ontology_Class30018] of  Ingrediente
+
+		(Cantidad 225.0)
+		(Contiene [ontology_Class3]))
+
+	([ontology_Class30019] of  Ingrediente
+
+		(Cantidad 100.0)
+		(Contiene [ontology_Class4]))
+
+	([ontology_Class30020] of  Plato
+
+		(Coccion hervido)
+		(Compatibilidad AptoVegetariano)
+		(Ingredientes
+			[ontology_Class30021]
+			[ontology_Class30022])
+		(plato "Tortilla de patatas")
+		(Temporada Verano))
+
+	([ontology_Class30021] of  Ingrediente
+
+		(Cantidad 200.0)
+		(Contiene [ontology_Class20005]))
+
+	([ontology_Class30022] of  Ingrediente
+
+		(Cantidad 250.0)
+		(Contiene [ontology_Class20002]))
 
 	([ontology_Class4] of  Alimento
 
