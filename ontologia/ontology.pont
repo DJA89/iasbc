@@ -1,4 +1,4 @@
-; Thu May 09 20:41:54 CEST 2019
+; Tue May 14 16:40:31 GMT+01:00 2019
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -17,12 +17,199 @@
 		(range 0 100)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
-	(single-slot Domingo
-		(type INSTANCE)
-;+		(allowed-classes MenuDia)
+	(single-slot Potasio
+		(type FLOAT)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
-	(single-slot Potasio
+	(single-slot Domingo
+		(type INSTANCE)
+;+		(allowed-classes)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot Calcio
+		(type FLOAT)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot NombreIngrediente
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot RestriccionesDiarias
+		(type INSTANCE)
+;+		(allowed-classes)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(multislot Nutrientes
+		(type INSTANCE)
+;+		(allowed-classes)
+		(cardinality 1 ?VARIABLE)
+		(create-accessor read-write))
+	(single-slot Enfermedad
+		(type SYMBOL)
+		(allowed-values Diabetes Osteoporosis)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot AcidoPantotenico
+		(type FLOAT)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot Lunes
+		(type INSTANCE)
+;+		(allowed-classes)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot alimento
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot Cena
+		(type INSTANCE)
+;+		(allowed-classes Plato)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(single-slot Temporada
+		(type SYMBOL)
+		(allowed-values Otono Primavera Verano Invierno)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot Merienda
+		(type INSTANCE)
+;+		(allowed-classes Plato)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot Desayuno
+		(type INSTANCE)
+;+		(allowed-classes Plato)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(single-slot NutrienteMonto
+		(type FLOAT)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot Cantidad
+		(type FLOAT)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot Manganeso
+		(type FLOAT)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot MaxSal
+		(type FLOAT)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot Fibra
+		(type FLOAT)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot Fosforo
+		(type FLOAT)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot Jueves
+		(type INSTANCE)
+;+		(allowed-classes)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot Vitamina+A+requerida
+		(type FLOAT)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot GrasaTotal
+		(type FLOAT)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot Niacina
+		(type FLOAT)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot Riboflavina
+		(type FLOAT)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot Cobre
+		(type FLOAT)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot Hierro
+		(type FLOAT)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot Sodio
+		(type FLOAT)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot Peso+Total
+		(type FLOAT)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot VitaminaD
+		(type FLOAT)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot requisitosEnfermedades
+		(type INSTANCE)
+;+		(allowed-classes)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot Contiene
+		(type INSTANCE)
+;+		(allowed-classes)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot recomendaciones
+		(type INSTANCE)
+;+		(allowed-classes)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(single-slot Postre
+		(type INSTANCE)
+;+		(allowed-classes Plato)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot Selenio
+		(type FLOAT)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot EnergiaNecesaria
+		(type FLOAT)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot Energia
+		(type FLOAT)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot Cobalamina
+		(type FLOAT)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot NivelActividad
+		(type SYMBOL)
+		(allowed-values Sedentario PocoActivo Activo MuyActivo)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot TipoIngrediente
+		(type SYMBOL)
+		(allowed-values Cereal Legumbre Fruta Verdura Carne Pescado FrutoSeco Lacteo)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot Calorias
+		(type FLOAT)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot NombrePlato
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot AcidosGrasosSaturados
+		(type FLOAT)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot Agua
+		(type FLOAT)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot Folato
 		(type FLOAT)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
@@ -31,42 +218,31 @@
 		(allowed-values Vegano Vegetariano Todo)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
-	(single-slot Calcio
-		(type FLOAT)
-;+		(cardinality 0 1)
-		(create-accessor read-write))
-	(single-slot RestriccionesDiarias
+	(single-slot MenuRecomendado
 		(type INSTANCE)
 ;+		(allowed-classes)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
-	(single-slot Enfermedad
-		(type SYMBOL)
-		(allowed-values Diabetes Osteoporosis)
-;+		(cardinality 0 1)
-		(create-accessor read-write))
-	(single-slot MenuRecomendado
+	(single-slot IngredientePrincipal
 		(type INSTANCE)
-;+		(allowed-classes MenuSemanal)
-;+		(cardinality 0 1)
+;+		(allowed-classes Ingrediente)
+;+		(cardinality 1 1)
 		(create-accessor read-write))
 	(single-slot Comida
 		(type INSTANCE)
 ;+		(allowed-classes Plato)
 ;+		(cardinality 1 1)
 		(create-accessor read-write))
-	(single-slot Lunes
-		(type INSTANCE)
-;+		(allowed-classes MenuDia)
+	(single-slot Tiamina
+		(type FLOAT)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
-	(single-slot Cena
-		(type INSTANCE)
-;+		(allowed-classes Plato)
-;+		(cardinality 1 1)
-		(create-accessor read-write))
-	(single-slot alimento
+	(single-slot VitaminaB6
 		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot Peso
+		(type FLOAT)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
 	(single-slot Sexo
@@ -74,30 +250,11 @@
 ;+		(allowed-classes)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
-	(single-slot Merienda
-		(type INSTANCE)
-;+		(allowed-classes Plato)
-;+		(cardinality 0 1)
-		(create-accessor read-write))
-	(single-slot Temporada
-		(type SYMBOL)
-		(allowed-values Otono Primavera Verano Invierno)
-;+		(cardinality 0 1)
-		(create-accessor read-write))
 	(single-slot Proteinas
 		(type FLOAT)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
-	(single-slot Desayuno
-		(type INSTANCE)
-;+		(allowed-classes Plato)
-;+		(cardinality 1 1)
-		(create-accessor read-write))
 	(single-slot Azucares
-		(type FLOAT)
-;+		(cardinality 0 1)
-		(create-accessor read-write))
-	(single-slot Cantidad
 		(type FLOAT)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
@@ -106,28 +263,19 @@
 ;+		(allowed-classes)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
-	(single-slot MaxSal
+	(single-slot VitaminaK
 		(type FLOAT)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
-	(single-slot ontology_Class5
-		(type STRING)
-;+		(cardinality 0 1)
-		(create-accessor read-write))
-	(single-slot Fibra
+	(single-slot VitaminaE
 		(type FLOAT)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
-	(single-slot Jueves
-		(type INSTANCE)
-;+		(allowed-classes MenuDia)
-;+		(cardinality 0 1)
-		(create-accessor read-write))
-	(single-slot Vitamina+A+requerida
+	(single-slot CarbohidratosTotales
 		(type FLOAT)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
-	(single-slot ontology_Class10019
+	(single-slot NutrienteMedida
 		(type STRING)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
@@ -136,18 +284,22 @@
 		(allowed-values 60-69 70-79)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
+	(single-slot AcidosGrasosTrans
+		(type FLOAT)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
 	(single-slot Total+Carbohidratos
 		(type FLOAT)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
 	(single-slot Viernes
 		(type INSTANCE)
-;+		(allowed-classes MenuDia)
+;+		(allowed-classes)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
 	(single-slot Miercoles
 		(type INSTANCE)
-;+		(allowed-classes MenuDia)
+;+		(allowed-classes)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
 	(single-slot Plato+Principal
@@ -164,10 +316,6 @@
 		(range 0 100)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
-	(single-slot Hierro
-		(type FLOAT)
-;+		(cardinality 0 1)
-		(create-accessor read-write))
 	(single-slot MaxCarbohidratos%25
 		(type INTEGER)
 		(range 0 100)
@@ -175,24 +323,11 @@
 		(create-accessor read-write))
 	(single-slot Martes
 		(type INSTANCE)
-;+		(allowed-classes MenuDia)
-;+		(cardinality 0 1)
-		(create-accessor read-write))
-	(single-slot Peso+Total
-		(type FLOAT)
-;+		(cardinality 0 1)
-		(create-accessor read-write))
-	(single-slot Sodio
-		(type FLOAT)
+;+		(allowed-classes)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
 	(single-slot Colesterol
 		(type FLOAT)
-;+		(cardinality 0 1)
-		(create-accessor read-write))
-	(single-slot requisitosEnfermedades
-		(type INSTANCE)
-;+		(allowed-classes)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
 	(single-slot RecomendacionesParticulares
@@ -200,35 +335,21 @@
 ;+		(allowed-classes)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
-	(single-slot ontology_Class14
-		(type STRING)
-;+		(cardinality 0 1)
-		(create-accessor read-write))
-	(single-slot recomendaciones
-		(type INSTANCE)
-;+		(allowed-classes RecomendacionesGenerales)
-;+		(cardinality 1 1)
-		(create-accessor read-write))
-	(single-slot Contiene
-		(type INSTANCE)
-;+		(allowed-classes Alimento)
-;+		(cardinality 0 1)
-		(create-accessor read-write))
 	(single-slot Genero
 		(type SYMBOL)
 		(allowed-values Hombre Mujer)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
-	(single-slot ontology_Class17
-		(type STRING)
+	(single-slot Colina
+		(type FLOAT)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
-	(single-slot Postre
-		(type INSTANCE)
-;+		(allowed-classes Plato)
+	(single-slot Tipo
+		(type SYMBOL)
+		(allowed-values Desayuno Postre Principal)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
-	(single-slot ontology_Class19
+	(single-slot nutriente
 		(type STRING)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
@@ -238,11 +359,7 @@
 		(create-accessor read-write))
 	(single-slot Coccion
 		(type SYMBOL)
-		(allowed-values plancha hervido)
-;+		(cardinality 0 1)
-		(create-accessor read-write))
-	(single-slot EnergiaNecesaria
-		(type FLOAT)
+		(allowed-values Plancha Hervido Horneado Frito Estofado Crudo)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
 	(single-slot Vitamina+A
@@ -259,17 +376,12 @@
 		(type FLOAT)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
-	(single-slot NivelActividad
-		(type SYMBOL)
-		(allowed-values Sedentario PocoActivo Activo MuyActivo)
-;+		(cardinality 0 1)
-		(create-accessor read-write))
-	(single-slot Calorias
+	(single-slot FibrasAlimenticias
 		(type FLOAT)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
-	(single-slot plato
-		(type STRING)
+	(single-slot Magnesio
+		(type FLOAT)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
 	(multislot Ingredientes
@@ -279,15 +391,23 @@
 		(create-accessor read-write))
 	(single-slot Sabado
 		(type INSTANCE)
-;+		(allowed-classes MenuDia)
+;+		(allowed-classes)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot Zinc
+		(type FLOAT)
 ;+		(cardinality 0 1)
 		(create-accessor read-write)))
 
 (defclass Plato
 	(is-a USER)
 	(role concrete)
-	(single-slot plato
-		(type STRING)
+	(single-slot Cobre
+		(type FLOAT)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot Folato
+		(type FLOAT)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
 	(single-slot Compatibilidad
@@ -295,47 +415,7 @@
 		(allowed-values AptoVegano AptoVegetariano NoAptoV)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
-	(multislot Ingredientes
-		(type INSTANCE)
-;+		(allowed-classes Ingrediente)
-		(cardinality 1 ?VARIABLE)
-		(create-accessor read-write))
-	(single-slot Temporada
-		(type SYMBOL)
-		(allowed-values Otono Primavera Verano Invierno)
-;+		(cardinality 0 1)
-		(create-accessor read-write))
-	(single-slot Coccion
-		(type SYMBOL)
-		(allowed-values plancha hervido)
-;+		(cardinality 0 1)
-		(create-accessor read-write)))
-
-(defclass Alimento "La cantidad de nutrientes esta expreseda en %"
-	(is-a USER)
-	(role concrete)
-	(single-slot Vitamina+A
-;+		(comment "cantidad en %")
-		(type FLOAT)
-;+		(cardinality 0 1)
-		(create-accessor read-write))
-	(single-slot Azucares
-		(type FLOAT)
-;+		(cardinality 0 1)
-		(create-accessor read-write))
-	(single-slot Total+Grasas
-		(type FLOAT)
-;+		(cardinality 0 1)
-		(create-accessor read-write))
-	(single-slot Vitamina+C
-		(type FLOAT)
-;+		(cardinality 0 1)
-		(create-accessor read-write))
 	(single-slot Potasio
-		(type FLOAT)
-;+		(cardinality 0 1)
-		(create-accessor read-write))
-	(single-slot Calcio
 		(type FLOAT)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
@@ -343,180 +423,158 @@
 		(type FLOAT)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
-	(single-slot Calorias
+	(single-slot Calcio
 		(type FLOAT)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
-	(single-slot Peso+Total
+	(single-slot IngredientePrincipal
+		(type INSTANCE)
+;+		(allowed-classes Ingrediente)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(single-slot VitaminaD
 		(type FLOAT)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
-	(single-slot Sodio
+	(single-slot AcidoPantotenico
 		(type FLOAT)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
-	(single-slot Colesterol
+	(single-slot Colina
 		(type FLOAT)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
-	(single-slot Total+Carbohidratos
+	(single-slot Tipo
+		(type SYMBOL)
+		(allowed-values Desayuno Postre Principal)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot Tiamina
 		(type FLOAT)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
-	(single-slot alimento
+	(single-slot VitaminaB6
 		(type STRING)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
-	(single-slot Fibra+dietetica
+	(single-slot Peso
 		(type FLOAT)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
 	(single-slot Proteinas
 		(type FLOAT)
 ;+		(cardinality 0 1)
-		(create-accessor read-write)))
-
-(defclass MenuSemanal
-	(is-a USER)
-	(role concrete)
-	(single-slot Domingo
-		(type INSTANCE)
-;+		(allowed-classes MenuDia)
+		(create-accessor read-write))
+	(single-slot Coccion
+		(type SYMBOL)
+		(allowed-values Plancha Hervido Horneado Frito Estofado Crudo)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
-	(single-slot Lunes
-		(type INSTANCE)
-;+		(allowed-classes MenuDia)
+	(single-slot Temporada
+		(type SYMBOL)
+		(allowed-values Otono Primavera Verano Invierno)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
-	(single-slot Sabado
-		(type INSTANCE)
-;+		(allowed-classes MenuDia)
+	(single-slot Selenio
+		(type FLOAT)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
-	(single-slot Jueves
-		(type INSTANCE)
-;+		(allowed-classes MenuDia)
+	(single-slot Azucares
+		(type FLOAT)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
-	(single-slot Viernes
-		(type INSTANCE)
-;+		(allowed-classes MenuDia)
+	(single-slot Vitamina+A
+;+		(comment "cantidad en %")
+		(type FLOAT)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
-	(single-slot Martes
-		(type INSTANCE)
-;+		(allowed-classes MenuDia)
+	(single-slot Manganeso
+		(type FLOAT)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
-	(single-slot Miercoles
-		(type INSTANCE)
-;+		(allowed-classes MenuDia)
+	(single-slot Energia
+		(type FLOAT)
 ;+		(cardinality 0 1)
-		(create-accessor read-write)))
-
-(defclass MenuDia
-	(is-a USER)
-	(role concrete)
-	(single-slot Desayuno
-		(type INSTANCE)
-;+		(allowed-classes Plato)
-;+		(cardinality 1 1)
 		(create-accessor read-write))
-	(single-slot Comida
-		(type INSTANCE)
-;+		(allowed-classes Plato)
-;+		(cardinality 1 1)
+	(single-slot VitaminaK
+		(type FLOAT)
+;+		(cardinality 0 1)
 		(create-accessor read-write))
-	(single-slot Cena
+	(single-slot Cobalamina
+		(type FLOAT)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot VitaminaE
+		(type FLOAT)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot Vitamina+C
+		(type FLOAT)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot Fosforo
+		(type FLOAT)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot FibrasAlimenticias
+		(type FLOAT)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot Magnesio
+		(type FLOAT)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot NombrePlato
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot CarbohidratosTotales
+		(type FLOAT)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot AcidosGrasosSaturados
+		(type FLOAT)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot GrasaTotal
+		(type FLOAT)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot Niacina
+		(type FLOAT)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot AcidosGrasosTrans
+		(type FLOAT)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(multislot Ingredientes
 		(type INSTANCE)
-;+		(allowed-classes Plato)
-;+		(cardinality 1 1)
+;+		(allowed-classes Ingrediente)
+		(cardinality 1 ?VARIABLE)
+		(create-accessor read-write))
+	(single-slot Riboflavina
+		(type FLOAT)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot Agua
+		(type FLOAT)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot Zinc
+		(type FLOAT)
+;+		(cardinality 0 1)
 		(create-accessor read-write)))
 
 (defclass Ingrediente
 	(is-a USER)
 	(role concrete)
-	(single-slot Cantidad
-		(type FLOAT)
-;+		(cardinality 0 1)
-		(create-accessor read-write))
-	(single-slot Contiene
-		(type INSTANCE)
-;+		(allowed-classes Alimento)
-;+		(cardinality 0 1)
-		(create-accessor read-write)))
-
-(defclass PerfilPersona
-	(is-a USER)
-	(role concrete)
-	(single-slot EnergiaNecesaria
-		(type FLOAT)
-;+		(cardinality 0 1)
-		(create-accessor read-write))
-	(single-slot Edad
+	(single-slot TipoIngrediente
 		(type SYMBOL)
-		(allowed-values 60-69 70-79)
+		(allowed-values Cereal Legumbre Fruta Verdura Carne Pescado FrutoSeco Lacteo)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
-	(single-slot requisitosEnfermedades
-		(type INSTANCE)
-;+		(allowed-classes)
-;+		(cardinality 0 1)
-		(create-accessor read-write))
-	(single-slot recomendaciones
-		(type INSTANCE)
-;+		(allowed-classes RecomendacionesGenerales)
-;+		(cardinality 1 1)
-		(create-accessor read-write))
-	(single-slot Genero
-		(type SYMBOL)
-		(allowed-values Hombre Mujer)
-;+		(cardinality 0 1)
-		(create-accessor read-write))
-	(single-slot NivelActividad
-		(type SYMBOL)
-		(allowed-values Sedentario PocoActivo Activo MuyActivo)
-;+		(cardinality 0 1)
-		(create-accessor read-write))
-	(single-slot Enfermedad
-		(type SYMBOL)
-		(allowed-values Diabetes Osteoporosis)
-;+		(cardinality 0 1)
-		(create-accessor read-write)))
-
-(defclass RecomendacionesGenerales "% de los nutrientes necesarios en funcion de la energia"
-	(is-a USER)
-	(role concrete)
-	(single-slot MinCarbohidratos%25
-		(type INTEGER)
-		(range 0 100)
-;+		(cardinality 0 1)
-		(create-accessor read-write))
-	(single-slot MaxGrasasTotales%25
-		(type INTEGER)
-		(range 0 100)
-;+		(cardinality 0 1)
-		(create-accessor read-write))
-	(single-slot Fibra
-		(type FLOAT)
-;+		(cardinality 0 1)
-		(create-accessor read-write))
-	(single-slot MinGrasasTotales%25
-		(type INTEGER)
-		(range 0 100)
-;+		(cardinality 0 1)
-		(create-accessor read-write))
-	(single-slot MaxCarbohidratos%25
-		(type INTEGER)
-		(range 0 100)
-;+		(cardinality 0 1)
-		(create-accessor read-write)))
-
-(defclass Hipertension
-	(is-a USER)
-	(role concrete)
-	(single-slot MaxSal
-		(type FLOAT)
+	(single-slot NombreIngrediente
+		(type STRING)
 ;+		(cardinality 0 1)
 		(create-accessor read-write)))
