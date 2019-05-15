@@ -1,8 +1,8 @@
 (defmodule MAIN 									(export ?ALL))
 (defmodule ASK_QUESTIONS					(import MAIN ?ALL)(export ?ALL))
-(defmodule PREPROCESS  					(import MAIN ?ALL)(export ?ALL))
-(defmodule PREPARESOLUTION  		(import MAIN ?ALL)(export ?ALL))
-(defmodule CREATESOLUTION 					(import MAIN ?ALL)(export ?ALL))
+(defmodule PREPROCESS  					(import ASK_QUESTIONS ?ALL)(export ?ALL))
+(defmodule PREPARESOLUTION  		(import PREPROCESS ?ALL)(export ?ALL))
+(defmodule CREATESOLUTION 					(import PREPARESOLUTION ?ALL)(export ?ALL))
 
 ;Comienza pegado de .pont
 
@@ -950,7 +950,7 @@
 (defrule PREPROCESS::requisitos-osteoporosis
 	(enfermedad osteoporosis)
 	?requisitos <- (Requisitos (calcio ?c))
-	(test (not (eq ?c 1.2) ))
+	(test (eq ?c 0.75))
 =>
 	(modify ?requisitos (calcio 1.2) )
 )
@@ -1002,25 +1002,24 @@
 	(focus PREPARESOLUTION))
 
 (defrule PREPARESOLUTION::crear-posibles-platos-por-dia
-	;(or (eliminados-si-vegano) (eliminados-si-vegetariano) (Dieta Ninguna))
-	;(eliminados-de-temporada)
 	?plate <- (object (is-a Plato))
-	?lunes <- (platosDisponibles (dia "Lunes") (platos $?platos-l))
-	?martes <- (platosDisponibles (dia "Martes") (platos $?platos-ma))
-	?miercoles <- (platosDisponibles (dia "Miercoles") (platos $?platos-mi))
-	?jueves <- (platosDisponibles (dia "Jueves") (platos $?platos-j))
-	?viernes <- (platosDisponibles (dia "Viernes") (platos $?platos-v))
-	?sabado <- (platosDisponibles (dia "Sabado") (platos $?platos-s))
-	?domingo <- (platosDisponibles (dia "Domingo") (platos $?platos-d))
+	?dia <- (platosDisponibles (platos $?platos-l))
+	;?martes <- (platosDisponibles (dia "Martes") (platos $?platos-ma))
+	;?miercoles <- (platosDisponibles (dia "Miercoles") (platos $?platos-mi))
+	;?jueves <- (platosDisponibles (dia "Jueves") (platos $?platos-j))
+	;?viernes <- (platosDisponibles (dia "Viernes") (platos $?platos-v))
+	;?sabado <- (platosDisponibles (dia "Sabado") (platos $?platos-s))
+	;?domingo <- (platosDisponibles (dia "Domingo") (platos $?platos-d))
+	(not (member ?plate $?platos-l))
 	=>
 
-	 (modify ?lunes (platos ?plate ?platos-l))
- 	 (modify ?martes (platos ?plate ?platos-ma))
- 	 (modify ?miercoles (platos ?plate ?platos-mi))
- 	 (modify ?jueves (platos ?plate ?platos-j))
- 	 (modify ?viernes (platos ?plate ?platos-v))
- 	 (modify ?sabado (platos ?plate ?platos-s))
- 	 (modify ?domingo (platos ?plate ?platos-d))
+	 (modify ?dia (platos ?plate ?platos-l))
+ 	; (modify ?martes (platos ?plate ?platos-ma))
+ 	 ;(modify ?miercoles (platos ?plate ?platos-mi))
+ 	 ;(modify ?jueves (platos ?plate ?platos-j))
+ 	 ;(modify ?viernes (platos ?plate ?platos-v))
+ 	 ;(modify ?sabado (platos ?plate ?platos-s))
+ 	 ;(modify ?domingo (platos ?plate ?platos-d))
 	)
 
 ;(defrule crear-soluciones-dia	(Requisitos (calorias ?cal) (minGrasas ?minG) (maxGrasas ?maxG) (fibras ?fib) (minCarbos ?minC) (maxCarbos ?maxC) (proteinas ?prot) (calcio ?pre) (potasio ?pot))
@@ -1034,7 +1033,7 @@
 ;	(assert (SolucionDia (dia "Domingo")))
 ;	)
 ;
-;(defrule agregarComidaLunesMartes
+;(defrule CREATESOLUTION::agregarComidaLunesMartes
 ;	(SolucionDia (dia "Lunes"))
 ;	(SolucionDia (dia "Martes")))
 
