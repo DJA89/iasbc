@@ -1,4 +1,4 @@
-; Wed May 15 16:12:35 GMT+01:00 2019
+; Wed May 15 17:26:52 GMT+01:00 2019
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -62,7 +62,7 @@
 		(create-accessor read-write))
 	(single-slot Temporada
 		(type SYMBOL)
-		(allowed-values Otono Primavera Verano Invierno)
+		(allowed-values Otono Primavera Verano Invierno Cualquiera)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
 	(single-slot Azucares
@@ -306,7 +306,7 @@
 		(create-accessor read-write))
 	(single-slot Temporada
 		(type SYMBOL)
-		(allowed-values Otono Primavera Verano Invierno)
+		(allowed-values Otono Primavera Verano Invierno Cualquiera)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
 	(single-slot Selenio
