@@ -729,7 +729,7 @@
 
 (defrule MAIN::say-hello
   =>
-	(printout t "Bienvenido/a al sistema de Menú Semanales" crlf "Favor responda algunas preguntas para que podamos ayudarle" crlf)
+	(printout t "Bienvenido/a al sistema de Menu Semanales" crlf "Favor responda algunas preguntas para que podamos ayudarle" crlf)
 	(assert (welcome-given TRUE))
 	(assert (preguntar-enfermedad))
 	(assert (Requisitos))
@@ -748,7 +748,7 @@
 (defrule ASK_QUESTIONS::ask-age
   (welcome-given TRUE)
   =>
-	(bind ?res (pregunta-integer "Cuál es su edad?"))
+	(bind ?res (pregunta-integer "Cual es su edad?"))
 	(assert (edad ?res))
 	(if (< ?res 65) then
 	(printout t "Esta ayuda es para mayores de 64" crlf)
@@ -768,7 +768,7 @@
   (sexo ?)
   (edad ?)
   =>
-  (bind ?res (pregunta-lista-imprimiendo-opciones "Qué nivel de actividad física tiene?" sedentario moderadamente-activo activo  muy-activo))
+  (bind ?res (pregunta-lista-imprimiendo-opciones "Que nivel de actividad fisica tiene?" sedentario moderadamente-activo activo  muy-activo))
   (assert (actividad-fisica ?res))
 (printout t crlf))
 
@@ -778,7 +778,7 @@
   (edad ?)
 	?var <- (preguntar-enfermedad)
   =>
-  (bind ?res (pregunta-lista-imprimiendo-opciones "Sufre de alguna de estas enfermedades? Cuál?" diabetes hipertension osteoporosis problemas-articulares ninguna))
+  (bind ?res (pregunta-lista-imprimiendo-opciones "Sufre de alguna de estas enfermedades? Cual?" diabetes hipertension osteoporosis problemas-articulares ninguna))
 	(if (not (eq ?res ninguna))
 	then (assert (enfermedad ?res)))
 	(retract ?var)
@@ -807,7 +807,7 @@
   (sexo ?)
   (edad ?)
   =>
-  (bind ?res (pregunta-lista-imprimiendo-opciones "Para qué momento del año es el menú?" Primavera Verano Otono Invierno))
+  (bind ?res (pregunta-lista-imprimiendo-opciones "Para que momento del año es el menu?" Primavera Verano Otono Invierno))
   (assert (temp ?res))
 (printout t crlf))
 
@@ -815,7 +815,7 @@
 	(sexo ?)
 	(edad ?)
 	=>
-	(bind ?res (pregunta-integer "Cuánto pesa?"))
+	(bind ?res (pregunta-integer "Cuanto pesa?"))
 	(assert (peso ?res))
 )
 
@@ -1004,7 +1004,7 @@
 (defrule PREPARESOLUTION::crear-posibles-platos-por-dia
 	;(or (eliminados-si-vegano) (eliminados-si-vegetariano) (Dieta Ninguna))
 	;(eliminados-de-temporada)
-	?plate <- (Plato)
+	?plate <- (object (is-a Plato))
 	?lunes <- (platosDisponibles (dia "Lunes") (platos $?platos-l))
 	?martes <- (platosDisponibles (dia "Martes") (platos $?platos-ma))
 	?miercoles <- (platosDisponibles (dia "Miercoles") (platos $?platos-mi))
