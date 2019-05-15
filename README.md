@@ -8,5 +8,6 @@ Opción 1:
 
 Opción 2:
 
-1. (load "iasbc.clp")
+1. Environment/Set Directory...
+2. (load "iasbc.clp")
 

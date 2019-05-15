@@ -1,4 +1,4 @@
-; Tue May 14 16:40:31 GMT+01:00 2019
+; Wed May 15 16:12:35 GMT+01:00 2019
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -12,6 +12,7 @@
 	(height 100)
 	(is_hidden FALSE)
 	(name ":ANNOTATION-TEXT")
+	(property_list [ontology_ProjectKB_Class10018])
 	(widget_class_name "edu.stanford.smi.protege.widget.YellowStickyWidget")
 	(width 200)
 	(x 0)
@@ -20,9 +21,9 @@
 ([BROWSER_SLOT_NAMES] of  Property_List
 
 	(properties
-		[ontology_ProjectKB_Class20129]
-		[ontology_ProjectKB_Class20130]
-		[ontology_ProjectKB_Class20131]))
+		[ontology_ProjectKB_Class20107]
+		[ontology_ProjectKB_Class20108]
+		[ontology_ProjectKB_Class20109]))
 
 ([CLSES_TAB] of  Widget
 
@@ -59,15 +60,13 @@
 		[ANNOTATED_INSTANCE_WIDGET]
 		[CREATOR_WIDGET]
 		[CREATION_TIMESTAMP_WIDGET]
-		[ANNOTATION_TEXT_WIDGET]))
+		[ANNOTATION_TEXT_WIDGET]
+		[ontology_ProjectKB_Class10017]))
 
 ([INSTANCES_TAB] of  Widget
 
 	(is_hidden FALSE)
 	(widget_class_name "edu.stanford.smi.protege.widget.InstancesTab"))
-
-([KB_011905_Class3] of  Map
-)
 
 ([KB_803769_Class0] of  String
 
@@ -77,9 +76,15 @@
 ([KB_803769_Class1] of  Map
 
 	(entries
-		[ontology_ProjectKB_Class20132]
-		[ontology_ProjectKB_Class20133]
-		[ontology_ProjectKB_Class20134]))
+		[ontology_ProjectKB_Class20110]
+		[ontology_ProjectKB_Class20111]
+		[ontology_ProjectKB_Class20112]
+		[ontology_ProjectKB_Class20113]
+		[ontology_ProjectKB_Class20114]
+		[ontology_ProjectKB_Class20115]
+		[ontology_ProjectKB_Class20117]
+		[ontology_ProjectKB_Class20118])
+	(referenced_maps [ontology_ProjectKB_Class20116]))
 
 ([KB_803769_Class100] of  String
 
@@ -173,6 +178,9 @@
 	(name "classes_file_name")
 	(string_value "ontology.pont"))
 
+([KB_920570_Class9] of  Map
+)
+
 ([LAYOUT_PROPERTIES] of  Property_List
 
 	(name "layout properties")
@@ -187,250 +195,31 @@
 ([ontology_ProjectKB_Class10] of  Property_List
 )
 
-([ontology_ProjectKB_Class10004] of  Widget
-
-	(is_hidden FALSE)
-	(name "Alimento")
-	(property_list [ontology_ProjectKB_Class10005])
-	(widget_class_name "edu.stanford.smi.protege.widget.FormWidget"))
-
-([ontology_ProjectKB_Class10005] of  Property_List
-
-	(properties
-		[ontology_ProjectKB_Class10006]
-		[ontology_ProjectKB_Class10007]
-		[ontology_ProjectKB_Class10009]
-		[ontology_ProjectKB_Class10011]
-		[ontology_ProjectKB_Class10013]
-		[ontology_ProjectKB_Class10015]
-		[ontology_ProjectKB_Class10017]
-		[ontology_ProjectKB_Class10019]
-		[ontology_ProjectKB_Class10021]
-		[ontology_ProjectKB_Class10023]
-		[ontology_ProjectKB_Class10025]
-		[ontology_ProjectKB_Class10027]
-		[ontology_ProjectKB_Class10029]
-		[ontology_ProjectKB_Class10031]
-		[ontology_ProjectKB_Class10033]
-		[ontology_ProjectKB_Class10035]))
-
-([ontology_ProjectKB_Class10006] of  Property_List
+([ontology_ProjectKB_Class10017] of  Property_List
 
 	(name "layout properties"))
 
-([ontology_ProjectKB_Class10007] of  Widget
-
-	(height 60)
-	(is_hidden FALSE)
-	(name "Azucares")
-	(property_list [ontology_ProjectKB_Class10008])
-	(widget_class_name "edu.stanford.smi.protege.widget.FloatFieldWidget")
-	(width 100)
-	(x 0)
-	(y 60))
-
-([ontology_ProjectKB_Class10008] of  Property_List
-)
-
-([ontology_ProjectKB_Class10009] of  Widget
-
-	(height 60)
-	(is_hidden FALSE)
-	(name "Vitamina A")
-	(property_list [ontology_ProjectKB_Class10010])
-	(widget_class_name "edu.stanford.smi.protege.widget.FloatFieldWidget")
-	(width 100)
-	(x 400)
-	(y 60))
-
-([ontology_ProjectKB_Class10010] of  Property_List
-)
-
-([ontology_ProjectKB_Class10011] of  Widget
-
-	(height 60)
-	(is_hidden FALSE)
-	(name "Total Grasas")
-	(property_list [ontology_ProjectKB_Class10012])
-	(widget_class_name "edu.stanford.smi.protege.widget.FloatFieldWidget")
-	(width 100)
-	(x 500)
-	(y 0))
-
-([ontology_ProjectKB_Class10012] of  Property_List
-)
-
-([ontology_ProjectKB_Class10013] of  Widget
-
-	(height 60)
-	(is_hidden FALSE)
-	(name "Potasio")
-	(property_list [ontology_ProjectKB_Class10014])
-	(widget_class_name "edu.stanford.smi.protege.widget.FloatFieldWidget")
-	(width 100)
-	(x 300)
-	(y 60))
-
-([ontology_ProjectKB_Class10014] of  Property_List
-)
-
-([ontology_ProjectKB_Class10015] of  Widget
-
-	(height 60)
-	(is_hidden FALSE)
-	(name "Vitamina C")
-	(property_list [ontology_ProjectKB_Class10016])
-	(widget_class_name "edu.stanford.smi.protege.widget.FloatFieldWidget")
-	(width 100)
-	(x 500)
-	(y 60))
-
-([ontology_ProjectKB_Class10016] of  Property_List
-)
-
-([ontology_ProjectKB_Class10017] of  Widget
-
-	(height 60)
-	(is_hidden FALSE)
-	(name "Hierro")
-	(property_list [ontology_ProjectKB_Class10018])
-	(widget_class_name "edu.stanford.smi.protege.widget.FloatFieldWidget")
-	(width 100)
-	(x 300)
-	(y 0))
-
 ([ontology_ProjectKB_Class10018] of  Property_List
-)
-
-([ontology_ProjectKB_Class10019] of  Widget
-
-	(height 60)
-	(is_hidden FALSE)
-	(name "Calcio")
-	(property_list [ontology_ProjectKB_Class10020])
-	(widget_class_name "edu.stanford.smi.protege.widget.FloatFieldWidget")
-	(width 100)
-	(x 100)
-	(y 60))
-
-([ontology_ProjectKB_Class10020] of  Property_List
-)
-
-([ontology_ProjectKB_Class10021] of  Widget
-
-	(height 60)
-	(is_hidden FALSE)
-	(name "Calorias")
-	(property_list [ontology_ProjectKB_Class10022])
-	(widget_class_name "edu.stanford.smi.protege.widget.FloatFieldWidget")
-	(width 100)
-	(x 0)
-	(y 120))
-
-([ontology_ProjectKB_Class10022] of  Property_List
-)
-
-([ontology_ProjectKB_Class10023] of  Widget
-
-	(height 60)
-	(is_hidden FALSE)
-	(name "Sodio")
-	(property_list [ontology_ProjectKB_Class10024])
-	(widget_class_name "edu.stanford.smi.protege.widget.FloatFieldWidget")
-	(width 100)
-	(x 300)
-	(y 120))
-
-([ontology_ProjectKB_Class10024] of  Property_List
-)
-
-([ontology_ProjectKB_Class10025] of  Widget
-
-	(height 60)
-	(is_hidden FALSE)
-	(name "Peso Total")
-	(property_list [ontology_ProjectKB_Class10026])
-	(widget_class_name "edu.stanford.smi.protege.widget.FloatFieldWidget")
-	(width 100)
-	(x 200)
-	(y 60))
-
-([ontology_ProjectKB_Class10026] of  Property_List
-)
-
-([ontology_ProjectKB_Class10027] of  Widget
-
-	(height 60)
-	(is_hidden FALSE)
-	(name "Colesterol")
-	(property_list [ontology_ProjectKB_Class10028])
-	(widget_class_name "edu.stanford.smi.protege.widget.FloatFieldWidget")
-	(width 100)
-	(x 100)
-	(y 120))
-
-([ontology_ProjectKB_Class10028] of  Property_List
-)
-
-([ontology_ProjectKB_Class10029] of  Widget
-
-	(height 60)
-	(is_hidden FALSE)
-	(name "Total Carbohidratos")
-	(property_list [ontology_ProjectKB_Class10030])
-	(widget_class_name "edu.stanford.smi.protege.widget.FloatFieldWidget")
-	(width 100)
-	(x 400)
-	(y 0))
-
-([ontology_ProjectKB_Class10030] of  Property_List
-)
-
-([ontology_ProjectKB_Class10031] of  Widget
-
-	(height 60)
-	(is_hidden FALSE)
-	(name "alimento")
-	(property_list [ontology_ProjectKB_Class10032])
-	(widget_class_name "edu.stanford.smi.protege.widget.TextFieldWidget")
-	(width 200)
-	(x 0)
-	(y 0))
-
-([ontology_ProjectKB_Class10032] of  Property_List
-)
-
-([ontology_ProjectKB_Class10033] of  Widget
-
-	(height 60)
-	(is_hidden FALSE)
-	(name "Fibra dietetica")
-	(property_list [ontology_ProjectKB_Class10034])
-	(widget_class_name "edu.stanford.smi.protege.widget.FloatFieldWidget")
-	(width 100)
-	(x 200)
-	(y 0))
-
-([ontology_ProjectKB_Class10034] of  Property_List
-)
-
-([ontology_ProjectKB_Class10035] of  Widget
-
-	(height 60)
-	(is_hidden FALSE)
-	(name "Proteinas")
-	(property_list [ontology_ProjectKB_Class10036])
-	(widget_class_name "edu.stanford.smi.protege.widget.FloatFieldWidget")
-	(width 100)
-	(x 200)
-	(y 120))
-
-([ontology_ProjectKB_Class10036] of  Property_List
 )
 
 ([ontology_ProjectKB_Class101] of  String
 
 	(name "SearchTab_Query"))
+
+([ontology_ProjectKB_Class10104] of  Integer
+
+	(integer_value 594)
+	(name "PAL_TAB_DIVIDER_LOCATION"))
+
+([ontology_ProjectKB_Class10105] of  Integer
+
+	(integer_value 83)
+	(name "CONSTRAINT_CONTROL_PANEL_TOP_DIVIDER_LOCATION"))
+
+([ontology_ProjectKB_Class10106] of  Integer
+
+	(integer_value 83)
+	(name "CONSTRAINT_CONTROL_PANEL_BOTTOM_DIVIDER_LOCATION"))
 
 ([ontology_ProjectKB_Class11] of  Widget
 
@@ -478,38 +267,80 @@
 )
 
 ([ontology_ProjectKB_Class20] of  Property_List
-)
 
-([ontology_ProjectKB_Class20129] of  String
+	(properties
+		[ontology_ProjectKB_Class10104]
+		[ontology_ProjectKB_Class10105]
+		[ontology_ProjectKB_Class10106]))
+
+([ontology_ProjectKB_Class20107] of  String
 
 	(name ":INSTANCE-ANNOTATION")
 	(string_value "%3AANNOTATION-TEXT"))
 
-([ontology_ProjectKB_Class20130] of  String
+([ontology_ProjectKB_Class20108] of  String
 
 	(name ":PAL-CONSTRAINT")
 	(string_value "%3APAL-NAME"))
 
-([ontology_ProjectKB_Class20131] of  String
+([ontology_ProjectKB_Class20109] of  String
 
 	(name ":META-CLASS")
 	(string_value "%3ANAME"))
 
-([ontology_ProjectKB_Class20132] of  Map_Entry
+([ontology_ProjectKB_Class20110] of  Map_Entry
 
 	(key "add_name_on_instance_form")
 	(key_class "java.lang.String")
 	(value "false")
 	(value_class "java.lang.String"))
 
-([ontology_ProjectKB_Class20133] of  Map_Entry
+([ontology_ProjectKB_Class20111] of  Map_Entry
+
+	(key "Allow meta-modeling")
+	(key_class "java.lang.String")
+	(value "false")
+	(value_class "java.lang.Boolean"))
+
+([ontology_ProjectKB_Class20112] of  Map_Entry
+
+	(key "lucene.search.individuals")
+	(key_class "java.lang.String")
+	(value "true")
+	(value_class "java.lang.Boolean"))
+
+([ontology_ProjectKB_Class20113] of  Map_Entry
 
 	(key "change_tracking_active")
 	(key_class "java.lang.String")
 	(value "false")
 	(value_class "java.lang.String"))
 
-([ontology_ProjectKB_Class20134] of  Map_Entry
+([ontology_ProjectKB_Class20114] of  Map_Entry
+
+	(key "lucene.search.classes")
+	(key_class "java.lang.String")
+	(value "true")
+	(value_class "java.lang.Boolean"))
+
+([ontology_ProjectKB_Class20115] of  Map_Entry
+
+	(key "lucene.search.properties")
+	(key_class "java.lang.String")
+	(value "true")
+	(value_class "java.lang.Boolean"))
+
+([ontology_ProjectKB_Class20116] of  Map
+)
+
+([ontology_ProjectKB_Class20117] of  Map_Entry
+
+	(key "InstanceDisplay.yellow_stickies")
+	(key_class "java.lang.String")
+	(value "ontology_ProjectKB_Class20116")
+	(value_class "java.util.Map"))
+
+([ontology_ProjectKB_Class20118] of  Map_Entry
 
 	(key "suppress_instance_counting")
 	(key_class "java.lang.String")
@@ -890,22 +721,22 @@
 		[FORMS_TAB]
 		[INSTANCES_TAB]
 		[QUERIES_TAB]
+		[ontology_ProjectKB_Class69]
+		[ontology_ProjectKB_Class17]
+		[ontology_ProjectKB_Class29]
+		[ontology_ProjectKB_Class21]
+		[ontology_ProjectKB_Class55]
 		[ontology_ProjectKB_Class37]
 		[ontology_ProjectKB_Class59]
 		[ontology_ProjectKB_Class23]
 		[ontology_ProjectKB_Class67]
 		[ontology_ProjectKB_Class9]
 		[ontology_ProjectKB_Class63]
-		[ontology_ProjectKB_Class17]
 		[ontology_ProjectKB_Class15]
 		[ontology_ProjectKB_Class1]
 		[ontology_ProjectKB_Class43]
 		[ontology_ProjectKB_Class65]
-		[ontology_ProjectKB_Class29]
 		[ontology_ProjectKB_Class25]
-		[ontology_ProjectKB_Class69]
-		[ontology_ProjectKB_Class21]
-		[ontology_ProjectKB_Class55]
 		[ontology_ProjectKB_Class19]
 		[ontology_ProjectKB_Class73]
 		[ontology_ProjectKB_Class7]
