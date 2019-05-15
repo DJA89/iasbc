@@ -1520,7 +1520,7 @@
 (defrule PREPROCESS::eliminar-platos-no-temporada
 	(temp ?t)
 	?plato <- (object (is-a Plato)(Temporada ?temp) (NombrePlato ?nombre))
-	(test (not (eq (str-compare ?temp ?t) 0) ))
+	(test (and (not (eq (str-compare ?temp ?t) 0) ) (not (eq (str-compare ?temp "Cualquiera") 0))))
 	=>
 	(printout t "Eliminado " ?nombre  " en eliminar-platos-no-temporada" crlf) ;Línea a borrar
 	(send ?plato delete)
