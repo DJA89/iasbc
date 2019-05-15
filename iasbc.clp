@@ -1677,8 +1677,7 @@
 	?dia <- (platosDisponibles (platos $?platos-l))
 	(test (not (member$ ?plate $?platos-l)))
 	=>
-		(printout t ?plate " " ?platos-l crlf)
-	 (modify ?dia (platos ?plate ?platos-l))
+		(modify ?dia (platos ?plate ?platos-l))
 	)
 
 
