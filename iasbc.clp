@@ -1330,7 +1330,7 @@
 )
 
 (deftemplate MAIN::platosDisponibles
-	(slot dia (type STRING))
+	(slot dia (type INTEGER))
 	(multislot platos (type INSTANCE))
 	)
 
@@ -1407,13 +1407,6 @@
 	(assert (welcome-given TRUE))
 	(assert (preguntar-enfermedad))
 	(assert (Requisitos))
-	(assert (platosDisponibles (dia "Lunes")))
-	(assert (platosDisponibles (dia "Martes")))
-	(assert (platosDisponibles (dia "Miercoles")))
-	(assert (platosDisponibles (dia "Jueves")))
-	(assert (platosDisponibles (dia "Viernes")))
-	(assert (platosDisponibles (dia "Sabado")))
-	(assert (platosDisponibles (dia "Domingo")))
   (focus ASK_QUESTIONS)
 	(assert (Plato))
 )
@@ -1672,6 +1665,17 @@
 	=>
 	(focus PREPARESOLUTION))
 
+(defrule PREPARESOLUTION::crear-platos-vacios
+	=>
+	(assert (platosDisponibles (dia 1)))
+	(assert (platosDisponibles (dia 2)))
+	(assert (platosDisponibles (dia 3)))
+	(assert (platosDisponibles (dia 4)))
+	(assert (platosDisponibles (dia 5)))
+	(assert (platosDisponibles (dia 6)))
+	(assert (platosDisponibles (dia 7)))
+	)
+
 (defrule PREPARESOLUTION::crear-posibles-platos-por-dia
 	?plate <- (object (is-a Plato))
 	?dia <- (platosDisponibles (platos $?platos-l))
@@ -1682,10 +1686,10 @@
 
 
 	(defrule CREATESOLUTION::menu-dia
-		?dia <- (dia ?x)
+		?dia <- (dia ?numero-de-dia)
 		?Sol-Dia <- (SolucionDia (dia ?y) )
-		(test (< ?x 8))
-		(test (eq ?x ?y))
+
+		(test (eq ?numero-de-dia ?y))
 
 		?Desayuno <- (object (is-a Plato) (Tipo ?tipo))
 		(test (eq ?tipo Desayuno))
@@ -1702,10 +1706,10 @@
 		?PostreCena <- (object (is-a Plato) (Tipo ?tipo))
 		(test (eq ?tipo Postre))
 	=>
-
-		(assert (+ ?dia 1))
+		(if (< ?numero-de-dia 7)
+		then (assert (+ ?dia 1))
+		)
 		(retract ?dia)
-
 	)
 
 ;(defrule crear-soluciones-dia	(Requisitos (calorias ?cal) (minGrasas ?minG) (maxGrasas ?maxG) (fibras ?fib) (minCarbos ?minC) (maxCarbos ?maxC) (proteinas ?prot) (calcio ?pre) (potasio ?pot))
