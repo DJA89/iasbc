@@ -1500,36 +1500,31 @@
 
 (defrule PREPROCESS::eliminar-platos-no-veganos
 	(dieta vegano)
-	?plato <-(object (is-a Plato)(Compatibilidad ?compt))
+	?plato <-(object (is-a Plato)(Compatibilidad ?compt) (NombrePlato ?nombre))
 	(test (or (eq(str-compare ?compt "NoAptoV") 0) (eq(str-compare ?compt "AptoVegetariano") 0) ))
 	=>
+	(printout t "Eliminado " ?nombre " en eliminar-platos-no-veganos" crlf) ;Línea a borrar
 	(send ?plato delete)
 	(assert (eliminados-si-vegano))
 )
 
 (defrule PREPROCESS::eliminar-platos-no-vegetarianos
 	(dieta vegetariano)
-	?plato <- (object (is-a Plato)(Compatibilidad ?compt))
+	?plato <- (object (is-a Plato)(Compatibilidad ?compt) (NombrePlato ?nombre))
 	(test (eq(str-compare ?compt "NoAptoV") 0) )
 	=>
+	(printout t "Eliminado " ?nombre " en eliminar-platos-no-vegetarianos" crlf) ;Línea a borrar
 	(send ?plato delete)
 	(assert (eliminados-si-vegetariano)))
 
 (defrule PREPROCESS::eliminar-platos-no-temporada
 	(temp ?t)
-	?plato <- (object (is-a Plato)(Temporada ?temp))
-	(test (not (eq (str-compare ?temp ?t) 0) ))
+	?plato <- (object (is-a Plato)(Temporada ?temp) (NombrePlato ?nombre))
+	(test (and (not (eq (str-compare ?temp ?t) 0) ) (not (eq (str-compare ?temp "Cualquiera") 0))))
 	=>
+	(printout t "Eliminado " ?nombre  " en eliminar-platos-no-temporada" crlf) ;Línea a borrar
 	(send ?plato delete)
 )
-
-
-;(defrule PREPROCESS::eliminado-platos-no-temporada
-;	(temp ?t)
-;	(not ((object (is-a Plato)(Temporada ?t))))
-;	=>
-;	(assert (eliminados-de-temporada))
-;)
 
 ;calculamos la energia a consumir necesaria a partir de la edad,sexo y NAF de la persona
 (defrule PREPROCESS::calcula-energia
@@ -1632,18 +1627,20 @@
 ;elimina aquellas comidas con mas de un 5% de azucares
 (defrule PREPROCESS::eliminar-platos-diabetes
     (enfermedad diabetes)
-    ?plato <- (object (is-a Plato) (Peso ?x) (Azucares ?a))
+    ?plato <- (object (is-a Plato) (Peso ?x) (Azucares ?a) (NombrePlato ?nombre))
     (test( > (/ ?a ?x) 5) )
     =>
+		(printout t "Eliminado " ?nombre  " en eliminar-platos-diabetes" crlf) ;Línea a borrar
     (send ?plato delete)
 )
 
 ;elimina aquellas comidas con mas de un 2% de saturated fats
 (defrule PREPROCESS::eliminar-platos-hipertension
     (enfermedad hipertension)
-    ?plato <- (object (is-a Plato)(Peso ?x) (AcidosGrasosSaturados ?a))
+    ?plato <- (object (is-a Plato)(Peso ?x) (AcidosGrasosSaturados ?a) (NombrePlato ?nombre))
     (test( > (/ ?a ?x) 2) )
     =>
+		(printout t "Eliminado " ?nombre  " en eliminar-platos-hipertension" crlf) ;Línea a borrar
     (send ?plato delete)
 )
 
@@ -1680,8 +1677,7 @@
 	?dia <- (platosDisponibles (platos $?platos-l))
 	(test (not (member$ ?plate $?platos-l)))
 	=>
-		(printout t ?plate " " ?platos-l crlf)
-	 (modify ?dia (platos ?plate ?platos-l))
+		(modify ?dia (platos ?plate ?platos-l))
 	)
 
 
