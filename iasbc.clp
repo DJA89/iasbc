@@ -3,6 +3,7 @@
 (defmodule PREPROCESS  					(import ASK_QUESTIONS ?ALL)(export ?ALL))
 (defmodule PREPARESOLUTION  		(import PREPROCESS ?ALL)(export ?ALL))
 (defmodule CREATESOLUTION 					(import PREPARESOLUTION ?ALL)(export ?ALL))
+(defmodule PRESENTSOLUTION 					(import CREATESOLUTION ?ALL)(export ?ALL))
 
 ;Comienza pegado de .pont
 
@@ -1280,20 +1281,6 @@
 ;Termina pegado de .pins
 )
 
-;(defrule cuatrimestreMatricula "regla para saber el cuatrimestre que se matriculara"
-;	(nuevo_estudiante)
-;	?h <- (Estudiante ?nombre)
-;	?alumno <-(object (is-a Estudiante)(nombre ?nombreA))
-;	(test (eq (str-compare  ?nombre ?nombreA) 0))
-;	=>
-;	(bind ?q (pregunta-general "�Qu� cuatrimestre es? [Q1(1)-Q2(2)]:  "))
-;	;;(bind ?restriccion (make-instance restriccionNumericaMHD of RestriccionCantidad))
-;	(switch ?q
-;		(case 1 then (assert(Cuatrimestre Q1)))
-;		(case 2 then (assert(Cuatrimestre Q2)))
-;	)
-;)
-
 (deftemplate MAIN::ValorNutricionalPlato
 	(slot nombre (type STRING))
 	(slot carbos (type FLOAT))
@@ -1317,7 +1304,7 @@
 )
 
 (deftemplate MAIN::SolucionDia
-	(slot dia (type STRING))
+	(slot dia (type INTEGER))
 	(slot grasas (type FLOAT))
 	(slot carbos (type FLOAT))
 	(slot fibras (type FLOAT))
@@ -1684,33 +1671,129 @@
 		(modify ?dia (platos ?plate ?platos-l))
 	)
 
-
-	(defrule CREATESOLUTION::menu-dia
-		?dia <- (dia ?numero-de-dia)
-		?Sol-Dia <- (SolucionDia (dia ?y) )
-
-		(test (eq ?numero-de-dia ?y))
-
-		?Desayuno <- (object (is-a Plato) (Tipo ?tipo))
-		(test (eq ?tipo Desayuno))
-
-		?Comida <- (object (is-a Plato) (Tipo ?tipo))
-		(test (eq ?tipo Principal))
-
-		?PostreComida <- (object (is-a Plato) (Tipo ?tipo))
-		(test (eq ?tipo Postre))
-
-		?Cena <- (object (is-a Plato) (Tipo ?tipo))
-		(test (eq ?tipo Principal))
-
-		?PostreCena <- (object (is-a Plato) (Tipo ?tipo))
-		(test (eq ?tipo Postre))
+(defrule PREPARESOLUTION::pasar-a-crear-solucion
+	(declare (salience -1))
 	=>
-		(if (< ?numero-de-dia 7)
-		then (assert (+ ?dia 1))
-		)
-		(retract ?dia)
+	(focus CREATESOLUTION))
+
+
+(defrule CREATESOLUTION::crear-soluciones-dias
+	=>
+	(assert (SolucionDia (dia 1)))
+	(assert (SolucionDia (dia 2)))
+	(assert (SolucionDia (dia 3)))
+	(assert (SolucionDia (dia 4)))
+	(assert (SolucionDia (dia 5)))
+	(assert (SolucionDia (dia 6)))
+	(assert (SolucionDia (dia 7)))
+	(assert (dia 1)))
+
+(defrule CREATESOLUTION::menu-dia
+	?dia <- (dia ?numero-de-dia)
+	?Sol-Dia <- (SolucionDia (dia ?y) )
+
+	(test (eq ?numero-de-dia ?y))
+
+	?Desayuno <- (object (is-a Plato) (Tipo ?des))
+	(test (eq ?des Desayuno))
+
+	?Comida <- (object (is-a Plato) (Tipo ?com))
+	(test (eq ?com Principal))
+
+	?PostreComida <- (object (is-a Plato) (Tipo ?post-com))
+	(test (eq ?post-com Postre))
+
+	?Cena <- (object (is-a Plato) (Tipo ?cen))
+	(test (eq ?cen Principal))
+
+	?PostreCena <- (object (is-a Plato) (Tipo ?post-cen))
+	(test (eq ?post-cen Postre))
+=>
+	(modify ?Sol-Dia (desayuno ?Desayuno) (comida ?Comida) (postreComida ?PostreComida) (cena ?Cena) (postreCena ?PostreCena))
+
+	(if (< ?numero-de-dia 7)
+	then (assert (dia (+ ?numero-de-dia 1)))
 	)
+	(retract ?dia)
+)
+
+(defrule CREATESOLUTION::pasar-a-presentar-solucion
+	(declare (salience -1))
+	=>
+	(focus PRESENTSOLUTION))
+
+(defrule PRESENTSOLUTION::imprimir-solucion
+	?Sol-Dia-1 <- (SolucionDia (dia 1) (desayuno ?des-1) (comida ?com-1) (postreComida ?post-com-1) (cena ?cen-1) (postreCena ?post-cen-1))
+	?Sol-Dia-2 <- (SolucionDia (dia 2) (desayuno ?des-2) (comida ?com-2) (postreComida ?post-com-2) (cena ?cen-2) (postreCena ?post-cen-2))
+	?Sol-Dia-3 <- (SolucionDia (dia 3) (desayuno ?des-3) (comida ?com-3) (postreComida ?post-com-3) (cena ?cen-3) (postreCena ?post-cen-3))
+	?Sol-Dia-4 <- (SolucionDia (dia 4) (desayuno ?des-4) (comida ?com-4) (postreComida ?post-com-4) (cena ?cen-4) (postreCena ?post-cen-4))
+	?Sol-Dia-5 <- (SolucionDia (dia 5) (desayuno ?des-5) (comida ?com-5) (postreComida ?post-com-5) (cena ?cen-5) (postreCena ?post-cen-5))
+	?Sol-Dia-6 <- (SolucionDia (dia 6) (desayuno ?des-6) (comida ?com-6) (postreComida ?post-com-6) (cena ?cen-6) (postreCena ?post-cen-6))
+	?Sol-Dia-7 <- (SolucionDia (dia 7) (desayuno ?des-7) (comida ?com-7) (postreComida ?post-com-7) (cena ?cen-7) (postreCena ?post-cen-7))
+	=>
+	(printout t "Esta es nuestra propuesta de menú especialmente preparada para usted: " crlf)
+	(printout t "Solucion dia 1: " crlf)
+	(printout t "Desayuno: " ?des-1 crlf)
+	(printout t "Comida: " ?com-1 crlf)
+	(printout t "Postre comida: " ?post-com-1 crlf)
+	(printout t "Cena: " ?cen-1 crlf)
+	(printout t "Postre cena: " ?post-cen-1 crlf crlf)
+
+	(printout t "Solucion dia 2: " crlf)
+	(printout t "Desayuno: " ?des-2 crlf)
+	(printout t "Comida: " ?com-2 crlf)
+	(printout t "Postre comida: " ?post-com-2 crlf)
+	(printout t "Cena: " ?cen-2 crlf)
+	(printout t "Postre cena: " ?post-cen-2 crlf crlf)
+
+	(printout t "Solucion dia 3: " crlf)
+	(printout t "Desayuno: " ?des-3 crlf)
+	(printout t "Comida: " ?com-3 crlf)
+	(printout t "Postre comida: " ?post-com-3 crlf)
+	(printout t "Cena: " ?cen-3 crlf)
+	(printout t "Postre cena: " ?post-cen-3 crlf crlf)
+
+	(printout t "Solucion dia 4: " crlf)
+	(printout t "Desayuno: " ?des-4 crlf)
+	(printout t "Comida: " ?com-4 crlf)
+	(printout t "Postre comida: " ?post-com-4 crlf)
+	(printout t "Cena: " ?cen-4 crlf)
+	(printout t "Postre cena: " ?post-cen-4 crlf crlf)
+
+	(printout t "Solucion dia 5: " crlf)
+	(printout t "Desayuno: " ?des-5 crlf)
+	(printout t "Comida: " ?com-5 crlf)
+	(printout t "Postre comida: " ?post-com-5 crlf)
+	(printout t "Cena: " ?cen-5 crlf)
+	(printout t "Postre cena: " ?post-cen-5 crlf crlf)
+
+	(printout t "Solucion dia 6: " crlf)
+	(printout t "Desayuno: " ?des-6 crlf)
+	(printout t "Comida: " ?com-6 crlf)
+	(printout t "Postre comida: " ?post-com-6 crlf)
+	(printout t "Cena: " ?cen-6 crlf)
+	(printout t "Postre cena: " ?post-cen-6 crlf crlf)
+
+	(printout t "Solucion dia 7: " crlf)
+	(printout t "Desayuno: " ?des-7 crlf)
+	(printout t "Comida: " ?com-7 crlf)
+	(printout t "Postre comida: " ?post-com-7 crlf)
+	(printout t "Cena: " ?cen-7 crlf)
+	(printout t "Postre cena: " ?post-cen-7 crlf crlf)
+	)
+
+;	(deftemplate SolucionDia
+;		(slot dia (type INTEGER))
+;		(slot grasas (type FLOAT))
+;		(slot carbos (type FLOAT))
+;		(slot fibras (type FLOAT))
+;		(slot calorias (type FLOAT))
+;		(slot desayuno (type INSTANCE))
+;		(slot comida (type INSTANCE))
+;		(slot postreComida (type INSTANCE))
+;		(slot cena (type INSTANCE))
+;		(slot postreCena (type INSTANCE))
+;	)
 
 ;(defrule crear-soluciones-dia	(Requisitos (calorias ?cal) (minGrasas ?minG) (maxGrasas ?maxG) (fibras ?fib) (minCarbos ?minC) (maxCarbos ?maxC) (proteinas ?prot) (calcio ?pre) (potasio ?pot))
 ;	=>
