@@ -1,4 +1,4 @@
-; Thu May 16 12:33:31 GMT+01:00 2019
+; Thu May 16 22:01:42 GMT+01:00 2019
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -55,14 +55,14 @@
 		(type FLOAT)
 ;+		(cardinality 1 1)
 		(create-accessor read-write))
-	(single-slot Temporada
-		(type SYMBOL)
-		(allowed-values Otono Primavera Verano Invierno Cualquiera)
-;+		(cardinality 0 1)
-		(create-accessor read-write))
 	(single-slot Proteinas
 		(type FLOAT)
 		(default 0.0)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot Temporada
+		(type SYMBOL)
+		(allowed-values Otono Primavera Verano Invierno Cualquiera)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
 	(single-slot Azucares
@@ -100,12 +100,12 @@
 		(default 0.0)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
-	(single-slot Niacina
+	(single-slot AcidosGrasosTrans
 		(type FLOAT)
 		(default 0.0)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
-	(single-slot AcidosGrasosTrans
+	(single-slot Niacina
 		(type FLOAT)
 		(default 0.0)
 ;+		(cardinality 0 1)
@@ -141,15 +141,15 @@
 		(default 0.0)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
-	(single-slot Tipo
-		(type SYMBOL)
-		(allowed-values Desayuno Postre Principal)
-;+		(cardinality 1 1)
-		(create-accessor read-write))
 	(single-slot Colina
 		(type FLOAT)
 		(default 0.0)
 ;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot Tipo
+		(type SYMBOL)
+		(allowed-values Desayuno Postre Principal)
+;+		(cardinality 1 1)
 		(create-accessor read-write))
 	(single-slot Coccion
 		(type SYMBOL)
@@ -166,14 +166,14 @@
 		(default 0.0)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
-	(single-slot TipoIngrediente
-		(type SYMBOL)
-		(allowed-values Cereal Legumbre Fruta Verdura Carne Pescado FrutoSeco Lacteo)
-;+		(cardinality 0 1)
-		(create-accessor read-write))
 	(single-slot FibrasAlimenticias
 		(type FLOAT)
 		(default 0.0)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot TipoIngrediente
+		(type SYMBOL)
+		(allowed-values Cereal Legumbre Fruta Verdura Carne Pescado FrutoSeco Lacteo)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
 	(single-slot Calorias
@@ -234,17 +234,12 @@
 		(default 0.0)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
-	(single-slot Calcio
-		(type FLOAT)
-		(default 0.0)
-;+		(cardinality 0 1)
-		(create-accessor read-write))
 	(single-slot Hierro
 		(type FLOAT)
 		(default 0.0)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
-	(single-slot VitaminaD
+	(single-slot Calcio
 		(type FLOAT)
 		(default 0.0)
 ;+		(cardinality 0 1)
@@ -253,6 +248,11 @@
 		(type INSTANCE)
 ;+		(allowed-classes Ingrediente)
 ;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(single-slot VitaminaD
+		(type FLOAT)
+		(default 0.0)
+;+		(cardinality 0 1)
 		(create-accessor read-write))
 	(single-slot VitaminaC
 		(type FLOAT)
@@ -270,15 +270,15 @@
 		(default 0.0)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
-	(single-slot Tipo
-		(type SYMBOL)
-		(allowed-values Desayuno Postre Principal)
-;+		(cardinality 1 1)
-		(create-accessor read-write))
 	(single-slot Colina
 		(type FLOAT)
 		(default 0.0)
 ;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot Tipo
+		(type SYMBOL)
+		(allowed-values Desayuno Postre Principal)
+;+		(cardinality 1 1)
 		(create-accessor read-write))
 	(single-slot Tiamina
 		(type FLOAT)
@@ -294,9 +294,9 @@
 		(type FLOAT)
 ;+		(cardinality 1 1)
 		(create-accessor read-write))
-	(single-slot Temporada
-		(type SYMBOL)
-		(allowed-values Otono Primavera Verano Invierno Cualquiera)
+	(single-slot Proteinas
+		(type FLOAT)
+		(default 0.0)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
 	(single-slot Coccion
@@ -304,9 +304,9 @@
 		(allowed-values Plancha Hervido Horneado Frito Estofado Crudo)
 ;+		(cardinality 1 1)
 		(create-accessor read-write))
-	(single-slot Proteinas
-		(type FLOAT)
-		(default 0.0)
+	(single-slot Temporada
+		(type SYMBOL)
+		(allowed-values Otono Primavera Verano Invierno Cualquiera)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
 	(single-slot Selenio
@@ -324,12 +324,12 @@
 		(default 0.0)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
-	(single-slot Cobalamina
+	(single-slot VitaminaK
 		(type FLOAT)
 		(default 0.0)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
-	(single-slot VitaminaK
+	(single-slot Cobalamina
 		(type FLOAT)
 		(default 0.0)
 ;+		(cardinality 0 1)
@@ -339,12 +339,12 @@
 		(default 0.0)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
-	(single-slot FibrasAlimenticias
+	(single-slot Fosforo
 		(type FLOAT)
 		(default 0.0)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
-	(single-slot Fosforo
+	(single-slot FibrasAlimenticias
 		(type FLOAT)
 		(default 0.0)
 ;+		(cardinality 0 1)
@@ -368,22 +368,12 @@
 		(default 0.0)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
-	(single-slot GrasaTotal
-		(type FLOAT)
-		(default 0.0)
-;+		(cardinality 0 1)
-		(create-accessor read-write))
 	(single-slot AcidosGrasosSaturados
 		(type FLOAT)
 		(default 0.0)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
-	(multislot Ingredientes
-		(type INSTANCE)
-;+		(allowed-classes Ingrediente)
-		(cardinality 1 ?VARIABLE)
-		(create-accessor read-write))
-	(single-slot AcidosGrasosTrans
+	(single-slot GrasaTotal
 		(type FLOAT)
 		(default 0.0)
 ;+		(cardinality 0 1)
@@ -392,6 +382,16 @@
 		(type FLOAT)
 		(default 0.0)
 ;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot AcidosGrasosTrans
+		(type FLOAT)
+		(default 0.0)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(multislot Ingredientes
+		(type INSTANCE)
+;+		(allowed-classes Ingrediente)
+		(cardinality 1 ?VARIABLE)
 		(create-accessor read-write))
 	(single-slot Riboflavina
 		(type FLOAT)
@@ -412,12 +412,12 @@
 (defclass Ingrediente
 	(is-a USER)
 	(role concrete)
+	(single-slot NombreIngrediente
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
 	(single-slot TipoIngrediente
 		(type SYMBOL)
 		(allowed-values Cereal Legumbre Fruta Verdura Carne Pescado FrutoSeco Lacteo)
-;+		(cardinality 0 1)
-		(create-accessor read-write))
-	(single-slot NombreIngrediente
-		(type STRING)
 ;+		(cardinality 0 1)
 		(create-accessor read-write)))

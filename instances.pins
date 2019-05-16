@@ -1,6 +1,11 @@
 ([Spanish_rice_mix_prepared_with_canola_vegetable_oil_blend_or_diced_tomatoes_and_margarine_dry_mix] of Plato
 
 (NombrePlato "Spanish rice mix, prepared (with canola/vegetable oil blend or diced tomatoes and margarine), dry mix")
+(Ingredientes
+[Arroz]
+[Tomate]
+[Margarina])
+(IngredientePrincipal [Arroz])
 (Peso 198)
 (Temporada Cualquiera)
 (Tipo Principal)
@@ -41,6 +46,10 @@
 ([Soup_mix_dry_chicken_noodle] of Plato
 
 (NombrePlato "Soup, mix, dry, chicken noodle")
+(Ingredientes
+[Fideo]
+[Pollo])
+(IngredientePrincipal [Pollo])
 (Peso 74)
 (Temporada Invierno)
 (Tipo Principal)
@@ -81,6 +90,11 @@
 ([Chili_con_carne_with_beans_canned_entree] of Plato
 
 (NombrePlato "Chili con carne with beans, canned entree")
+(Ingredientes
+[Chile]
+[Res]
+[Frijol])
+(IngredientePrincipal [Frijol])
 (Peso 242)
 (Temporada Cualquiera)
 (Tipo Principal)
@@ -121,6 +135,10 @@
 ([Fast_foods_with_condiments_single_patty_large_hamburger] of Plato
 
 (NombrePlato "Fast foods, with condiments, single patty, large, hamburger")
+(Ingredientes
+[Hamburguesa]
+[Pan])
+(IngredientePrincipal [Hamburguesa])
 (Peso 171)
 (Temporada Cualquiera)
 (Tipo Principal)
@@ -161,6 +179,10 @@
 ([Spaghetti_cooked_spinach] of Plato
 
 (NombrePlato "Spaghetti, cooked, spinach")
+(Ingredientes
+[Fideo]
+[Espinaca])
+(IngredientePrincipal [Fideo])
 (Peso 140)
 (Temporada Cualquiera)
 (Tipo Principal)
@@ -201,6 +223,11 @@
 ([Sandwich_spread_beef_pork] of Plato
 
 (NombrePlato "Sandwich spread, beef, pork")
+(Ingredientes
+[Pan]
+[Cerdo]
+[Res])
+(IngredientePrincipal [Pan])
 (Peso 28.35)
 (Temporada Cualquiera)
 (Tipo Desayuno)
@@ -241,6 +268,9 @@
 ([Restaurant_french_fries_family_style] of Plato
 
 (NombrePlato "Restaurant, french fries, family style")
+(Ingredientes
+[Patata])
+(IngredientePrincipal [Patata])
 (Peso 170)
 (Temporada Cualquiera)
 (Tipo Principal)
@@ -281,6 +311,10 @@
 ([Macaroni_and_Cheese_canned_entree] of Plato
 
 (NombrePlato "Macaroni and Cheese, canned entree")
+(Ingredientes
+[Fideo]
+[Queso])
+(IngredientePrincipal [Queso])
 (Peso 244)
 (Temporada Primavera)
 (Tipo Principal)
@@ -321,6 +355,11 @@
 ([Salad_dressing_bacon_and_tomato] of Plato
 
 (NombrePlato "Salad dressing, bacon and tomato")
+(Ingredientes
+[Lechuga]
+[Cerdo]
+[Tomate])
+(IngredientePrincipal [Lechuga])
 (Peso 240)
 (Temporada Primavera)
 (Tipo Principal)
@@ -361,6 +400,10 @@
 ([Potato_salad_with_egg] of Plato
 
 (NombrePlato "Potato salad with egg")
+(Ingredientes
+[Patata]
+[Huevo])
+(IngredientePrincipal [Patata])
 (Peso 125)
 (Temporada Otono)
 (Tipo Principal)
@@ -401,6 +444,9 @@
 ([Egg_omelet_cooked_whole] of Plato
 
 (NombrePlato "Egg, omelet, cooked, whole")
+(Ingredientes
+[Huevo])
+(IngredientePrincipal [Huevo])
 (Peso 61)
 (Temporada Cualquiera)
 (Tipo Desayuno)
@@ -441,6 +487,9 @@
 ([Ice_cream_sandwich] of Plato
 
 (NombrePlato "Ice cream sandwich")
+(Ingredientes
+[Helado])
+(IngredientePrincipal [Helado])
 (Peso 70)
 (Temporada Verano)
 (Tipo Postre)
@@ -481,6 +530,10 @@
 ([Ravioli_canned_cheese_filled] of Plato
 
 (NombrePlato "Ravioli, canned, cheese-filled")
+(Ingredientes
+[Fideo]
+[Queso])
+(IngredientePrincipal [Fideo])
 (Peso 242)
 (Temporada Invierno)
 (Tipo Principal)
@@ -521,6 +574,10 @@
 ([Fish_tuna_salad] of Plato
 
 (NombrePlato "Fish, tuna salad")
+(Ingredientes
+[Atun]
+[Lechuga])
+(IngredientePrincipal [Atun])
 (Peso 205)
 (Temporada Cualquiera)
 (Tipo Principal)
@@ -561,6 +618,11 @@
 ([Babyfood_prepared_with_whole_milk_with_honey_rice_cereal] of Plato
 
 (NombrePlato "Babyfood, prepared with whole milk, with honey, rice, cereal")
+(Ingredientes
+[Leche]
+[Maiz]
+[Arroz])
+(IngredientePrincipal [Leche])
 (Peso 28.35)
 (Temporada Cualquiera)
 (Tipo Desayuno)
@@ -601,6 +663,9 @@
 ([Yogurt_nonfat_plain_Greek] of Plato
 
 (NombrePlato "Yogurt, nonfat, plain, Greek")
+(Ingredientes
+[Yogurt])
+(IngredientePrincipal [Yogurt])
 (Peso 170)
 (Temporada Invierno)
 (Tipo Desayuno)
@@ -641,6 +706,10 @@
 ([Babyfood_prepared_with_whole_milk_mixed_cereal] of Plato
 
 (NombrePlato "Babyfood, prepared with whole milk, mixed, cereal")
+(Ingredientes
+[Leche]
+[Maiz])
+(IngredientePrincipal [Maiz])
 (Peso 28.35)
 (Temporada Cualquiera)
 (Tipo Postre)
@@ -681,6 +750,9 @@
 ([Gelatin_desserts_dry_mix] of Plato
 
 (NombrePlato "Gelatin desserts, dry mix")
+(Ingredientes
+[Gel])
+(IngredientePrincipal [Gel])
 (Peso 85)
 (Temporada Verano)
 (Tipo Postre)
@@ -721,6 +793,11 @@
 ([Salad_dressing_low_calorie_caesar] of Plato
 
 (NombrePlato "Salad dressing, low calorie, caesar")
+(Ingredientes
+[Pollo]
+[Queso]
+[Lechuga])
+(IngredientePrincipal [Pollo])
 (Peso 240)
 (Temporada Primavera)
 (Tipo Principal)
@@ -761,6 +838,10 @@
 ([Salad_dressing_russian_dressing] of Plato
 
 (NombrePlato "Salad dressing, russian dressing")
+(Ingredientes
+[Huevo]
+[Pollo])
+(IngredientePrincipal [Pollo])
 (Peso 245)
 (Temporada Otono)
 (Tipo Principal)
@@ -801,6 +882,10 @@
 ([Pasta_with_tomato_sauce_canned_no_meat] of Plato
 
 (NombrePlato "Pasta with tomato sauce, canned, no meat")
+(Ingredientes
+[Fideo]
+[Tomate])
+(IngredientePrincipal [Fideo])
 (Peso 238)
 (Temporada Cualquiera)
 (Tipo Principal)
@@ -837,3 +922,119 @@
 (VitaminaE 1.48000000)
 (VitaminaK 0.00000290)
 (Zinc 0.90000000))
+
+([Arroz] of Ingrediente
+
+(NombreIngrediente "Arroz")
+(TipoIngrediente Cereal))
+
+([Tomate] of Ingrediente
+
+(NombreIngrediente "Tomate")
+(TipoIngrediente Verdura))
+
+([Pollo] of Ingrediente
+
+(NombreIngrediente "Pollo")
+(TipoIngrediente Carne))
+
+([Fideo] of Ingrediente
+
+(NombreIngrediente "Fideo")
+(TipoIngrediente Cereal))
+
+([Frijol] of Ingrediente
+
+(NombreIngrediente "Frijol")
+(TipoIngrediente Legumbre))
+
+([Chile] of Ingrediente
+
+(NombreIngrediente "Chile")
+(TipoIngrediente Fruta))
+
+([Cerdo] of Ingrediente
+
+(NombreIngrediente "Cerdo")
+(TipoIngrediente Carne))
+
+([Res] of Ingrediente
+
+(NombreIngrediente "Res")
+(TipoIngrediente Carne))
+
+([Hamburguesa] of Ingrediente
+
+(NombreIngrediente "Hamburguesa")
+(TipoIngrediente Carne))
+
+([Pan] of Ingrediente
+
+(NombreIngrediente "Pan")
+(TipoIngrediente Cereal))
+
+([Espinaca] of Ingrediente
+
+(NombreIngrediente "Espinaca")
+(TipoIngrediente Verdura))
+
+([Patata] of Ingrediente
+
+(NombreIngrediente "Patata")
+(TipoIngrediente Verdura))
+
+([Queso] of Ingrediente
+
+(NombreIngrediente "Queso")
+(TipoIngrediente Lacteo))
+
+([Margarina] of Ingrediente
+
+(NombreIngrediente "Margarina")
+(TipoIngrediente Lacteo))
+
+([Huevo] of Ingrediente
+
+(NombreIngrediente "Huevo")
+(TipoIngrediente Lacteo))
+
+([Lechuga] of Ingrediente
+
+(NombreIngrediente "Lechuga")
+(TipoIngrediente Verdura))
+
+([Helado] of Ingrediente
+
+(NombreIngrediente "Helado")
+(TipoIngrediente Lacteo))
+
+([Atun] of Ingrediente
+
+(NombreIngrediente "Atun")
+(TipoIngrediente Pescado))
+
+([Leche] of Ingrediente
+
+(NombreIngrediente "Leche")
+(TipoIngrediente Lacteo))
+
+([Maiz] of Ingrediente
+
+(NombreIngrediente "Maiz")
+(TipoIngrediente Cereal))
+
+([Yogurt] of Ingrediente
+
+(NombreIngrediente "Yogurt")
+(TipoIngrediente Lacteo))
+
+([Gel] of Ingrediente
+
+(NombreIngrediente "Gel")
+(TipoIngrediente Carne))
+
+([Anchoa] of Ingrediente
+
+(NombreIngrediente "Anchoa")
+(TipoIngrediente Pescado))
+

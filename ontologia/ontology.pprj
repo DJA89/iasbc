@@ -1,4 +1,4 @@
-; Thu May 16 12:33:31 GMT+01:00 2019
+; Thu May 16 22:01:42 GMT+01:00 2019
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -21,9 +21,9 @@
 ([BROWSER_SLOT_NAMES] of  Property_List
 
 	(properties
-		[ontology_ProjectKB_Class10010]
-		[ontology_ProjectKB_Class10011]
-		[ontology_ProjectKB_Class10012]))
+		[ontology_ProjectKB_Class20126]
+		[ontology_ProjectKB_Class20127]
+		[ontology_ProjectKB_Class20128]))
 
 ([CLSES_TAB] of  Widget
 
@@ -76,15 +76,15 @@
 ([KB_803769_Class1] of  Map
 
 	(entries
-		[ontology_ProjectKB_Class10013]
-		[ontology_ProjectKB_Class10014]
-		[ontology_ProjectKB_Class10015]
-		[ontology_ProjectKB_Class10016]
-		[ontology_ProjectKB_Class20017]
-		[ontology_ProjectKB_Class20018]
-		[ontology_ProjectKB_Class20020]
-		[ontology_ProjectKB_Class20021])
-	(referenced_maps [ontology_ProjectKB_Class20019]))
+		[ontology_ProjectKB_Class20129]
+		[ontology_ProjectKB_Class20130]
+		[ontology_ProjectKB_Class20131]
+		[ontology_ProjectKB_Class20132]
+		[ontology_ProjectKB_Class20133]
+		[ontology_ProjectKB_Class20134]
+		[ontology_ProjectKB_Class20136]
+		[ontology_ProjectKB_Class20137])
+	(referenced_maps [ontology_ProjectKB_Class20135]))
 
 ([KB_803769_Class100] of  String
 
@@ -178,7 +178,7 @@
 	(name "classes_file_name")
 	(string_value "ontology.pont"))
 
-([KB_813651_Class9] of  Map
+([KB_951486_Class9] of  Map
 )
 
 ([LAYOUT_PROPERTIES] of  Property_List
@@ -194,49 +194,6 @@
 
 ([ontology_ProjectKB_Class10] of  Property_List
 )
-
-([ontology_ProjectKB_Class10010] of  String
-
-	(name ":INSTANCE-ANNOTATION")
-	(string_value "%3AANNOTATION-TEXT"))
-
-([ontology_ProjectKB_Class10011] of  String
-
-	(name ":META-CLASS")
-	(string_value "%3ANAME"))
-
-([ontology_ProjectKB_Class10012] of  String
-
-	(name ":PAL-CONSTRAINT")
-	(string_value "%3APAL-NAME"))
-
-([ontology_ProjectKB_Class10013] of  Map_Entry
-
-	(key "Allow meta-modeling")
-	(key_class "java.lang.String")
-	(value "false")
-	(value_class "java.lang.Boolean"))
-
-([ontology_ProjectKB_Class10014] of  Map_Entry
-
-	(key "add_name_on_instance_form")
-	(key_class "java.lang.String")
-	(value "false")
-	(value_class "java.lang.String"))
-
-([ontology_ProjectKB_Class10015] of  Map_Entry
-
-	(key "lucene.search.individuals")
-	(key_class "java.lang.String")
-	(value "true")
-	(value_class "java.lang.Boolean"))
-
-([ontology_ProjectKB_Class10016] of  Map_Entry
-
-	(key "change_tracking_active")
-	(key_class "java.lang.String")
-	(value "false")
-	(value_class "java.lang.String"))
 
 ([ontology_ProjectKB_Class10017] of  Property_List
 
@@ -316,31 +273,74 @@
 		[ontology_ProjectKB_Class10105]
 		[ontology_ProjectKB_Class10106]))
 
-([ontology_ProjectKB_Class20017] of  Map_Entry
+([ontology_ProjectKB_Class20126] of  String
 
-	(key "lucene.search.properties")
+	(name ":INSTANCE-ANNOTATION")
+	(string_value "%3AANNOTATION-TEXT"))
+
+([ontology_ProjectKB_Class20127] of  String
+
+	(name ":PAL-CONSTRAINT")
+	(string_value "%3APAL-NAME"))
+
+([ontology_ProjectKB_Class20128] of  String
+
+	(name ":META-CLASS")
+	(string_value "%3ANAME"))
+
+([ontology_ProjectKB_Class20129] of  Map_Entry
+
+	(key "add_name_on_instance_form")
+	(key_class "java.lang.String")
+	(value "false")
+	(value_class "java.lang.String"))
+
+([ontology_ProjectKB_Class20130] of  Map_Entry
+
+	(key "Allow meta-modeling")
+	(key_class "java.lang.String")
+	(value "false")
+	(value_class "java.lang.Boolean"))
+
+([ontology_ProjectKB_Class20131] of  Map_Entry
+
+	(key "lucene.search.individuals")
 	(key_class "java.lang.String")
 	(value "true")
 	(value_class "java.lang.Boolean"))
 
-([ontology_ProjectKB_Class20018] of  Map_Entry
+([ontology_ProjectKB_Class20132] of  Map_Entry
+
+	(key "change_tracking_active")
+	(key_class "java.lang.String")
+	(value "false")
+	(value_class "java.lang.String"))
+
+([ontology_ProjectKB_Class20133] of  Map_Entry
 
 	(key "lucene.search.classes")
 	(key_class "java.lang.String")
 	(value "true")
 	(value_class "java.lang.Boolean"))
 
-([ontology_ProjectKB_Class20019] of  Map
+([ontology_ProjectKB_Class20134] of  Map_Entry
+
+	(key "lucene.search.properties")
+	(key_class "java.lang.String")
+	(value "true")
+	(value_class "java.lang.Boolean"))
+
+([ontology_ProjectKB_Class20135] of  Map
 )
 
-([ontology_ProjectKB_Class20020] of  Map_Entry
+([ontology_ProjectKB_Class20136] of  Map_Entry
 
 	(key "InstanceDisplay.yellow_stickies")
 	(key_class "java.lang.String")
-	(value "ontology_ProjectKB_Class20019")
+	(value "ontology_ProjectKB_Class20135")
 	(value_class "java.util.Map"))
 
-([ontology_ProjectKB_Class20021] of  Map_Entry
+([ontology_ProjectKB_Class20137] of  Map_Entry
 
 	(key "suppress_instance_counting")
 	(key_class "java.lang.String")
@@ -702,8 +702,8 @@
 	(browser_slot_names [BROWSER_SLOT_NAMES])
 	(customized_instance_widgets
 		[INSTANCE_ANNOTATION_FORM_WIDGET]
-		[STANDARD_FACET_FORM_WIDGET]
 		[STANDARD_SLOT_FORM_WIDGET]
+		[STANDARD_FACET_FORM_WIDGET]
 		[PAL_FORM_WIDGET]
 		[STANDARD_CLASS_FORM_WIDGET])
 	(default_cls_metaclass ":STANDARD-CLASS")
