@@ -2329,11 +2329,11 @@
 	=>
 	(focus CREATESOLUTION))
 
-(deftemplate CREATESOLUTION::MenuDias
+(deftemplate MAIN::MenuDias
 	(multislot lista (type INSTANCE)))
 
 
-(defrule CREATESOLUTION::crear-lista
+(defrule PREPROCESS::crear-lista
 	=>
 	(assert (MenuDias))
 	)
@@ -2344,7 +2344,7 @@
 		 else
 		 (bind ?r ?x)
 		)
-		?x
+		?r
 	)
 
 (defrule CREATESOLUTION::crear-menusDiarios
@@ -2471,9 +2471,9 @@
 (defrule CREATESOLUTION::agregar-a-lista
 	?menu-dia <-(MenuDia)
 	?lista <- (MenuDias (lista $?menues-dias))
-	(test (not (member$ ?menu-dia $?menues-dias)))
 	=>
 	(modify ?lista (lista ?menu-dia ?menues-dias))
+	(retract ?menu-dia)
 	)
 
 (deffunction CREATESOLUTION::compareMenus
@@ -2481,19 +2481,33 @@
 	(> (fact-slot-value ?a valorNutritivo) (fact-slot-value ?b valorNutritivo))
 	)
 
+(defrule CREATESOLUTION::start-ordenar
+=>
+(assert (ordernar-lista))
+	)
 
 (defrule CREATESOLUTION::ordenar-lista
-	(declare (salience -1))
+	(declare (salience -2))
+	?f1 <- (ordenar-lista)
 	?mdias <- (MenuDias (lista $?Menu-dias))
 	=>
 	(bind ?nuevaLista (sort compareMenus ?Menu-dias))
 	(modify ?mdias (lista ?nuevaLista))
+	(retract ?f1)
 	)
 
 (defrule CREATESOLUTION::pasar-a-presentar-solucion
-	(declare (salience -1))
+	(declare (salience -3))
 	=>
 	(focus PRESENTSOLUTION))
+
+(defrule PRESENTSOLUTION::print
+	?mdias <- (MenuDias (lista $?Menu-dias))
+	=>
+	(bind ?first (nth$ 1 $?Menu-dias))
+	(bind ?x (fact-slot-value ?first grasas))
+	(printout t "TEST: " ?first " " ?x  crlf)
+	)
 ;
 ; (defrule PRESENTSOLUTION::imprimir-solucion
 ; 	?Sol-Dia-1 <- (SolucionDia (dia 1) (desayuno ?des-1) (comida ?com-1) (postreComida ?post-com-1) (cena ?cen-1) (postreCena ?post-cen-1))
