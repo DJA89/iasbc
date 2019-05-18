@@ -2334,6 +2334,7 @@
 
 
 (defrule CREATESOLUTION::crear-lista
+	(declare (salience 1))
 	=>
 	(assert (MenuDias))
 	(assert (ordenar))
@@ -2481,7 +2482,8 @@
 )
 
 (defrule CREATESOLUTION::agregar-a-lista
-	?menu-dia <-(aux (menu-dia ?actual-menu))
+	(declare (salience 1))
+	?menu-dia <- (aux (menu-dia ?actual-menu))
 	?lista <- (MenuDias (lista $?menues-dias))
 	=>
 	(modify ?lista (lista ?actual-menu ?menues-dias))
