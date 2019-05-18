@@ -1,8 +1,7 @@
 (defmodule MAIN 									(export ?ALL))
 (defmodule ASK_QUESTIONS					(import MAIN ?ALL)(export ?ALL))
 (defmodule PREPROCESS  					(import ASK_QUESTIONS ?ALL)(export ?ALL))
-(defmodule PREPARESOLUTION  		(import PREPROCESS ?ALL)(export ?ALL))
-(defmodule CREATESOLUTION 					(import PREPARESOLUTION ?ALL) (import MAIN ?ALL)(export ?ALL))
+(defmodule CREATESOLUTION 					(import PREPROCESS ?ALL)(export ?ALL))
 (defmodule PRESENTSOLUTION 					(import CREATESOLUTION ?ALL)(export ?ALL))
 
 ;Comienza pegado de .pont
@@ -1675,7 +1674,7 @@
 [Leche]
 [Huevo])
 (IngredientePrincipal [Leche])
-(Peso size)
+(Peso 100.0)
 (Temporada Cualquiera)
 (Tipo Postre)
 (Compatibilidad NoAptoV)
@@ -1925,7 +1924,7 @@
 	(slot Hierro (type FLOAT) (default 11.0))
 	(slot Cobalamina (type FLOAT) (default 0.004))
 	(slot Cobre (type FLOAT))
-	(slot Colina (type FLOAT) (default 0.040))
+	(slot Colina (type FLOAT) (default 400.0))
 	(slot Folato (type FLOAT) (default 0.330))
 	(slot Fosforo (type FLOAT) (default 550.0))
 	(slot Magnesio (type FLOAT) (default 350.0))
@@ -1943,7 +1942,7 @@
 )
 
 (deftemplate MAIN::MenuDia
-	(slot grasas (type FLOAT))  ;ratio de la necesidad cubrida del dia
+	(slot grasas (type FLOAT))  ;ratio consumido/requerido
 	(slot carbos (type FLOAT))
 	(slot fibras (type FLOAT))
 	(slot calorias (type FLOAT))
@@ -1975,7 +1974,7 @@
 	(slot cena (type INSTANCE))
 	(slot postreCena (type INSTANCE))
 
-	(multislot tipoIngrUsados (type STRING))
+	(multislot IngrPrincipalesUsados (type STRING))
 
 	(slot valorNutricional (type FLOAT))
 )
@@ -2330,15 +2329,9 @@
 (defrule PREPROCESS::pasar-a-preparar-solucion
 	(declare (salience -2))
 	=>
-	(focus PREPARESOLUTION))
+	(focus CREATESOLUTION))
 
 
-
-(defrule PREPARESOLUTION::pasar-a-create-solution
-	(declare (salience -1))
-=>
-	(focus CREATESOLUTION)
-)
 
 (deftemplate CREATESOLUTION::MenuDias
 	(multislot lista (type INSTANCE)))
@@ -2348,32 +2341,89 @@
 	(assert (MenuDias))
 	)
 
+	(deffunction CREATESOLUTION::cutToOne (?x)
+		(if ( > ?x 1.0 ) then
+			(bind ?r (1.0))
+		 	else (
+			(bind ?r (?x))
+			)
+		)
+		(?r)
+	)
+
 (defrule CREATESOLUTION::crear-menusDiarios
 
-	(Requisitos (minCarbos ?minCarbos) (maxCarbos ?maxCarbos) (minGrasas ?minGrasas) (maxGrasas ?maxGrasas) (fibras ?fibras) (proteinas ?proteinas) (calcio ?calcio) (potasio ?potasio))
+	(Requisitos (calorias ?calorias) (minCarbos ?minCarbos) (maxCarbos ?maxCarbos) (minGrasas ?minGrasas) (maxGrasas ?maxGrasas) (fibras ?fibras) (proteinas ?proteinas) (calcio ?calcio) (potasio ?potasio)
+		(Hierro ?hierro) (Cobalamina ?cobalamina) (Cobre ?cobre) (Colina ?colina) (Folato ?folato) (Fosforo ?fosforo) (Magnesio ?magnesio) (Manganeso ?manganeso) (Niacina ?niacina) (Riboflavina ?riboflavina)
+		(Selenio ?selenio) (Tiamina ?tiamina) (VitaminaA ?vitaminaA) (VitaminaB6 ?vitaminaB6) (VitaminaC ?vitaminaC) (VitaminaE ?vitaminaE) (VitaminaK ?vitaminaK) (Zinc ?zinc))
 
-	?Desayuno <- (object (is-a Plato) (Calorias ?calorias1) (CarbohidratosTotales ?carbs1) (GrasaTotal ?gras1) (Proteinas ?prot1) (Calcio ?calcio1) (Potasio ?pot1) (FibrasAlimenticias ?fib1) (Tipo Desayuno))
-	?Comida <- (object (is-a Plato) (Calorias ?calorias2) (CarbohidratosTotales ?carbs2) (GrasaTotal ?gras2) (Proteinas ?prot2) (Calcio ?calcio2) (Potasio ?pot2) (FibrasAlimenticias ?fib2) (Tipo Principal) (IngredientePrincipal ?ingred-Comida) )
-	?PostreComida <- (object (is-a Plato) (Calorias ?calorias3) (CarbohidratosTotales ?carbs3) (GrasaTotal ?gras3) (Proteinas ?prot3) (Calcio ?calcio3) (Potasio ?pot3) (FibrasAlimenticias ?fib3) (Tipo Postre))
-	?Cena <- (object (is-a Plato) (Calorias ?calorias4) (CarbohidratosTotales ?carbs4) (GrasaTotal ?gras4) (Proteinas ?prot4) (Calcio ?calcio4) (Potasio ?pot4) (FibrasAlimenticias ?fib4) (Tipo Principal) (IngredientePrincipal ?ingred-Cena))
-	?PostreCena <- (object (is-a Plato) (Calorias ?calorias5) (CarbohidratosTotales ?carbs5) (GrasaTotal ?gras5) (Proteinas ?prot5) (Calcio ?calcio5) (Potasio ?pot5) (FibrasAlimenticias ?fib5) (Tipo Postre))
+	?Desayuno <- (object (is-a Plato) (Calorias ?calorias1) (CarbohidratosTotales ?carbs1) (GrasaTotal ?gras1) (Proteinas ?prot1) (Calcio ?calcio1) (Potasio ?pot1) (FibrasAlimenticias ?fib1)
+		(Hierro ?hierro1) (Cobalamina ?cobalamina1) (Cobre ?cobre1) (Colina ?colina1) (Folato ?folato1) (Fosforo ?fosforo1) (Magnesio ?magnesio1) (Manganeso ?manganeso1) (Niacina ?niacina1) (Riboflavina ?riboflavina1)
+		(Selenio ?selenio1) (Tiamina ?tiamina1) (VitaminaA ?vitaminaA-1) (VitaminaB6 ?vitaminaB6-1) (VitaminaC ?vitaminaC-1) (VitaminaE ?vitaminaE-1) (VitaminaK ?vitaminaK-1) (Zinc ?zinc1)
+		(Tipo Desayuno))
+	?PostreDesayuno <- (object (is-a Plato) (Calorias ?calorias6) (CarbohidratosTotales ?carbs6) (GrasaTotal ?gras6) (Proteinas ?prot6) (Calcio ?calcio6) (Potasio ?pot6) (FibrasAlimenticias ?fib6)
+		(Hierro ?hierro6) (Cobalamina ?cobalamina6) (Cobre ?cobre6) (Colina ?colina6) (Folato ?folato6) (Fosforo ?fosforo6) (Magnesio ?magnesio6) (Manganeso ?manganeso6) (Niacina ?niacina6) (Riboflavina ?riboflavina6)
+		(Selenio ?selenio6) (Tiamina ?tiamina6) (VitaminaA ?vitaminaA-6) (VitaminaB6 ?vitaminaB6-6) (VitaminaC ?vitaminaC-6) (VitaminaE ?vitaminaE-6) (VitaminaK ?vitaminaK-6) (Zinc ?zinc6)
+		(Tipo Postre) (IngredientePrincipal ?ingredPostreDesayuno))
 
-	(test ( not (eq(send ?ingred-Comida get-TipoIngrediente) (send ?ingred-Cena get-TipoIngrediente) )))
+		(test (eq (send ?ingredPostreDesayuno get-TipoIngrediente) Fruta))  ;queremos que cada dia haya una fruta obligatoria con el desayuno
 
-	(test (< (+ ?calorias4 ?calorias5) (+ ?calorias2 ?calorias3) ) ) ;las calorias de la cena no deben superar las de la comida
+	?Comida <- (object (is-a Plato) (Calorias ?calorias2) (CarbohidratosTotales ?carbs2) (GrasaTotal ?gras2) (Proteinas ?prot2) (Calcio ?calcio2) (Potasio ?pot2) (FibrasAlimenticias ?fib2)
+		(Hierro ?hierro2) (Cobalamina ?cobalamina2) (Cobre ?cobre2) (Colina ?colina2) (Folato ?folato2) (Fosforo ?fosforo2) (Magnesio ?magnesio2) (Manganeso ?manganeso2) (Niacina ?niacina2) (Riboflavina ?riboflavina2)
+		(Selenio ?selenio2) (Tiamina ?tiamina2) (VitaminaA ?vitaminaA-2) (VitaminaB6 ?vitaminaB6-2) (VitaminaC ?vitaminaC-2) (VitaminaE ?vitaminaE-2) (VitaminaK ?vitaminaK-2) (Zinc ?zinc2)
+		(Tipo Principal) (IngredientePrincipal ?ingred-Comida) )
+	?PostreComida <- (object (is-a Plato) (Calorias ?calorias3) (CarbohidratosTotales ?carbs3) (GrasaTotal ?gras3) (Proteinas ?prot3) (Calcio ?calcio3) (Potasio ?pot3) (FibrasAlimenticias ?fib3)
+		(Hierro ?hierro3) (Cobalamina ?cobalamina3) (Cobre ?cobre3) (Colina ?colina3) (Folato ?folato3) (Fosforo ?fosforo3) (Magnesio ?magnesio3) (Manganeso ?manganeso3) (Niacina ?niacina3) (Riboflavina ?riboflavina3)
+		(Selenio ?selenio3) (Tiamina ?tiamina3) (VitaminaA ?vitaminaA-3) (VitaminaB6 ?vitaminaB6-3) (VitaminaC ?vitaminaC-3) (VitaminaE ?vitaminaE-3) (VitaminaK ?vitaminaK-3) (Zinc ?zinc3)
+		(Tipo Postre))
+	?Cena <- (object (is-a Plato) (Calorias ?calorias4) (CarbohidratosTotales ?carbs4) (GrasaTotal ?gras4) (Proteinas ?prot4) (Calcio ?calcio4) (Potasio ?pot4) (FibrasAlimenticias ?fib4)
+		(Hierro ?hierro4) (Cobalamina ?cobalamina4) (Cobre ?cobre4) (Colina ?colina4) (Folato ?folato4) (Fosforo ?fosforo4) (Magnesio ?magnesio4) (Manganeso ?manganeso4) (Niacina ?niacina4) (Riboflavina ?riboflavina4)
+		(Selenio ?selenio4) (Tiamina ?tiamina4) (VitaminaA ?vitaminaA-4) (VitaminaB6 ?vitaminaB6-4) (VitaminaC ?vitaminaC-4) (VitaminaE ?vitaminaE-4) (VitaminaK ?vitaminaK-4) (Zinc ?zinc4)
+		(Tipo Principal) (IngredientePrincipal ?ingred-Cena))
+	?PostreCena <- (object (is-a Plato) (Calorias ?calorias5) (CarbohidratosTotales ?carbs5) (GrasaTotal ?gras5) (Proteinas ?prot5) (Calcio ?calcio5) (Potasio ?pot5) (FibrasAlimenticias ?fib5)
+		(Hierro ?hierro5) (Cobalamina ?cobalamina5) (Cobre ?cobre5) (Colina ?colina5) (Folato ?folato5) (Fosforo ?fosforo5) (Magnesio ?magnesio5) (Manganeso ?manganeso5) (Niacina ?niacina5) (Riboflavina ?riboflavina5)
+		(Selenio ?selenio5) (Tiamina ?tiamina5) (VitaminaA ?vitaminaA-5) (VitaminaB6 ?vitaminaB6-5) (VitaminaC ?vitaminaC-5) (VitaminaE ?vitaminaE-5) (VitaminaK ?vitaminaK-5) (Zinc ?zinc5)
+		(Tipo Postre))
+
+	(test ( not (eq(send ?ingred-Comida get-TipoIngrediente) (send ?ingred-Cena get-TipoIngrediente) ))) ;la comida y la cena deben tener un tipo de ingrediente diferente
+
+	(test (< (+ ?calorias4 ?calorias5) (* 0.8 (+ ?calorias2 ?calorias3) ) )) ;las calorias de la cena deben ser como mucho els 80 % de las de la comida
 
 =>
+
+	(bind ?caloriasConsumido (+ ?calorias1 ?calorias2 ?calorias3 ?calorias4 ?calorias5) )
 	(bind ?carbsConsumido (+ ?carbs1 ?carbs2 ?carbs3 ?carbs4 ?carbs5) )
-	(bind ?protsConsumido (+ ?prot1 ?prot2 ?prot3 ?prot4 ?prot5) )
 	(bind ?grasasConsumido (+ ?gras1 ?gras2 ?gras3 ?gras4 ?gras5)  )
+	(bind ?protsConsumido (+ ?prot1 ?prot2 ?prot3 ?prot4 ?prot5) )
 	(bind ?fibrasConsumido (+ ?fib1 ?fib2 ?fib3 ?fib4 ?fib5) )
 	(bind ?potasioConsumido (+ ?pot1 ?pot2 ?pot3 ?pot4 ?pot5) )
 	(bind ?calcioConsumido (+ ?calcio1 ?calcio2 ?calcio3 ?calcio4 ?calcio5) )
+	(bind ?hierroConsumido (+ ?hierro1 ?hierro2 ?hierro3 ?hierro4 ?hierro5) )
+
+	(bind ?cobalaminaConsumido (+ ?cobalamina1 ?cobalamina2 ?cobalamina3 ?cobalamina4 ?cobalamina5) )
+	(bind ?cobreConsumido (+ ?cobre1 ?cobre2 ?cobre3 ?cobre4 ?cobre5) )
+	(bind ?colinaConsumido (+ ?colina1 ?colina2 ?colina3 ?colina4 ?colina5) )
+	(bind ?folatoConsumido (+ ?folato1 ?folato2 ?folato3 ?folato4 ?folato5) )
+	(bind ?fosforoConsumido (+ ?fosforo1 ?fosforo2 ?fosforo3 ?fosforo4 ?fosforo5) )
+	(bind ?magnesioConsumido (+ ?magnesio1 ?magnesio2 ?magnesio3 ?magnesio4 ?magnesio5) )
+	(bind ?manganesoConsumido (+ ?manganeso1 ?manganeso2 ?manganeso3 ?manganeso4 ?manganeso5) )
+	(bind ?niacinaConsumido (+ ?niacina1 ?niacina2 ?niacina3 ?niacina4 ?niacina5) )
+	(bind ?riboflavinaConsumido (+ ?riboflavina1 ?riboflavina2 ?riboflavina3 ?riboflavina4 ?riboflavina5) )
+	(bind ?selenioConsumido (+ ?selenio1 ?selenio2 ?selenio3 ?selenio4 ?selenio5) )
+	(bind ?tiaminaConsumido (+ ?tiamina1 ?tiamina2 ?tiamina3 ?tiamina4 ?tiamina5) )
+	(bind ?vitaminaAConsumido (+ ?vitaminaA-1 ?vitaminaA-2 ?vitaminaA-3 ?vitaminaA-4 ?vitaminaA-5) )
+	(bind ?vitaminaB6Consumido (+ ?vitaminaB6-1 ?vitaminaB6-2 ?vitaminaB6-3 ?vitaminaB6-4 ?vitaminaB6-5) )
+	(bind ?vitaminaCConsumido (+ ?vitaminaC-1 ?vitaminaC-2 ?vitaminaC-3 ?vitaminaC-4 ?vitaminaC-5) )
+	(bind ?vitaminaEConsumido (+ ?vitaminaE-1 ?vitaminaE-2 ?vitaminaE-3 ?vitaminaE-4 ?vitaminaE-5) )
+	(bind ?vitaminaKConsumido (+ ?vitaminaK-1 ?vitaminaK-2 ?vitaminaK-3 ?vitaminaK-4 ?vitaminaK-5) )
+	(bind ?zincConsumido (+ ?zinc1 ?zinc2 ?zinc3 ?zinc4 ?zinc5) )
 
 	(if 	(and
 		 (< ?carbsConsumido ?maxCarbos)
 		 (< ?grasasConsumido ?maxGrasas)
 			) then
+
+			(bind ?caloriasRatio  ( / ?caloriasConsumido ?calorias))
 
 			(bind ?carbsRatio ( / ?carbsConsumido ?minCarbos))
 			(bind ?protsRatio ( / ?protsConsumido ?proteinas))
@@ -2381,33 +2431,68 @@
 			(bind ?fibrasRatio ( / ?fibrasConsumido ?fibras))
 			(bind ?potasioRatio ( / ?potasioConsumido ?potasio))
 			(bind ?calcioRatio ( / ?calcioConsumido ?calcio))
+			(bind ?hierroRatio ( / ?hierroConsumido ?hierro))
 
-	(assert (MenuDia (carbos ?carbsRatio) (proteinas ?protsRatio) (grasas ?grasasRatio) (fibras ?fibrasRatio) (potasio ?potasioRatio) (calcio ?calcioRatio) (desayuno ?Desayuno) (comida ?Comida) (postreComida ?PostreComida) (cena ?Cena) (postreCena ?Cena)  ) )
+			(bind ?cobalaminaRatio ( / ?cobalaminaConsumido ?cobalamina))
+			(bind ?cobreRatio ( / ?cobreConsumido ?cobre))
+			(bind ?colinaRatio ( / ?colinaConsumido ?colina))
+			(bind ?folatoRatio ( / ?folatoConsumido ?folato))
+			(bind ?fosforoRatio ( / ?fosforoConsumido ?fosforo))
+			(bind ?magnesioRatio ( / ?magnesioConsumido ?magnesio))
+			(bind ?manganesoRatio ( / ?manganesoConsumido ?manganeso))
+			(bind ?niacinaRatio ( / ?niacinaConsumido ?niacina))
+			(bind ?riboflavinaRatio ( / ?riboflavinaConsumido ?riboflavina))
+			(bind ?selenioRatio ( / ?selenioConsumido ?selenio))
+			(bind ?tiaminaRatio ( / ?tiaminaConsumido ?tiamina))
+			(bind ?vitaminaARatio ( / ?vitaminaAConsumido ?vitaminaA))
+			(bind ?vitaminaB6Ratio ( / ?vitaminaB6Consumido ?vitaminaB6))
+			(bind ?vitaminaCRatio ( / ?vitaminaCConsumido ?vitaminaC))
+			(bind ?vitaminaERatio ( / ?vitaminaEConsumido ?vitaminaE))
+			(bind ?vitaminaKRatio ( / ?vitaminaKConsumido ?vitaminaK))
+			(bind ?zincRatio ( / ?zincConsumido ?zinc))
+
+			(bind ?IngrPrincipalComida (send ?ingred-Comida get-NombreIngrediente) )
+			(bind ?IngrPrincipalCena (send ?ingred-Cena get-NombreIngrediente) )
+
+
+			(bind ?valorNutricional1 (cutToOne ?carbsRatio) (cutToOne ?protsRatio) (cutToOne ?grasasRatio) (cutToOne ?fibrasRatio) (cutToOne ?potasioRatio) (cutToOne ?calcioRatio) (cutToOne ?hierroRatio))
+			(bind ?valorNutricional2 (cutToOne ?cobalaminaRatio) (cutToOne ?cobreRatio) (cutToOne ?colinaRatio) (cutToOne ?folatoRatio) (cutToOne ?fosforoRatio) (cutToOne ?magnesioRatio) (cutToOne ?manganesoRatio)
+				(cutToOne ?niacinaRatio) (cutToOne ?riboflavinaRatio) (cutToOne ?selenioRatio) (cutToOne ?tiaminaRatio) (cutToOne ?vitaminaARatio) (cutToOne ?vitaminaB6Ratio) (cutToOne ?vitaminaCRatio)(cutToOne ?vitaminaERatio)
+				(cutToOne ?vitaminaKRatio) (cutToOne (?zincRatio)))
+
+			(bind ?valorNutricional (+ valorNutricional1 (* 0.4 valorNutricional2)))
+
+
+	(assert (MenuDia (calorias ?caloriasRatio)(carbos ?carbsRatio) (proteinas ?protsRatio) (grasas ?grasasRatio) (fibras ?fibrasRatio) (potasio ?potasioRatio) (calcio ?calcioRatio)
+		(Hierro ?hierroRatio) (Cobalamina ?cobalaminaRatio) (Cobre ?cobreRatio) (Colina ?colinaRatio) (Folato ?folatoRatio) (Fosforo ?fosforoRatio) (Magnesio ?magnesioRatio) (Manganeso ?manganesoRatio) (Niacina ?niacinaRatio) (Riboflavina ?riboflavinaRatio)
+		(Selenio ?selenioRatio) (Tiamina ?tiaminaRatio) (VitaminaA ?vitaminaARatio) (VitaminaB6 ?vitaminaB6Ratio) (VitaminaC ?vitaminaCRatio) (VitaminaE ?vitaminaERatio) (VitaminaK ?vitaminaKRatio) (Zinc ?zincRatio)
+	(desayuno ?Desayuno) (comida ?Comida) (postreComida ?PostreComida) (cena ?Cena) (postreCena ?Cena)
+	(IngrPrincipalesUsados ?IngrPrincipalComida ?IngrPrincipalCena ) (valorNutricional ?valorNutricional) ) )
 
 	)
 )
 
-(defrule CREATESOLUTION::agregar-a-lista
-	?menu-dia <-(MenuDia)
-	?lista <- (MenuDias (lista $?menues-dias))
-	(test (not (member$ ?menu-dia $?menues-dias)))
-	=>
-	(modify ?lista (lista ?menu-dia ?menues-dias))
-	)
-
-(deffunction CREATESOLUTION::compareMenus
-	(?a ?b)
-	(> fact-slot-value ?a valorNutritivo) (fact-slot-value ?b valorNutritivo))
-	)
-
-
-(defrule CREATESOLUTION::ordenar-lista
-	(declare (salience -1))
-	?mdias <- (MenuDias (lista $?Menu-dias))
-	=>
-	(bind ?nuevaLista (sort compareMenus ?Menu-dias))
-	(modify ?mdias (lista ?nuevaLista))
-	)
+; (defrule CREATESOLUTION::agregar-a-lista
+; 	?menu-dia <-(MenuDia)
+; 	?lista <- (MenuDias (lista $?menues-dias))
+; 	(test (not (member$ ?menu-dia $?menues-dias)))
+; 	=>
+; 	(modify ?lista (lista ?menu-dia ?menues-dias))
+; 	)
+;
+; (deffunction CREATESOLUTION::compareMenus
+; 	(?a ?b)
+; 	(> fact-slot-value ?a valorNutritivo) (fact-slot-value ?b valorNutritivo))
+; 	)
+;
+;
+; (defrule CREATESOLUTION::ordenar-lista
+; 	(declare (salience -1))
+; 	?mdias <- (MenuDias (lista $?Menu-dias))
+; 	=>
+; 	(bind ?nuevaLista (sort compareMenus ?Menu-dias))
+; 	(modify ?mdias (lista ?nuevaLista))
+; 	)
 
 
 (defrule CREATESOLUTION::pasar-a-presentar-solucion
