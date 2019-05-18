@@ -2538,29 +2538,45 @@
 ;(printout t "?lista-b: " ?lista-b crlf)
 (bind ?lista-b (fact-slot-value ?lista-b IngrPrincipalesUsados))
 (bind ?largo-lista-a (length$ ?lista-a))
+;(printout t "?largo-lista-a: " ?largo-lista-a crlf)
 (bind ?largo-lista-b (length$ ?lista-b))
+;(printout t "?largo-lista-b: " ?largo-lista-b crlf)
 (bind ?cantidad-de-elementos-maxima (/ (* ?largo-lista-a ?porcentaje) 100))
+;(printout t "?cantidad-de-elementos-maxima: " ?cantidad-de-elementos-maxima crlf)
 (bind ?elements-in-common 0)
+;(printout t "?elements-in-common: " ?elements-in-common crlf)
 (bind ?i 0)
+;(printout t "?i: " ?i crlf)
 (while (and (not ?too-many) (< ?i ?largo-lista-a))
 do
+;(printout t "Entré a primer while" crlf)
 (bind ?i (+ ?i 1))
+;(printout t "?i: " ?i crlf)
 (bind ?j 0)
-(while (< ?j ?largo-lista-b) do
+;(printout t "?j: " ?j crlf)
+(while (and (not ?too-many) (< ?j ?largo-lista-b)) do
+;(printout t "Entré a segundo while" crlf)
 
 	(bind ?j (+ ?j 1))
+;	(printout t "?j: " ?j crlf)
+;	(printout t "(nth$ ?i ?lista-a): " (nth$ ?i ?lista-a) crlf)
+;	(printout t "(nth$ ?j ?lista-b): " (nth$ ?j ?lista-b) crlf)
+;	(printout t "(eq (nth$ ?i ?lista-a) (nth$ ?j ?lista-b)): " (eq (nth$ ?i ?lista-a) (nth$ ?j ?lista-b)) crlf)
 	(if (eq (nth$ ?i ?lista-a) (nth$ ?j ?lista-b))
 	then
 		(bind ?elements-in-common (+ ?elements-in-common 1))
+;		(printout t "?elements-in-common: " ?elements-in-common crlf)
 		(bind ?too-many (> ?elements-in-common ?cantidad-de-elementos-maxima))
+;		(printout t "?too-many: " ?too-many crlf)
 		)
 	)
 )
+;(printout t "?too-many final: " ?too-many crlf crlf crlf)
 ?too-many
 )
 
 (defrule CREATESOLUTION::crear-menu-dias-aux-dia
-	(dia 1 done)
+	(dia ?x done)
 	(MenuDias (lista $?lista) (aux 0))
 	=>
 	(assert (MenuDias (lista ?lista) (aux 1)))
@@ -2588,7 +2604,9 @@ do
 	(modify ?msemanal (dia2 ?primero-lista))
 	(modify ?mdiasreal (lista (delete-member$ ?lista-real ?primero-lista)))
 	(assert (dia 2 done))
+	(retract ?mdias)
 	(retract ?a-borrar)
+	(halt)
 )
 
 (defrule CREATESOLUTION::pruning-for-day-three
@@ -2606,7 +2624,7 @@ do
 	?mdiasreal <- (MenuDias (lista $?lista-real) (aux 0))
 	?msemanal <- (MenuSemanal (dia1 ?menu-dia-1) (dia2 ?menu-dia-2))
 	?a-borrar <- (dia 2 done)
-	(test (not (and (have-x-elements-in-common ?menu-dia-1 ?primero-lista 14) (have-x-elements-in-common ?menu-dia-2 ?primero-lista 0))))
+	(test (not (or (have-x-elements-in-common ?menu-dia-1 ?primero-lista 14) (have-x-elements-in-common ?menu-dia-2 ?primero-lista 0))))
 	=>
 	(modify ?msemanal (dia3 ?primero-lista))
 	(modify ?mdiasreal (lista (delete-member$ ?lista-real ?primero-lista)))
