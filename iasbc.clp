@@ -1981,6 +1981,12 @@
 
 (deftemplate MAIN::MenuSemanal
 	(slot dia1 (type INSTANCE))
+	(slot dia2 (type INSTANCE))
+	(slot dia3 (type INSTANCE))
+	(slot dia4 (type INSTANCE))
+	(slot dia5 (type INSTANCE))
+	(slot dia6 (type INSTANCE))
+	(slot dia7 (type INSTANCE))
 	)
 
 (deftemplate MAIN::platosDisponibles
@@ -2067,11 +2073,11 @@
 (defrule ASK_QUESTIONS::ask-age
   (welcome-given TRUE)
   =>
-	(bind ?res (pregunta-integer "Cual es su edad?"))
+	;(bind ?res (pregunta-integer "Cual es su edad?"))
+	(bind ?res 70) ;borrar esta línea
 	(assert (edad ?res))
 	(if (< ?res 65) then
 	(printout t "Esta ayuda es para mayores de 64" crlf)
-	(halt)
 	(reset)
 	)
 )
@@ -2079,7 +2085,8 @@
 (defrule ASK_QUESTIONS::ask-sex
   (welcome-given TRUE)
   =>
-  (bind ?res (pregunta-lista "Es usted hombre o mujer?" hombre mujer))
+  ;(bind ?res (pregunta-lista "Es usted hombre o mujer?" hombre mujer))
+	(bind ?res hombre) ;borrar esta línea
   (assert (sexo ?res)))
 
 ;Esta quizá habría que desglozarla en diferentes preguntas? Como por ejemplo, cuántas veces a la semana camina? Practica algún deporte? Etc.
@@ -2087,8 +2094,9 @@
   (sexo ?)
   (edad ?)
   =>
-  (bind ?res (pregunta-lista-imprimiendo-opciones "Que nivel de actividad fisica tiene?" sedentario moderadamente-activo activo  muy-activo))
-  (assert (actividad-fisica ?res))
+  ;(bind ?res (pregunta-lista-imprimiendo-opciones "Que nivel de actividad fisica tiene?" sedentario moderadamente-activo activo  muy-activo))
+	(bind ?res activo) ;borrar esta línea
+	(assert (actividad-fisica ?res))
 (printout t crlf))
 
 
@@ -2097,7 +2105,8 @@
   (edad ?)
 	?var <- (preguntar-enfermedad)
   =>
-  (bind ?res (pregunta-lista-imprimiendo-opciones "Sufre de alguna de estas enfermedades? Cual?" diabetes hipertension osteoporosis problemas-articulares ninguna))
+  ;(bind ?res (pregunta-lista-imprimiendo-opciones "Sufre de alguna de estas enfermedades? Cual?" diabetes hipertension osteoporosis problemas-articulares ninguna))
+	(bind ?res ninguna) ;borrar esta línea
 	(if (not (eq ?res ninguna))
 	then (assert (enfermedad ?res)))
 	(retract ?var)
@@ -2118,7 +2127,8 @@
   (sexo ?)
   (edad ?)
   =>
-  (bind ?res (pregunta-lista-imprimiendo-opciones "Sigue alguna de las siguientes dietas?" vegano vegetariano ninguna))
+	(bind ?res ninguna) ;borrar esta línea
+  ;(bind ?res (pregunta-lista-imprimiendo-opciones "Sigue alguna de las siguientes dietas?" vegano vegetariano ninguna))
   (assert (dieta ?res))
 (printout t crlf))
 
@@ -2126,7 +2136,8 @@
   (sexo ?)
   (edad ?)
   =>
-  (bind ?res (pregunta-lista-imprimiendo-opciones "Para que temporada es el menu?" Primavera Verano Otono Invierno Irrelevante))
+	(bind ?res Verano) ;borrar esta línea
+  ;(bind ?res (pregunta-lista-imprimiendo-opciones "Para que temporada es el menu?" Primavera Verano Otono Invierno Irrelevante))
   (assert (temp ?res))
 (printout t crlf))
 
@@ -2134,7 +2145,8 @@
 	(sexo ?)
 	(edad ?)
 	=>
-	(bind ?res (pregunta-integer "Cuanto pesa?"))
+	(bind ?res 70) ;borrar esta línea
+	;(bind ?res (pregunta-integer "Cuanto pesa?"))
 	(assert (peso ?res))
 )
 
@@ -2330,7 +2342,8 @@
 	(focus CREATESOLUTION))
 
 (deftemplate CREATESOLUTION::MenuDias
-	(multislot lista (type INSTANCE)))
+	(multislot lista (type INSTANCE))
+	(slot aux (type INTEGER))) ;0 false, 1 true
 
 
 (defrule CREATESOLUTION::crear-lista
@@ -2338,6 +2351,8 @@
 	=>
 	(assert (MenuDias))
 	(assert (ordenar))
+	(assert (MenuSemanal))
+	(assert (indice 1))
 	)
 
 	(deffunction CREATESOLUTION::cut-to-one (?x)
@@ -2346,7 +2361,7 @@
 		 else
 		 (bind ?r ?x)
 		)
-		?x
+		?r
 	)
 
 
@@ -2469,7 +2484,7 @@
 	(assert (MenuDia (calorias ?caloriasRatio)(carbos ?carbsRatio) (proteinas ?protsRatio) (grasas ?grasasRatio) (fibras ?fibrasRatio) (potasio ?potasioRatio) (calcio ?calcioRatio)
 		(Hierro ?hierroRatio) (Cobalamina ?cobalaminaRatio) (Cobre ?cobreRatio) (Colina ?colinaRatio) (Folato ?folatoRatio) (Fosforo ?fosforoRatio) (Magnesio ?magnesioRatio) (Manganeso ?manganesoRatio) (Niacina ?niacinaRatio) (Riboflavina ?riboflavinaRatio)
 		(Selenio ?selenioRatio) (Tiamina ?tiaminaRatio) (VitaminaA ?vitaminaARatio) (VitaminaB6 ?vitaminaB6Ratio) (VitaminaC ?vitaminaCRatio) (VitaminaE ?vitaminaERatio) (VitaminaK ?vitaminaKRatio) (Zinc ?zincRatio)
-	(desayuno ?Desayuno) (comida ?Comida) (postreComida ?PostreComida) (cena ?Cena) (postreCena ?Cena)
+	(desayuno ?Desayuno) (comida ?Comida) (postreComida ?PostreComida) (cena ?Cena) (postreCena ?PostreCena)
 	(IngrPrincipalesUsados ?IngrPrincipalComida ?IngrPrincipalCena ) (valorNutricional ?valorNutricional) ) )
 
 	)
@@ -2492,7 +2507,7 @@
 
 (deffunction CREATESOLUTION::compareMenus
 	(?a ?b)
-	(> (fact-slot-value ?a valorNutricional) (fact-slot-value ?b valorNutricional))
+	(< (fact-slot-value ?a valorNutricional) (fact-slot-value ?b valorNutricional))
 	)
 
 
@@ -2506,11 +2521,141 @@
 	(retract ?a-borrar)
 	)
 
-(defrule CREATESOLUTION::pasar-a-presentar-solucion
+(defrule CREATESOLUTION::day-one
+	(not (ordenar))
+	?mdias <- (MenuDias (lista ?primero-lista $?resto-lista))
+	?msemanal <- (MenuSemanal (dia1 [nil]))
+	=>
+	(modify ?msemanal (dia1 ?primero-lista))
+	(modify ?mdias (lista ?resto-lista))
+	(assert (dia 1 done))
+	)
+
+(deffunction CREATESOLUTION::have-x-elements-in-common (?lista-a ?lista-b ?porcentaje)
+(bind ?too-many FALSE)
+;(printout t "?lista-a: " ?lista-a crlf)
+(bind ?lista-a (fact-slot-value ?lista-a IngrPrincipalesUsados))
+;(printout t "?lista-b: " ?lista-b crlf)
+(bind ?lista-b (fact-slot-value ?lista-b IngrPrincipalesUsados))
+(bind ?largo-lista-a (length$ ?lista-a))
+(bind ?largo-lista-b (length$ ?lista-b))
+(bind ?cantidad-de-elementos-maxima (/ (* ?largo-lista-a ?porcentaje) 100))
+(bind ?elements-in-common 0)
+(bind ?i 0)
+(while (and (not ?too-many) (< ?i ?largo-lista-a))
+do
+(bind ?i (+ ?i 1))
+(bind ?j 0)
+(while (< ?j ?largo-lista-b) do
+
+	(bind ?j (+ ?j 1))
+	(if (eq (nth$ ?i ?lista-a) (nth$ ?j ?lista-b))
+	then
+		(bind ?elements-in-common (+ ?elements-in-common 1))
+		(bind ?too-many (> ?elements-in-common ?cantidad-de-elementos-maxima))
+		)
+	)
+)
+?too-many
+)
+
+(defrule CREATESOLUTION::crear-menu-dias-aux-dia
+	(dia 1 done)
+	(MenuDias (lista $?lista) (aux 0))
+	=>
+	(assert (MenuDias (lista ?lista) (aux 1)))
+	)
+
+
+(defrule CREATESOLUTION::pruning-for-day-two
 	(declare (salience -1))
+	(dia 1 done)
+	?mdias <- (MenuDias (lista ?primero-lista $?resto-lista) (aux 1))
+	?msemanal <- (MenuSemanal (dia1 ?menu-dia-1))
+	=>
+	;(printout t "?menu-dia-1: " ?menu-dia-1 crlf)
+	;(printout t "?primero-lista: " ?primero-lista crlf)
+	(modify ?mdias (lista ?resto-lista))
+	)
+
+(defrule CREATESOLUTION::day-two
+	?mdias <- (MenuDias (lista ?primero-lista $?resto-lista) (aux 1))
+	?mdiasreal <- (MenuDias (lista $?lista-real) (aux 0))
+	?msemanal <- (MenuSemanal (dia1 ?menu-dia-1))
+	?a-borrar <- (dia 1 done)
+	(test (not (have-x-elements-in-common ?menu-dia-1 ?primero-lista 0)))
+	=>
+	(modify ?msemanal (dia2 ?primero-lista))
+	(modify ?mdiasreal (lista (delete-member$ ?lista-real ?primero-lista)))
+	(assert (dia 2 done))
+	(retract ?a-borrar)
+)
+
+(defrule CREATESOLUTION::pruning-for-day-three
+	(declare (salience -1))
+	(dia 2 done)
+	?mdias <- (MenuDias (lista ?primero-lista $?resto-lista) (aux 1))
+	?msemanal <- (MenuSemanal (dia1 ?menu-dia-1) (dia2 ?menu-dia-2))
+	;(test (or (have-x-elements-in-common ?menu-dia-1 ?primero-lista 14) (have-x-elements-in-common ?menu-dia-2 ?primero-lista 0)))
+	=>
+	(modify ?mdias (lista ?resto-lista))
+	)
+
+(defrule CREATESOLUTION::day-three
+	?mdias <- (MenuDias (lista ?primero-lista $?resto-lista) (aux 1))
+	?mdiasreal <- (MenuDias (lista $?lista-real) (aux 0))
+	?msemanal <- (MenuSemanal (dia1 ?menu-dia-1) (dia2 ?menu-dia-2))
+	?a-borrar <- (dia 2 done)
+	(test (not (and (have-x-elements-in-common ?menu-dia-1 ?primero-lista 14) (have-x-elements-in-common ?menu-dia-2 ?primero-lista 0))))
+	=>
+	(modify ?msemanal (dia3 ?primero-lista))
+	(modify ?mdiasreal (lista (delete-member$ ?lista-real ?primero-lista)))
+	(assert (dia 3 done))
+	(retract ?a-borrar)
+)
+
+;
+; (defrule CREATESOLUTION::day-two
+; 	?mdias <- (MenuDias (lista $?principio-lista ?seleccionado-lista $?resto-lista))
+; 	(MenuDias (lista ?lista-completa))
+; 	?indice <- (indice ?lugar-en-lista)
+; 	?nth-menu-dia <- (nth ?lugar-en-lista ?lista-completa)
+; 	(eq ?seleccionado-lista ?nth-menu-dia)
+; 	?msemanal <- (MenuSemanal (dia1 ?menu-dia-1))
+; 	?a-borrar <- (dia1 done)
+; 	=>
+; 	(if (not (have-x-elements-in-common ?menu-dia-1 ?seleccionado-lista 0)) then
+; 	(modify ?msemanal (dia2 ?seleccionado-lista))
+; 	(modify ?mdias (lista ?principio-lista ?resto-lista))
+; 	(assert (dia2 done))
+; 	(retract ?a-borrar)
+; 	(assert (indice 1))
+; 	(retract ?indice)
+; 	else
+; 	(assert (indice (+ ?lugar-en-lista 1)))
+; 	(retract ?indice)
+; 	)
+; )
+
+
+; (defrule CREATESOLUTION::print-sol
+; 	(dia2 done)
+; 	?msemanal <- (MenuSemanal (dia1 ?menu-dia-1)) (dia2 ?menu-dia-2)
+; =>
+; (printout t (fact-slot-value ?menu-dia-1 valorNutricional) crlf (fact-slot-value ?menu-dia-2 valorNutricional))
+; 	)
+
+(defrule CREATESOLUTION::pasar-a-presentar-solucion
+	(declare (salience -5))
 	=>
 	(focus PRESENTSOLUTION))
-;
+
+
+	(deffunction PRESENTSOLUTION:imprimir-dia (?menu-dia)
+
+		)
+
+
 ; (defrule PRESENTSOLUTION::imprimir-solucion
 ; 	?Sol-Dia-1 <- (SolucionDia (dia 1) (desayuno ?des-1) (comida ?com-1) (postreComida ?post-com-1) (cena ?cen-1) (postreCena ?post-cen-1))
 ; 	?Sol-Dia-2 <- (SolucionDia (dia 2) (desayuno ?des-2) (comida ?com-2) (postreComida ?post-com-2) (cena ?cen-2) (postreCena ?post-cen-2))
