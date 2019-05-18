@@ -1,6 +1,6 @@
 (defmodule MAIN 									(export ?ALL))
-(defmodule ASK_QUESTIONS					(import MAIN ?ALL)(export ?ALL))
-(defmodule PREPROCESS  					(import ASK_QUESTIONS ?ALL)(export ?ALL))
+(defmodule RECOPILACION					(import MAIN ?ALL)(export ?ALL))
+(defmodule PREPROCESS  					(import RECOPILACION ?ALL)(export ?ALL))
 (defmodule CREATESOLUTION 					(import PREPROCESS ?ALL)(export ?ALL))
 (defmodule PRESENTSOLUTION 					(import CREATESOLUTION ?ALL)(export ?ALL))
 
@@ -1969,6 +1969,7 @@
 	(slot Zinc (type FLOAT))
 
 	(slot desayuno (type INSTANCE))
+	(slot postreDesayuno (type INSTANCE))
 	(slot comida (type INSTANCE))
 	(slot postreComida (type INSTANCE))
 	(slot cena (type INSTANCE))
@@ -1989,11 +1990,6 @@
 	(slot dia7 (type INSTANCE))
 	)
 
-(deftemplate MAIN::platosDisponibles
-	(slot dia (type INTEGER))
-	(multislot platos (type INSTANCE))
-	)
-
 
 (deftemplate MAIN::Usuario
 	(slot sexo (type STRING))
@@ -2007,13 +2003,9 @@
 
 ;;PREGUNTAS
 
-;;; Funcion para hacer una pregunta general
-
-
-
 
 ;;; Funcion para hacer una pregunta con respuesta en un rango dado
-(deffunction ASK_QUESTIONS::pregunta-numerica (?pregunta ?rangini ?rangfi)
+(deffunction RECOPILACION::pregunta-numerica (?pregunta ?rangini ?rangfi)
 	(format t "%s [%d, %d] " ?pregunta ?rangini ?rangfi)
 	(bind ?respuesta (read))
 	(while (not(and(>= ?respuesta ?rangini)(<= ?respuesta ?rangfi))) do
@@ -2024,7 +2016,7 @@
 )
 
 ;;; Funcion para hacer una pregunta con un conjunto definido de valores de repuesta
-(deffunction ASK_QUESTIONS::pregunta-lista (?question $?allowed-values)
+(deffunction RECOPILACION::pregunta-lista (?question $?allowed-values)
    (printout t ?question crlf)
    (bind ?answer (read))
    (if (lexemep ?answer)
@@ -2036,7 +2028,7 @@
           then (bind ?answer (lowcase ?answer))))
    ?answer)
 
-	 (deffunction ASK_QUESTIONS::pregunta-lista-imprimiendo-opciones (?question $?allowed-values)
+	 (deffunction RECOPILACION::pregunta-lista-imprimiendo-opciones (?question $?allowed-values)
 	    (printout t ?question crlf)
 			(progn$ (?value ?allowed-values) (printout t ?value crlf))
 			(printout t crlf "--> ")
@@ -2048,7 +2040,7 @@
 	       (bind ?answer (read)))
 	    ?answer)
 
-(deffunction ASK_QUESTIONS::pregunta-integer (?question)
+(deffunction RECOPILACION::pregunta-integer (?question)
 (printout t ?question crlf )
 (printout t crlf "--> ")
 (bind ?answer (read))
@@ -2065,12 +2057,12 @@
 	(assert (welcome-given TRUE))
 	(assert (preguntar-enfermedad))
 	(assert (Requisitos))
-  (focus ASK_QUESTIONS)
+  (focus RECOPILACION)
 	(assert (Plato))
 )
 
 
-(defrule ASK_QUESTIONS::ask-age
+(defrule RECOPILACION::ask-age
   (welcome-given TRUE)
   =>
 	;(bind ?res (pregunta-integer "Cual es su edad?"))
@@ -2082,7 +2074,7 @@
 	)
 )
 
-(defrule ASK_QUESTIONS::ask-sex
+(defrule RECOPILACION::ask-sex
   (welcome-given TRUE)
   =>
   ;(bind ?res (pregunta-lista "Es usted hombre o mujer?" hombre mujer))
@@ -2090,7 +2082,7 @@
   (assert (sexo ?res)))
 
 ;Esta quizá habría que desglozarla en diferentes preguntas? Como por ejemplo, cuántas veces a la semana camina? Practica algún deporte? Etc.
-(defrule ASK_QUESTIONS::ask-actividad-fisicas
+(defrule RECOPILACION::ask-actividad-fisicas
   (sexo ?)
   (edad ?)
   =>
@@ -2100,7 +2092,7 @@
 (printout t crlf))
 
 
-(defrule ASK_QUESTIONS::ask-sickness
+(defrule RECOPILACION::ask-sickness
   (sexo ?)
   (edad ?)
 	?var <- (preguntar-enfermedad)
@@ -2112,7 +2104,7 @@
 	(retract ?var)
 (printout t crlf))
 
-(defrule ASK_QUESTIONS::more-sickness
+(defrule RECOPILACION::more-sickness
 	(sexo ?)
   (edad ?)
 	;(not (preguntar-enfermedad))
@@ -2123,7 +2115,7 @@
 	(if (eq ?answer si)
 	then (assert (preguntar-enfermedad))))
 
-(defrule ASK_QUESTIONS::ask-diet
+(defrule RECOPILACION::ask-diet
   (sexo ?)
   (edad ?)
   =>
@@ -2132,7 +2124,7 @@
   (assert (dieta ?res))
 (printout t crlf))
 
-(defrule ASK_QUESTIONS::ask-temp
+(defrule RECOPILACION::ask-temp
   (sexo ?)
   (edad ?)
   =>
@@ -2141,7 +2133,7 @@
   (assert (temp ?res))
 (printout t crlf))
 
-(defrule ASK_QUESTIONS::ask-weight
+(defrule RECOPILACION::ask-weight
 	(sexo ?)
 	(edad ?)
 	=>
@@ -2150,7 +2142,7 @@
 	(assert (peso ?res))
 )
 
-(defrule ASK_QUESTIONS::pasar-a-preproceso
+(defrule RECOPILACION::pasar-a-preproceso
 	(declare (salience -1))
 	=>
 	(focus PREPROCESS))
@@ -2484,7 +2476,7 @@
 	(assert (MenuDia (calorias ?caloriasRatio)(carbos ?carbsRatio) (proteinas ?protsRatio) (grasas ?grasasRatio) (fibras ?fibrasRatio) (potasio ?potasioRatio) (calcio ?calcioRatio)
 		(Hierro ?hierroRatio) (Cobalamina ?cobalaminaRatio) (Cobre ?cobreRatio) (Colina ?colinaRatio) (Folato ?folatoRatio) (Fosforo ?fosforoRatio) (Magnesio ?magnesioRatio) (Manganeso ?manganesoRatio) (Niacina ?niacinaRatio) (Riboflavina ?riboflavinaRatio)
 		(Selenio ?selenioRatio) (Tiamina ?tiaminaRatio) (VitaminaA ?vitaminaARatio) (VitaminaB6 ?vitaminaB6Ratio) (VitaminaC ?vitaminaCRatio) (VitaminaE ?vitaminaERatio) (VitaminaK ?vitaminaKRatio) (Zinc ?zincRatio)
-	(desayuno ?Desayuno) (comida ?Comida) (postreComida ?PostreComida) (cena ?Cena) (postreCena ?PostreCena)
+	(desayuno ?Desayuno) (postreDesayuno ?PostreDesayuno) (comida ?Comida) (postreComida ?PostreComida) (cena ?Cena) (postreCena ?PostreCena)
 	(IngrPrincipalesUsados ?IngrPrincipalComida ?IngrPrincipalCena ) (valorNutricional ?valorNutricional) ) )
 
 	)
