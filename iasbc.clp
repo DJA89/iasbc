@@ -2002,11 +2002,9 @@
 ;;PREGUNTAS
 
 ;;; Funcion para hacer una pregunta general
-(deffunction ASK_QUESTIONS::pregunta-general (?pregunta)
-	(format t "%s" ?pregunta)
-	(bind ?respuesta (read))
-	?respuesta
-)
+
+
+
 
 ;;; Funcion para hacer una pregunta con respuesta en un rango dado
 (deffunction ASK_QUESTIONS::pregunta-numerica (?pregunta ?rangini ?rangfi)
@@ -2331,24 +2329,22 @@
 	=>
 	(focus CREATESOLUTION))
 
-
-
 (deftemplate CREATESOLUTION::MenuDias
 	(multislot lista (type INSTANCE)))
+
 
 (defrule CREATESOLUTION::crear-lista
 	=>
 	(assert (MenuDias))
 	)
 
-	(deffunction CREATESOLUTION::cutToOne (?x)
-		(if ( > ?x 1.0 ) then
-			(bind ?r (1.0))
-		 	else (
-			(bind ?r (?x))
-			)
+	(deffunction CREATESOLUTION::cut-to-one (?x)
+		(if (> ?x 1.0) then
+		 (bind ?r 1.0)
+		 else
+		 (bind ?r ?x)
 		)
-		(?r)
+		?x
 	)
 
 (defrule CREATESOLUTION::crear-menusDiarios
@@ -2455,12 +2451,12 @@
 			(bind ?IngrPrincipalCena (send ?ingred-Cena get-NombreIngrediente) )
 
 
-			(bind ?valorNutricional1 (cutToOne ?carbsRatio) (cutToOne ?protsRatio) (cutToOne ?grasasRatio) (cutToOne ?fibrasRatio) (cutToOne ?potasioRatio) (cutToOne ?calcioRatio) (cutToOne ?hierroRatio))
-			(bind ?valorNutricional2 (cutToOne ?cobalaminaRatio) (cutToOne ?cobreRatio) (cutToOne ?colinaRatio) (cutToOne ?folatoRatio) (cutToOne ?fosforoRatio) (cutToOne ?magnesioRatio) (cutToOne ?manganesoRatio)
-				(cutToOne ?niacinaRatio) (cutToOne ?riboflavinaRatio) (cutToOne ?selenioRatio) (cutToOne ?tiaminaRatio) (cutToOne ?vitaminaARatio) (cutToOne ?vitaminaB6Ratio) (cutToOne ?vitaminaCRatio)(cutToOne ?vitaminaERatio)
-				(cutToOne ?vitaminaKRatio) (cutToOne (?zincRatio)))
+			(bind ?valorNutricional1 (+ (cut-to-one ?carbsRatio) (cut-to-one ?protsRatio) (cut-to-one ?grasasRatio) (cut-to-one ?fibrasRatio) (cut-to-one ?potasioRatio) (cut-to-one ?calcioRatio) (cut-to-one ?hierroRatio)))
+			(bind ?valorNutricional2 (+ (cut-to-one ?cobalaminaRatio) (cut-to-one ?cobreRatio) (cut-to-one ?colinaRatio) (cut-to-one ?folatoRatio) (cut-to-one ?fosforoRatio) (cut-to-one ?magnesioRatio) (cut-to-one ?manganesoRatio)
+				(cut-to-one ?niacinaRatio) (cut-to-one ?riboflavinaRatio) (cut-to-one ?selenioRatio) (cut-to-one ?tiaminaRatio) (cut-to-one ?vitaminaARatio) (cut-to-one ?vitaminaB6Ratio) (cut-to-one ?vitaminaCRatio)(cut-to-one ?vitaminaERatio)
+				(cut-to-one ?vitaminaKRatio) (cut-to-one ?zincRatio)))
 
-			(bind ?valorNutricional (+ valorNutricional1 (* 0.4 valorNutricional2)))
+			(bind ?valorNutricional (+ ?valorNutricional1 (* 0.4 ?valorNutricional2)))
 
 
 	(assert (MenuDia (calorias ?caloriasRatio)(carbos ?carbsRatio) (proteinas ?protsRatio) (grasas ?grasasRatio) (fibras ?fibrasRatio) (potasio ?potasioRatio) (calcio ?calcioRatio)
@@ -2472,30 +2468,89 @@
 	)
 )
 
-; (defrule CREATESOLUTION::agregar-a-lista
-; 	?menu-dia <-(MenuDia)
-; 	?lista <- (MenuDias (lista $?menues-dias))
-; 	(test (not (member$ ?menu-dia $?menues-dias)))
-; 	=>
-; 	(modify ?lista (lista ?menu-dia ?menues-dias))
-; 	)
-;
-; (deffunction CREATESOLUTION::compareMenus
-; 	(?a ?b)
-; 	(> fact-slot-value ?a valorNutritivo) (fact-slot-value ?b valorNutritivo))
-; 	)
-;
-;
-; (defrule CREATESOLUTION::ordenar-lista
-; 	(declare (salience -1))
-; 	?mdias <- (MenuDias (lista $?Menu-dias))
-; 	=>
-; 	(bind ?nuevaLista (sort compareMenus ?Menu-dias))
-; 	(modify ?mdias (lista ?nuevaLista))
-; 	)
+(defrule CREATESOLUTION::agregar-a-lista
+	?menu-dia <-(MenuDia)
+	?lista <- (MenuDias (lista $?menues-dias))
+	(test (not (member$ ?menu-dia $?menues-dias)))
+	=>
+	(modify ?lista (lista ?menu-dia ?menues-dias))
+	)
 
+(deffunction CREATESOLUTION::compareMenus
+	(?a ?b)
+	(> (fact-slot-value ?a valorNutritivo) (fact-slot-value ?b valorNutritivo))
+	)
+
+
+(defrule CREATESOLUTION::ordenar-lista
+	(declare (salience -1))
+	?mdias <- (MenuDias (lista $?Menu-dias))
+	=>
+	(bind ?nuevaLista (sort compareMenus ?Menu-dias))
+	(modify ?mdias (lista ?nuevaLista))
+	)
 
 (defrule CREATESOLUTION::pasar-a-presentar-solucion
-	(declare (salience -2))
+	(declare (salience -1))
 	=>
 	(focus PRESENTSOLUTION))
+;
+; (defrule PRESENTSOLUTION::imprimir-solucion
+; 	?Sol-Dia-1 <- (SolucionDia (dia 1) (desayuno ?des-1) (comida ?com-1) (postreComida ?post-com-1) (cena ?cen-1) (postreCena ?post-cen-1))
+; 	?Sol-Dia-2 <- (SolucionDia (dia 2) (desayuno ?des-2) (comida ?com-2) (postreComida ?post-com-2) (cena ?cen-2) (postreCena ?post-cen-2))
+; 	?Sol-Dia-3 <- (SolucionDia (dia 3) (desayuno ?des-3) (comida ?com-3) (postreComida ?post-com-3) (cena ?cen-3) (postreCena ?post-cen-3))
+; 	?Sol-Dia-4 <- (SolucionDia (dia 4) (desayuno ?des-4) (comida ?com-4) (postreComida ?post-com-4) (cena ?cen-4) (postreCena ?post-cen-4))
+; 	?Sol-Dia-5 <- (SolucionDia (dia 5) (desayuno ?des-5) (comida ?com-5) (postreComida ?post-com-5) (cena ?cen-5) (postreCena ?post-cen-5))
+; 	?Sol-Dia-6 <- (SolucionDia (dia 6) (desayuno ?des-6) (comida ?com-6) (postreComida ?post-com-6) (cena ?cen-6) (postreCena ?post-cen-6))
+; 	?Sol-Dia-7 <- (SolucionDia (dia 7) (desayuno ?des-7) (comida ?com-7) (postreComida ?post-com-7) (cena ?cen-7) (postreCena ?post-cen-7))
+; 	=>
+; 	(printout t "Esta es nuestra propuesta de menú especialmente preparada para usted: " crlf)
+; 	(printout t "Solucion dia 1: " crlf)
+; 	(printout t "Desayuno: " ?des-1 crlf)
+; 	(printout t "Comida: " ?com-1 crlf)
+; 	(printout t "Postre comida: " ?post-com-1 crlf)
+; 	(printout t "Cena: " ?cen-1 crlf)
+; 	(printout t "Postre cena: " ?post-cen-1 crlf crlf)
+;
+; 	(printout t "Solucion dia 2: " crlf)
+; 	(printout t "Desayuno: " ?des-2 crlf)
+; 	(printout t "Comida: " ?com-2 crlf)
+; 	(printout t "Postre comida: " ?post-com-2 crlf)
+; 	(printout t "Cena: " ?cen-2 crlf)
+; 	(printout t "Postre cena: " ?post-cen-2 crlf crlf)
+;
+; 	(printout t "Solucion dia 3: " crlf)
+; 	(printout t "Desayuno: " ?des-3 crlf)
+; 	(printout t "Comida: " ?com-3 crlf)
+; 	(printout t "Postre comida: " ?post-com-3 crlf)
+; 	(printout t "Cena: " ?cen-3 crlf)
+; 	(printout t "Postre cena: " ?post-cen-3 crlf crlf)
+;
+; 	(printout t "Solucion dia 4: " crlf)
+; 	(printout t "Desayuno: " ?des-4 crlf)
+; 	(printout t "Comida: " ?com-4 crlf)
+; 	(printout t "Postre comida: " ?post-com-4 crlf)
+; 	(printout t "Cena: " ?cen-4 crlf)
+; 	(printout t "Postre cena: " ?post-cen-4 crlf crlf)
+;
+; 	(printout t "Solucion dia 5: " crlf)
+; 	(printout t "Desayuno: " ?des-5 crlf)
+; 	(printout t "Comida: " ?com-5 crlf)
+; 	(printout t "Postre comida: " ?post-com-5 crlf)
+; 	(printout t "Cena: " ?cen-5 crlf)
+; 	(printout t "Postre cena: " ?post-cen-5 crlf crlf)
+;
+; 	(printout t "Solucion dia 6: " crlf)
+; 	(printout t "Desayuno: " ?des-6 crlf)
+; 	(printout t "Comida: " ?com-6 crlf)
+; 	(printout t "Postre comida: " ?post-com-6 crlf)
+; 	(printout t "Cena: " ?cen-6 crlf)
+; 	(printout t "Postre cena: " ?post-cen-6 crlf crlf)
+;
+; 	(printout t "Solucion dia 7: " crlf)
+; 	(printout t "Desayuno: " ?des-7 crlf)
+; 	(printout t "Comida: " ?com-7 crlf)
+; 	(printout t "Postre comida: " ?post-com-7 crlf)
+; 	(printout t "Cena: " ?cen-7 crlf)
+; 	(printout t "Postre cena: " ?post-cen-7 crlf crlf)
+; )
