@@ -2336,6 +2336,7 @@
 (defrule CREATESOLUTION::crear-lista
 	=>
 	(assert (MenuDias))
+	(assert (ordenar))
 	)
 
 	(deffunction CREATESOLUTION::cut-to-one (?x)
@@ -2345,6 +2346,11 @@
 		 (bind ?r ?x)
 		)
 		?x
+	)
+
+
+	(deftemplate CREATESOLUTION::aux
+		(slot menu-dia (type INSTANCE))
 	)
 
 (defrule CREATESOLUTION::crear-menusDiarios
@@ -2468,26 +2474,34 @@
 	)
 )
 
+(defrule add-aux-helper
+	 ?menu-dia <- (MenuDia)
+=>
+(assert (aux (menu-dia ?menu-dia)))
+)
+
 (defrule CREATESOLUTION::agregar-a-lista
-	?menu-dia <-(MenuDia)
+	?menu-dia <-(aux (menu-dia ?actual-menu))
 	?lista <- (MenuDias (lista $?menues-dias))
-	(test (not (member$ ?menu-dia $?menues-dias)))
 	=>
-	(modify ?lista (lista ?menu-dia ?menues-dias))
+	(modify ?lista (lista ?actual-menu ?menues-dias))
+	(retract ?menu-dia)
 	)
 
 (deffunction CREATESOLUTION::compareMenus
 	(?a ?b)
-	(> (fact-slot-value ?a valorNutritivo) (fact-slot-value ?b valorNutritivo))
+	(> (fact-slot-value ?a valorNutricional) (fact-slot-value ?b valorNutricional))
 	)
 
 
 (defrule CREATESOLUTION::ordenar-lista
 	(declare (salience -1))
 	?mdias <- (MenuDias (lista $?Menu-dias))
+	?a-borrar <- (ordenar)
 	=>
 	(bind ?nuevaLista (sort compareMenus ?Menu-dias))
 	(modify ?mdias (lista ?nuevaLista))
+	(retract ?a-borrar)
 	)
 
 (defrule CREATESOLUTION::pasar-a-presentar-solucion
