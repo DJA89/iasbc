@@ -930,7 +930,7 @@
 [Helado]
 [Galleta])
 (IngredientePrincipal [Helado])
-(Peso size)
+(Peso 100)
 (Temporada Verano)
 (Tipo Postre)
 (Compatibilidad AptoVegetariano)
@@ -1239,7 +1239,7 @@
 [Leche]
 [Huevo])
 (IngredientePrincipal [Leche])
-(Peso size)
+(Peso 100)
 (Temporada Cualquiera)
 (Tipo Postre)
 (Compatibilidad NoAptoV)
