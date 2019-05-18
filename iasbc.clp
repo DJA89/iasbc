@@ -2533,9 +2533,9 @@
 
 (deffunction CREATESOLUTION::have-x-elements-in-common (?lista-a ?lista-b ?porcentaje)
 (bind ?too-many FALSE)
-;(printout t "?lista-a: " ?lista-a crlf)
+(printout t "?lista-a: " ?lista-a crlf)
 (bind ?lista-a (fact-slot-value ?lista-a IngrPrincipalesUsados))
-;(printout t "?lista-b: " ?lista-b crlf)
+(printout t "?lista-b: " ?lista-b crlf)
 (bind ?lista-b (fact-slot-value ?lista-b IngrPrincipalesUsados))
 (bind ?largo-lista-a (length$ ?lista-a))
 ;(printout t "?largo-lista-a: " ?largo-lista-a crlf)
@@ -2583,14 +2583,11 @@ do
 	)
 
 
-(defrule CREATESOLUTION::pruning-for-day-two
+(defrule CREATESOLUTION::prune-possibilities
 	(declare (salience -1))
-	(dia 1 done)
+	(dia ?x done)
 	?mdias <- (MenuDias (lista ?primero-lista $?resto-lista) (aux 1))
-	?msemanal <- (MenuSemanal (dia1 ?menu-dia-1))
 	=>
-	;(printout t "?menu-dia-1: " ?menu-dia-1 crlf)
-	;(printout t "?primero-lista: " ?primero-lista crlf)
 	(modify ?mdias (lista ?resto-lista))
 	)
 
@@ -2606,32 +2603,91 @@ do
 	(assert (dia 2 done))
 	(retract ?mdias)
 	(retract ?a-borrar)
-	(halt)
 )
-
-(defrule CREATESOLUTION::pruning-for-day-three
-	(declare (salience -1))
-	(dia 2 done)
-	?mdias <- (MenuDias (lista ?primero-lista $?resto-lista) (aux 1))
-	?msemanal <- (MenuSemanal (dia1 ?menu-dia-1) (dia2 ?menu-dia-2))
-	;(test (or (have-x-elements-in-common ?menu-dia-1 ?primero-lista 14) (have-x-elements-in-common ?menu-dia-2 ?primero-lista 0)))
-	=>
-	(modify ?mdias (lista ?resto-lista))
-	)
 
 (defrule CREATESOLUTION::day-three
 	?mdias <- (MenuDias (lista ?primero-lista $?resto-lista) (aux 1))
 	?mdiasreal <- (MenuDias (lista $?lista-real) (aux 0))
 	?msemanal <- (MenuSemanal (dia1 ?menu-dia-1) (dia2 ?menu-dia-2))
 	?a-borrar <- (dia 2 done)
-	(test (not (or (have-x-elements-in-common ?menu-dia-1 ?primero-lista 14) (have-x-elements-in-common ?menu-dia-2 ?primero-lista 0))))
+	(test (not (or (have-x-elements-in-common ?menu-dia-1 ?primero-lista 16) (have-x-elements-in-common ?menu-dia-2 ?primero-lista 0))))
 	=>
 	(modify ?msemanal (dia3 ?primero-lista))
 	(modify ?mdiasreal (lista (delete-member$ ?lista-real ?primero-lista)))
 	(assert (dia 3 done))
+	(retract ?mdias)
 	(retract ?a-borrar)
 )
 
+
+(deffunction CREATESOLUTION::print-ingredientes-principales (?menu-dia)
+	(printout t (fact-slot-value ?menu-dia IngrPrincipalesUsados) crlf)
+)
+(deffunction CREATESOLUTION::print-all (?menu-dia-1 ?menu-dia-2 ?menu-dia-3 ?menu-dia-4 ?menu-dia-5 ?menu-dia-6 ?menu-dia-7)
+	(print-ingredientes-principales ?menu-dia-1)
+	(print-ingredientes-principales ?menu-dia-2)
+	(print-ingredientes-principales ?menu-dia-3)
+	(print-ingredientes-principales ?menu-dia-4)
+	(print-ingredientes-principales ?menu-dia-5)
+	(print-ingredientes-principales ?menu-dia-6)
+	(print-ingredientes-principales ?menu-dia-7)
+)
+
+(defrule CREATESOLUTION::day-four
+	?mdias <- (MenuDias (lista ?primero-lista $?resto-lista) (aux 1))
+	?mdiasreal <- (MenuDias (lista $?lista-real) (aux 0))
+	?msemanal <- (MenuSemanal (dia1 ?menu-dia-1) (dia2 ?menu-dia-2) (dia3 ?menu-dia-3))
+	?a-borrar <- (dia 3 done)
+	(test (not (or (have-x-elements-in-common ?menu-dia-1 ?primero-lista 33) (have-x-elements-in-common ?menu-dia-2 ?primero-lista 16) (have-x-elements-in-common ?menu-dia-3 ?primero-lista 0))))
+	=>
+	(modify ?msemanal (dia4 ?primero-lista))
+	(modify ?mdiasreal (lista (delete-member$ ?lista-real ?primero-lista)))
+	(assert (dia 4 done))
+	(retract ?mdias)
+	(retract ?a-borrar)
+)
+
+(defrule CREATESOLUTION::day-five
+	?mdias <- (MenuDias (lista ?primero-lista $?resto-lista) (aux 1))
+	?mdiasreal <- (MenuDias (lista $?lista-real) (aux 0))
+	?msemanal <- (MenuSemanal (dia1 ?menu-dia-1) (dia2 ?menu-dia-2) (dia3 ?menu-dia-3) (dia4 ?menu-dia-4))
+	?a-borrar <- (dia 4 done)
+	(test (not (or (have-x-elements-in-common ?menu-dia-1 ?primero-lista 75) (have-x-elements-in-common ?menu-dia-2 ?primero-lista 50) (have-x-elements-in-common ?menu-dia-3 ?primero-lista 25) (have-x-elements-in-common ?menu-dia-4 ?primero-lista 0))))
+	=>
+	(modify ?msemanal (dia5 ?primero-lista))
+	(modify ?mdiasreal (lista (delete-member$ ?lista-real ?primero-lista)))
+	(assert (dia 5 done))
+	(retract ?mdias)
+	(retract ?a-borrar)
+)
+
+(defrule CREATESOLUTION::day-six
+	?mdias <- (MenuDias (lista ?primero-lista $?resto-lista) (aux 1))
+	?mdiasreal <- (MenuDias (lista $?lista-real) (aux 0))
+	?msemanal <- (MenuSemanal (dia1 ?menu-dia-1) (dia2 ?menu-dia-2) (dia3 ?menu-dia-3) (dia4 ?menu-dia-4) (dia5 ?menu-dia-5))
+	?a-borrar <- (dia 5 done)
+	(test (not (or (have-x-elements-in-common ?menu-dia-2 ?primero-lista 75) (have-x-elements-in-common ?menu-dia-3 ?primero-lista 50) (have-x-elements-in-common ?menu-dia-4 ?primero-lista 25) (have-x-elements-in-common ?menu-dia-5 ?primero-lista 0))))
+	=>
+	(modify ?msemanal (dia5 ?primero-lista))
+	(modify ?mdiasreal (lista (delete-member$ ?lista-real ?primero-lista)))
+	(assert (dia 6 done))
+	(retract ?mdias)
+	(retract ?a-borrar)
+)
+
+(defrule CREATESOLUTION::day-seven
+	?mdias <- (MenuDias (lista ?primero-lista $?resto-lista) (aux 1))
+	?mdiasreal <- (MenuDias (lista $?lista-real) (aux 0))
+	?msemanal <- (MenuSemanal (dia1 ?menu-dia-1) (dia2 ?menu-dia-2) (dia3 ?menu-dia-3) (dia4 ?menu-dia-4) (dia5 ?menu-dia-5) (dia6 ?menu-dia-6))
+	?a-borrar <- (dia 6 done)
+	(test (not (or (have-x-elements-in-common ?menu-dia-3 ?primero-lista 75) (have-x-elements-in-common ?menu-dia-4 ?primero-lista 50) (have-x-elements-in-common ?menu-dia-5 ?primero-lista 25) (have-x-elements-in-common ?menu-dia-6 ?primero-lista 0))))
+	=>
+	(print-all ?menu-dia-1 ?menu-dia-2 ?menu-dia-3 ?menu-dia-4 ?menu-dia-5 ?menu-dia-6 ?primero-lista)
+	(modify ?msemanal (dia6 ?primero-lista))
+	(modify ?mdiasreal (lista (delete-member$ ?lista-real ?primero-lista)))
+	(retract ?mdias)
+	(retract ?a-borrar)
+)
 ;
 ; (defrule CREATESOLUTION::day-two
 ; 	?mdias <- (MenuDias (lista $?principio-lista ?seleccionado-lista $?resto-lista))
