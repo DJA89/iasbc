@@ -4966,8 +4966,8 @@
 
 	(test (< (+ ?calorias4 ?calorias5) (* 0.8 (+ ?calorias2 ?calorias3) ) )) ;las calorias de la cena deben ser como mucho el 80 % de las de la comida
 	(test (and (< (+ ?carbs1 ?carbs2 ?carbs3 ?carbs4 ?carbs5) ?maxCarbos) (< (+ ?gras1 ?gras2 ?gras3 ?gras4 ?gras5) ?maxGrasas) )) ;los menus no pueden superar el maximo recomendado de grassas y carbohidratos
-	(test (and (> (+ ?prot1 ?prot2 ?prot3 ?prot4 ?prot5) (* 0.85 ?proteinas) ) (> (+ ?fib1 ?fib2 ?fib3 ?fib4 ?fib5) (* 0.85 ?fibras) ) (> (+ ?calcio1 ?calcio2 ?calcio3 ?calcio4 ?calcio5) (* 0.6 ?calcio) )
-	 		(> (+ ?pot1 ?pot2 ?pot3 ?pot4 ?pot5) (* 0.6 ?potasio) ) (> (+ ?hierro1 ?hierro2 ?hierro3 ?hierro4 ?hierro5) (* 0.6 ?hierro) ) ) )   ;garantizamos unos minimos
+	(test (and (> (+ ?prot1 ?prot2 ?prot3 ?prot4 ?prot5) (* 0.95 ?proteinas) ) (> (+ ?fib1 ?fib2 ?fib3 ?fib4 ?fib5) (* 0.95 ?fibras) ) (> (+ ?calcio1 ?calcio2 ?calcio3 ?calcio4 ?calcio5) (* 0.95 ?calcio) )
+	 		(> (+ ?pot1 ?pot2 ?pot3 ?pot4 ?pot5) (* 0.95 ?potasio) ) (> (+ ?hierro1 ?hierro2 ?hierro3 ?hierro4 ?hierro5) (* 0.95 ?hierro) ) ) )   ;garantizamos unos minimos
 	(test (and (> (/(+ ?carbs1 ?carbs2 ?carbs3 ?carbs4 ?carbs5) ?minCarbos) 1.0)  (> (/(+ ?gras1 ?gras2 ?gras3 ?gras4 ?gras5) ?minGrasas) 1.0))) ;garantimos un minimo de energia
 =>
 
