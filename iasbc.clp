@@ -3229,7 +3229,7 @@
 		(Selenio ?selenio5) (Tiamina ?tiamina5) (VitaminaA ?vitaminaA-5) (VitaminaB6 ?vitaminaB6-5) (VitaminaC ?vitaminaC-5) (VitaminaE ?vitaminaE-5) (VitaminaK ?vitaminaK-5) (Zinc ?zinc5)
 		(Tipo Postre))
 
-	(test (not (eq ?postre1 ?postre2 ?postre3)))
+	(test (not (or(eq ?postre1 ?postre2) (eq ?postre2 ?postre3) (eq ?postre1 ?postre3)))) ;postres diferentes
 	(test ( not (eq(send ?ingred-Comida get-TipoIngrediente) (send ?ingred-Cena get-TipoIngrediente) ))) ;la comida y la cena deben tener un tipo de ingrediente diferente
 
 	(test (< (+ ?calorias4 ?calorias5) (* 0.8 (+ ?calorias2 ?calorias3) ) )) ;las calorias de la cena deben ser como mucho els 80 % de las de la comida
