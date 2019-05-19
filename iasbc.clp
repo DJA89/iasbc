@@ -2815,7 +2815,7 @@
 	(test ( not (eq(send ?ingred-Comida get-TipoIngrediente) (send ?ingred-Cena get-TipoIngrediente) ))) ;la comida y la cena deben tener un tipo de ingrediente diferente
 
 	(test (< (+ ?calorias4 ?calorias5) (* 0.8 (+ ?calorias2 ?calorias3) ) )) ;las calorias de la cena deben ser como mucho els 80 % de las de la comida
-
+	(test (and (< (+ ?carbs1 ?carbs2 ?carbs3 ?carbs4 ?carbs5) ?maxCarbos) (< (+ ?gras1 ?gras2 ?gras3 ?gras4 ?gras5) ?maxGrasas)))
 =>
 
 	(bind ?caloriasConsumido (+ ?calorias1 ?calorias2 ?calorias3 ?calorias4 ?calorias5) )
@@ -2845,49 +2845,44 @@
 	(bind ?vitaminaKConsumido (+ ?vitaminaK-1 ?vitaminaK-2 ?vitaminaK-3 ?vitaminaK-4 ?vitaminaK-5) )
 	(bind ?zincConsumido (+ ?zinc1 ?zinc2 ?zinc3 ?zinc4 ?zinc5) )
 
-	(if 	(and
-		 (< ?carbsConsumido ?maxCarbos)
-		 (< ?grasasConsumido ?maxGrasas)
-			) then
+	(bind ?caloriasRatio  ( / ?caloriasConsumido ?calorias))
 
-			(bind ?caloriasRatio  ( / ?caloriasConsumido ?calorias))
+	(bind ?carbsRatio ( / ?carbsConsumido ?minCarbos))
+	(bind ?protsRatio ( / ?protsConsumido ?proteinas))
+	(bind ?grasasRatio ( / ?grasasConsumido ?minGrasas))
+	(bind ?fibrasRatio ( / ?fibrasConsumido ?fibras))
+	(bind ?potasioRatio ( / ?potasioConsumido ?potasio))
+	(bind ?calcioRatio ( / ?calcioConsumido ?calcio))
+	(bind ?hierroRatio ( / ?hierroConsumido ?hierro))
 
-			(bind ?carbsRatio ( / ?carbsConsumido ?minCarbos))
-			(bind ?protsRatio ( / ?protsConsumido ?proteinas))
-			(bind ?grasasRatio ( / ?grasasConsumido ?minGrasas))
-			(bind ?fibrasRatio ( / ?fibrasConsumido ?fibras))
-			(bind ?potasioRatio ( / ?potasioConsumido ?potasio))
-			(bind ?calcioRatio ( / ?calcioConsumido ?calcio))
-			(bind ?hierroRatio ( / ?hierroConsumido ?hierro))
+	(bind ?cobalaminaRatio ( / ?cobalaminaConsumido ?cobalamina))
+	(bind ?cobreRatio ( / ?cobreConsumido ?cobre))
+	(bind ?colinaRatio ( / ?colinaConsumido ?colina))
+	(bind ?folatoRatio ( / ?folatoConsumido ?folato))
+	(bind ?fosforoRatio ( / ?fosforoConsumido ?fosforo))
+	(bind ?magnesioRatio ( / ?magnesioConsumido ?magnesio))
+	(bind ?manganesoRatio ( / ?manganesoConsumido ?manganeso))
+	(bind ?niacinaRatio ( / ?niacinaConsumido ?niacina))
+	(bind ?riboflavinaRatio ( / ?riboflavinaConsumido ?riboflavina))
+	(bind ?selenioRatio ( / ?selenioConsumido ?selenio))
+	(bind ?tiaminaRatio ( / ?tiaminaConsumido ?tiamina))
+	(bind ?vitaminaARatio ( / ?vitaminaAConsumido ?vitaminaA))
+	(bind ?vitaminaB6Ratio ( / ?vitaminaB6Consumido ?vitaminaB6))
+	(bind ?vitaminaCRatio ( / ?vitaminaCConsumido ?vitaminaC))
+	(bind ?vitaminaERatio ( / ?vitaminaEConsumido ?vitaminaE))
+	(bind ?vitaminaKRatio ( / ?vitaminaKConsumido ?vitaminaK))
+	(bind ?zincRatio ( / ?zincConsumido ?zinc))
 
-			(bind ?cobalaminaRatio ( / ?cobalaminaConsumido ?cobalamina))
-			(bind ?cobreRatio ( / ?cobreConsumido ?cobre))
-			(bind ?colinaRatio ( / ?colinaConsumido ?colina))
-			(bind ?folatoRatio ( / ?folatoConsumido ?folato))
-			(bind ?fosforoRatio ( / ?fosforoConsumido ?fosforo))
-			(bind ?magnesioRatio ( / ?magnesioConsumido ?magnesio))
-			(bind ?manganesoRatio ( / ?manganesoConsumido ?manganeso))
-			(bind ?niacinaRatio ( / ?niacinaConsumido ?niacina))
-			(bind ?riboflavinaRatio ( / ?riboflavinaConsumido ?riboflavina))
-			(bind ?selenioRatio ( / ?selenioConsumido ?selenio))
-			(bind ?tiaminaRatio ( / ?tiaminaConsumido ?tiamina))
-			(bind ?vitaminaARatio ( / ?vitaminaAConsumido ?vitaminaA))
-			(bind ?vitaminaB6Ratio ( / ?vitaminaB6Consumido ?vitaminaB6))
-			(bind ?vitaminaCRatio ( / ?vitaminaCConsumido ?vitaminaC))
-			(bind ?vitaminaERatio ( / ?vitaminaEConsumido ?vitaminaE))
-			(bind ?vitaminaKRatio ( / ?vitaminaKConsumido ?vitaminaK))
-			(bind ?zincRatio ( / ?zincConsumido ?zinc))
-
-			(bind ?IngrPrincipalComida (send ?ingred-Comida get-NombreIngrediente) )
-			(bind ?IngrPrincipalCena (send ?ingred-Cena get-NombreIngrediente) )
+	(bind ?IngrPrincipalComida (send ?ingred-Comida get-NombreIngrediente) )
+	(bind ?IngrPrincipalCena (send ?ingred-Cena get-NombreIngrediente) )
 
 
-			(bind ?valorNutricional1 (+ (cut-to-one ?carbsRatio) (cut-to-one ?protsRatio) (cut-to-one ?grasasRatio) (cut-to-one ?fibrasRatio) (cut-to-one ?potasioRatio) (cut-to-one ?calcioRatio) (cut-to-one ?hierroRatio)))
-			(bind ?valorNutricional2 (+ (cut-to-one ?cobalaminaRatio) (cut-to-one ?cobreRatio) (cut-to-one ?colinaRatio) (cut-to-one ?folatoRatio) (cut-to-one ?fosforoRatio) (cut-to-one ?magnesioRatio) (cut-to-one ?manganesoRatio)
-				(cut-to-one ?niacinaRatio) (cut-to-one ?riboflavinaRatio) (cut-to-one ?selenioRatio) (cut-to-one ?tiaminaRatio) (cut-to-one ?vitaminaARatio) (cut-to-one ?vitaminaB6Ratio) (cut-to-one ?vitaminaCRatio)(cut-to-one ?vitaminaERatio)
-				(cut-to-one ?vitaminaKRatio) (cut-to-one ?zincRatio)))
+	(bind ?valorNutricional1 (+ (cut-to-one ?carbsRatio) (cut-to-one ?protsRatio) (cut-to-one ?grasasRatio) (cut-to-one ?fibrasRatio) (cut-to-one ?potasioRatio) (cut-to-one ?calcioRatio) (cut-to-one ?hierroRatio)))
+	(bind ?valorNutricional2 (+ (cut-to-one ?cobalaminaRatio) (cut-to-one ?cobreRatio) (cut-to-one ?colinaRatio) (cut-to-one ?folatoRatio) (cut-to-one ?fosforoRatio) (cut-to-one ?magnesioRatio) (cut-to-one ?manganesoRatio)
+		(cut-to-one ?niacinaRatio) (cut-to-one ?riboflavinaRatio) (cut-to-one ?selenioRatio) (cut-to-one ?tiaminaRatio) (cut-to-one ?vitaminaARatio) (cut-to-one ?vitaminaB6Ratio) (cut-to-one ?vitaminaCRatio)(cut-to-one ?vitaminaERatio)
+		(cut-to-one ?vitaminaKRatio) (cut-to-one ?zincRatio)))
 
-			(bind ?valorNutricional (/ (+ ?valorNutricional1 (* 0.4 ?valorNutricional2)) 13.8)) ;valorNutricional del menu entre 0 - 1, 13.8 es la puntuacion maxima que puede obtener
+	(bind ?valorNutricional (/ (+ ?valorNutricional1 (* 0.4 ?valorNutricional2)) 13.8)) ;valorNutricional del menu entre 0 - 1, 13.8 es la puntuacion maxima que puede obtener
 
 
 	(assert (MenuDia (calorias ?caloriasRatio)(carbos ?carbsRatio) (proteinas ?protsRatio) (grasas ?grasasRatio) (fibras ?fibrasRatio) (potasio ?potasioRatio) (calcio ?calcioRatio)
@@ -2895,8 +2890,6 @@
 		(Selenio ?selenioRatio) (Tiamina ?tiaminaRatio) (VitaminaA ?vitaminaARatio) (VitaminaB6 ?vitaminaB6Ratio) (VitaminaC ?vitaminaCRatio) (VitaminaE ?vitaminaERatio) (VitaminaK ?vitaminaKRatio) (Zinc ?zincRatio)
 	(desayuno ?Desayuno) (postreDesayuno ?PostreDesayuno) (comida ?Comida) (postreComida ?PostreComida) (cena ?Cena) (postreCena ?PostreCena)
 	(IngrPrincipalesUsados ?IngrPrincipalComida ?IngrPrincipalCena ) (valorNutricional ?valorNutricional) ) )
-
-	)
 )
 
 
