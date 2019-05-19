@@ -3955,6 +3955,7 @@
 )
 
 ;;PREGUNTAS
+;las funciones a continuacion son para facilitar las preguntas-respuestas y recopilar la informacion
 (defrule MAIN::say-hello
   =>
 	(printout t "Bienvenido/a al sistema de Menu Semanales" crlf "Favor responda algunas preguntas para que podamos ayudarle" crlf)
@@ -4013,7 +4014,7 @@
 	?answer)
 
 
-
+;cada regla del modulo de recopilacion se encarga de preguntar por un campo concreto y crear el fact correspondiente
 
 (defrule RECOPILACION::ask-age
   (welcome-given TRUE)
@@ -4100,6 +4101,7 @@
 	=>
 	(focus PREPROCESS))
 
+;elimina aquellos platos no aptos para veganos si la persona es vegana
 (defrule PREPROCESS::eliminar-platos-no-veganos
 	(dieta vegano)
 	?plato <-(object (is-a Plato)(Compatibilidad ?compt) (NombrePlato ?nombre))
@@ -4109,6 +4111,7 @@
 	(send ?plato delete)
 )
 
+;elimina aquellos platos no aptos para vegetarianos si la persona es vegetariana
 (defrule PREPROCESS::eliminar-platos-no-vegetarianos
 	(dieta vegetariano)
 	?plato <- (object (is-a Plato)(Compatibilidad ?compt) (NombrePlato ?nombre))
@@ -4118,6 +4121,7 @@
 	(send ?plato delete)
 )
 
+;elimina aquellos platos que no son de temporada (siempre y cuando la temporada del menu no sea irrelevante)
 (defrule PREPROCESS::eliminar-platos-no-temporada
 	(temp ?t)
 	(test (not (eq ?t Irrelevante)))
@@ -4230,6 +4234,7 @@
 
 )
 
+;actualizamos el calcio necesario si la persona parece osteoporosis
 (defrule PREPROCESS::requisitos-osteoporosis
 	(enfermedad osteoporosis)
 	?requisitos <- (Requisitos (calcio ?c))
@@ -4238,6 +4243,7 @@
 	(modify ?requisitos (calcio 1200.0) )
 )
 
+;actualizamos los requisitos necesarios si la persona parece artritis
 (defrule PREPROCESS::requisitos-artritis
 	(enfermedad problemas-articulares)
 	?requisitos <- (Requisitos (calcio ?c) (Fosforo ?fosforo) (Magnesio ?magnesio) (VitaminaC ?vitC))
@@ -4297,6 +4303,7 @@
 	=>
 	(focus CREATESOLUTION))
 
+;estructura para contener todos los menus diarios creados y ser ordenados por su valor nutricional
 (deftemplate CREATESOLUTION::MenuDias
 	(multislot lista (type INSTANCE))
 	(slot aux (type INTEGER))) ;0 false, 1 true
@@ -4321,12 +4328,12 @@
 		?r
 	)
 
-
+;estructura auxiliar para controlar el tratamiento de los menu y que no vuelvan a entrar en las reglas una vez tratados
 (deftemplate CREATESOLUTION::aux
 	(slot menu-dia (type INSTANCE))
 )
 
-
+;creacion de un menú diario especificando su estructura de menú que queremos, si se cumple se calculan los ratios ingerido/requisito por nutriente, el valor nutricional y se genera el menu diario
 (defrule CREATESOLUTION::crear-menusDiarios
 	?stop <- (continue menus)
 
@@ -4364,16 +4371,17 @@
 
 	(test (not (or(eq ?postre1 ?postre2) (eq ?postre2 ?postre3) (eq ?postre1 ?postre3)))) ;postres diferentes
 
-	(test (< (+ ?calorias4 ?calorias5) (* 0.8 (+ ?calorias2 ?calorias3) ) )) ;las calorias de la cena deben ser como mucho els 80 % de las de la comida
+	(test (< (+ ?calorias4 ?calorias5) (* 0.8 (+ ?calorias2 ?calorias3) ) )) ;las calorias de la cena deben ser como mucho el 80 % de las de la comida
 	(test (and (< (+ ?carbs1 ?carbs2 ?carbs3 ?carbs4 ?carbs5) ?maxCarbos) (< (+ ?gras1 ?gras2 ?gras3 ?gras4 ?gras5) ?maxGrasas) )) ;los menus no pueden superar el maximo recomendado de grassas y carbohidratos
 	(test (and (> (+ ?prot1 ?prot2 ?prot3 ?prot4 ?prot5) (* 0.85 ?proteinas) ) (> (+ ?fib1 ?fib2 ?fib3 ?fib4 ?fib5) (* 0.85 ?fibras) ) (> (+ ?calcio1 ?calcio2 ?calcio3 ?calcio4 ?calcio5) (* 0.6 ?calcio) )
-	 		(> (+ ?pot1 ?pot2 ?pot3 ?pot4 ?pot5) (* 0.6 ?potasio) ) (> (+ ?hierro1 ?hierro2 ?hierro3 ?hierro4 ?hierro5) (* 0.6 ?hierro) ) ) )  ;garantizamos unos minimos
+	 		(> (+ ?pot1 ?pot2 ?pot3 ?pot4 ?pot5) (* 0.6 ?potasio) ) (> (+ ?hierro1 ?hierro2 ?hierro3 ?hierro4 ?hierro5) (* 0.6 ?hierro) ) ) )   ;garantizamos unos minimos
 	(test (and (> (/(+ ?carbs1 ?carbs2 ?carbs3 ?carbs4 ?carbs5) ?minCarbos) 1.0)  (> (/(+ ?gras1 ?gras2 ?gras3 ?gras4 ?gras5) ?minGrasas) 1.0))) ;garantimos un minimo de energia
 =>
 
 
 	(bind ?tipo1 (send ?ingred-Comida get-TipoIngrediente))
 	(bind ?tipo2 (send ?ingred-Cena get-TipoIngrediente))
+	;esta condicion como test en la precondicion relantizaba mucho todo el programa, el tipo de ingrediente de la cena y la comida deben ser diferentes
 	(if (not (eq ?tipo1 ?tipo2)) then
 
 		(bind ?caloriasConsumido (+ ?calorias1 ?calorias2 ?calorias3 ?calorias4 ?calorias5) )
@@ -4440,7 +4448,7 @@
 		(bind ?valorNutricional2 (+ (cut-to-one ?cobalaminaRatio) (cut-to-one ?cobreRatio) (cut-to-one ?colinaRatio) (cut-to-one ?folatoRatio) (cut-to-one ?fosforoRatio) (cut-to-one ?magnesioRatio) (cut-to-one ?manganesoRatio)
 			(cut-to-one ?niacinaRatio) (cut-to-one ?riboflavinaRatio) (cut-to-one ?selenioRatio) (cut-to-one ?tiaminaRatio) (cut-to-one ?vitaminaARatio) (cut-to-one ?vitaminaB6Ratio) (cut-to-one ?vitaminaCRatio)(cut-to-one ?vitaminaERatio)
 			(cut-to-one ?vitaminaKRatio) (cut-to-one ?zincRatio)))
-
+	;calculo del valorNutricional del menu = suma del ratio de los nutrientes + suma del ratio de los micronutrientes* 0.4 -> normalizar,  los ratios aportan como mucho 1 punto,  no se valora el exceso de ingesta
 		(bind ?valorNutricional (/ (+ ?valorNutricional1 (* 0.4 ?valorNutricional2)) 13.8)) ;valorNutricional del menu entre 0 - 1, 13.8 es la puntuacion maxima que puede obtener
 
 
@@ -4474,7 +4482,7 @@
 	(< (fact-slot-value ?a valorNutricional) (fact-slot-value ?b valorNutricional))
 	)
 
-
+;ordenacion de los menus diarios en funcion de su valor nutricional
 (defrule CREATESOLUTION::ordenar-lista
 	(declare (salience -1))
 	?mdias <- (MenuDias (lista $?Menu-dias))
@@ -4495,6 +4503,7 @@
 	(assert (dia 1 done))
 	)
 
+;true si las listas tienen menos del porcentaje establecido de elementos en comun, otherwise false
 (deffunction CREATESOLUTION::have-x-elements-in-common (?lista-a ?lista-b ?porcentaje)
 (bind ?too-many FALSE)
 (bind ?lista-a (fact-slot-value ?lista-a IngrPrincipalesUsados))
@@ -4521,6 +4530,7 @@ do
 ?too-many
 )
 
+;estructura auxiliar para controlar la entrada en reglar al modificar la lista de menus
 (defrule CREATESOLUTION::crear-menu-dias-aux-dia
 	(dia ?x done)
 	(MenuDias (lista $?lista) (aux 0))
@@ -4528,7 +4538,7 @@ do
 	(assert (MenuDias (lista ?lista) (aux 1)))
 	)
 
-
+;se borra aquel menu que no ha podido ser asignado a la semana
 (defrule CREATESOLUTION::prune-possibilities
 	(declare (salience -1))
 	(dia ?x done)
@@ -4536,6 +4546,8 @@ do
 	=>
 	(modify ?mdias (lista ?resto-lista))
 	)
+
+; a continuacion las reglas para asignar los menusDiarios a los dias de la semana cumpliendo cierta variedad
 
 (defrule CREATESOLUTION::day-two
 	?mdias <- (MenuDias (lista ?primero-lista $?resto-lista) (aux 1))
@@ -4640,6 +4652,9 @@ do
 	=>
 	(focus PRESENTSOLUTION))
 
+
+;modulo para presentar por pantalla adecuadamente la informacion del menu semanal
+
 (deffunction PRESENTSOLUTION::imprimir-ingrediente (?ingrediente)
 (printout t "Ingrediente: " crlf)
 (printout t "  NombreIngrediente: " (send ?ingrediente get-NombreIngrediente) crlf)
@@ -4721,6 +4736,7 @@ do
 	(assert (askfor info-nutricional))
 	)
 
+;preguntamos al usuario si quiere ver la informacion nutricional del menu respecto a sus requisitos
 	(defrule PRESENTSOLUTION::askfor-info-nutricional
 	  (askfor info-nutricional)
 	  =>
