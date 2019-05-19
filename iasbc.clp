@@ -3454,7 +3454,7 @@ do
 	?mdiasreal <- (MenuDias (lista $?lista-real) (aux 0))
 	?msemanal <- (MenuSemanal (dia1 ?menu-dia-1) (dia2 ?menu-dia-2))
 	?a-borrar <- (dia 2 done)
-	(test (not (or (have-x-elements-in-common ?menu-dia-1 ?primero-lista 80) (have-x-elements-in-common ?menu-dia-2 ?primero-lista 0))))
+	(test (not (or (have-x-elements-in-common ?menu-dia-1 ?primero-lista 50) (have-x-elements-in-common ?menu-dia-2 ?primero-lista 0))))
 	=>
 	(modify ?msemanal (dia3 ?primero-lista))
 	(modify ?mdiasreal (lista (delete-member$ ?lista-real ?primero-lista)))
@@ -3482,7 +3482,7 @@ do
 	?mdiasreal <- (MenuDias (lista $?lista-real) (aux 0))
 	?msemanal <- (MenuSemanal (dia1 ?menu-dia-1) (dia2 ?menu-dia-2) (dia3 ?menu-dia-3))
 	?a-borrar <- (dia 3 done)
-	(test (not (or  (have-x-elements-in-common ?menu-dia-2 ?primero-lista 80) (have-x-elements-in-common ?menu-dia-3 ?primero-lista 0))))
+	(test (not (or  (have-x-elements-in-common ?menu-dia-2 ?primero-lista 50) (have-x-elements-in-common ?menu-dia-3 ?primero-lista 0))))
 	=>
 	(modify ?msemanal (dia4 ?primero-lista))
 	(modify ?mdiasreal (lista (delete-member$ ?lista-real ?primero-lista)))
@@ -3496,7 +3496,7 @@ do
 	?mdiasreal <- (MenuDias (lista $?lista-real) (aux 0))
 	?msemanal <- (MenuSemanal (dia1 ?menu-dia-1) (dia2 ?menu-dia-2) (dia3 ?menu-dia-3) (dia4 ?menu-dia-4))
 	?a-borrar <- (dia 4 done)
-	(test (not (or  (have-x-elements-in-common ?menu-dia-3 ?primero-lista 80) (have-x-elements-in-common ?menu-dia-4 ?primero-lista 0))))
+	(test (not (or  (have-x-elements-in-common ?menu-dia-3 ?primero-lista 50) (have-x-elements-in-common ?menu-dia-4 ?primero-lista 0))))
 	=>
 	(modify ?msemanal (dia5 ?primero-lista))
 	(modify ?mdiasreal (lista (delete-member$ ?lista-real ?primero-lista)))
@@ -3510,7 +3510,7 @@ do
 	?mdiasreal <- (MenuDias (lista $?lista-real) (aux 0))
 	?msemanal <- (MenuSemanal (dia1 ?menu-dia-1) (dia2 ?menu-dia-2) (dia3 ?menu-dia-3) (dia4 ?menu-dia-4) (dia5 ?menu-dia-5))
 	?a-borrar <- (dia 5 done)
-	(test (not (or (have-x-elements-in-common ?menu-dia-4 ?primero-lista 80) (have-x-elements-in-common ?menu-dia-5 ?primero-lista 0))))
+	(test (not (or (have-x-elements-in-common ?menu-dia-4 ?primero-lista 50) (have-x-elements-in-common ?menu-dia-5 ?primero-lista 0))))
 	=>
 	(modify ?msemanal (dia6 ?primero-lista))
 	(modify ?mdiasreal (lista (delete-member$ ?lista-real ?primero-lista)))
@@ -3524,7 +3524,7 @@ do
 	?mdiasreal <- (MenuDias (lista $?lista-real) (aux 0))
 	?msemanal <- (MenuSemanal (dia1 ?menu-dia-1) (dia2 ?menu-dia-2) (dia3 ?menu-dia-3) (dia4 ?menu-dia-4) (dia5 ?menu-dia-5) (dia6 ?menu-dia-6))
 	?a-borrar <- (dia 6 done)
-	(test (not (or  (have-x-elements-in-common ?menu-dia-5 ?primero-lista 80) (have-x-elements-in-common ?menu-dia-6 ?primero-lista 0))))
+	(test (not (or  (have-x-elements-in-common ?menu-dia-5 ?primero-lista 50) (have-x-elements-in-common ?menu-dia-6 ?primero-lista 0))))
 	=>
 	(modify ?msemanal (dia7 ?primero-lista))
 	(modify ?mdiasreal (lista (delete-member$ ?lista-real ?primero-lista)))
