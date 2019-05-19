@@ -2482,8 +2482,8 @@
 (defrule RECOPILACION::ask-age
   (welcome-given TRUE)
   =>
-	;(bind ?res (pregunta-integer "Cual es su edad?"))
-	(bind ?res 70) ;borrar esta línea
+	(bind ?res (pregunta-integer "Cual es su edad?"))
+	; (bind ?res 70) ;borrar esta línea
 	(assert (edad ?res))
 	(if (< ?res 65) then
 	(printout t "Esta ayuda es para mayores de 64" crlf)
@@ -2494,8 +2494,8 @@
 (defrule RECOPILACION::ask-sex
   (welcome-given TRUE)
   =>
-  ;(bind ?res (pregunta-lista "Es usted hombre o mujer?" hombre mujer))
-	(bind ?res hombre) ;borrar esta línea
+  (bind ?res (pregunta-lista "Es usted hombre o mujer?" hombre mujer))
+	; (bind ?res hombre) ;borrar esta línea
   (assert (sexo ?res)))
 
 ;Esta quizá habría que desglozarla en diferentes preguntas? Como por ejemplo, cuántas veces a la semana camina? Practica algún deporte? Etc.
@@ -2503,8 +2503,8 @@
   (sexo ?)
   (edad ?)
   =>
-  ;(bind ?res (pregunta-lista-imprimiendo-opciones "Que nivel de actividad fisica tiene?" sedentario moderadamente-activo activo  muy-activo))
-	(bind ?res activo) ;borrar esta línea
+  (bind ?res (pregunta-lista-imprimiendo-opciones "Que nivel de actividad fisica tiene?" sedentario moderadamente-activo activo  muy-activo))
+	; (bind ?res activo) ;borrar esta línea
 	(assert (actividad-fisica ?res))
 (printout t crlf))
 
@@ -2514,8 +2514,8 @@
   (edad ?)
 	?var <- (preguntar-enfermedad)
   =>
-  ;(bind ?res (pregunta-lista-imprimiendo-opciones "Sufre de alguna de estas enfermedades? Cual?" diabetes hipertension osteoporosis problemas-articulares ninguna))
-	(bind ?res ninguna) ;borrar esta línea
+  (bind ?res (pregunta-lista-imprimiendo-opciones "Sufre de alguna de estas enfermedades? Cual?" diabetes hipertension osteoporosis problemas-articulares ninguna))
+	; (bind ?res ninguna) ;borrar esta línea
 	(if (not (eq ?res ninguna))
 	then (assert (enfermedad ?res)))
 	(retract ?var)
@@ -2524,7 +2524,7 @@
 (defrule RECOPILACION::more-sickness
 	(sexo ?)
   (edad ?)
-	;(not (preguntar-enfermedad))
+	(not (preguntar-enfermedad))
 	(enfermedad ?qual)
 =>
 	(printout t "Sufre de alguna otra enfermedad? (si, no)" crlf)
@@ -2536,8 +2536,8 @@
   (sexo ?)
   (edad ?)
   =>
-	(bind ?res ninguna) ;borrar esta línea
-  ;(bind ?res (pregunta-lista-imprimiendo-opciones "Sigue alguna de las siguientes dietas?" vegano vegetariano ninguna))
+	; (bind ?res ninguna) ;borrar esta línea
+  (bind ?res (pregunta-lista-imprimiendo-opciones "Sigue alguna de las siguientes dietas?" vegano vegetariano ninguna))
   (assert (dieta ?res))
 (printout t crlf))
 
@@ -2545,8 +2545,8 @@
   (sexo ?)
   (edad ?)
   =>
-	(bind ?res Verano) ;borrar esta línea
-  ;(bind ?res (pregunta-lista-imprimiendo-opciones "Para que temporada es el menu?" Primavera Verano Otono Invierno Irrelevante))
+	; (bind ?res Verano) ;borrar esta línea
+  (bind ?res (pregunta-lista-imprimiendo-opciones "Para que temporada es el menu?" Primavera Verano Otono Invierno Irrelevante))
   (assert (temp ?res))
 (printout t crlf))
 
@@ -2554,8 +2554,8 @@
 	(sexo ?)
 	(edad ?)
 	=>
-	(bind ?res 70) ;borrar esta línea
-	;(bind ?res (pregunta-integer "Cuanto pesa?"))
+	; (bind ?res 70) ;borrar esta línea
+	(bind ?res (pregunta-integer "Cuanto pesa?"))
 	(assert (peso ?res))
 )
 
@@ -2594,7 +2594,7 @@
 
 ;calculamos la energia a consumir necesaria a partir de la edad,sexo y NAF de la persona
 (defrule PREPROCESS::calcula-energia
-  	(sexo ?x)
+  (sexo ?x)
 	(edad ?e)
 	(actividad-fisica ?a)
 
@@ -2704,8 +2704,9 @@
 ;elimina aquellas comidas con mas de un 5% de azucares
 (defrule PREPROCESS::eliminar-platos-diabetes
     (enfermedad diabetes)
-    ?plato <- (object (is-a Plato) (Peso ?x) (Azucares ?a) (NombrePlato ?nombre))
-    (test( > (/ ?a ?x) 5) )
+    ?plato <- (object (is-a Plato) (Peso ?x) (Azucares ?a) (NombrePlato ?nombre) (IngredientePrincipal ?ingr))
+		(test (not (eq (send ?ingr get-TipoIngrediente) Fruta)))
+    (test( > (/ ?a (* ?x 1000)) 0.05) )
     =>
 		(printout t "Eliminado " ?nombre  " en eliminar-platos-diabetes" crlf) ;Línea a borrar
     (send ?plato delete)
@@ -2715,7 +2716,7 @@
 (defrule PREPROCESS::eliminar-platos-hipertension
     (enfermedad hipertension)
     ?plato <- (object (is-a Plato)(Peso ?x) (AcidosGrasosSaturados ?a) (NombrePlato ?nombre))
-    (test( > (/ ?a ?x) 2) )
+    (test( > (/ ?a (* ?x 1000)) 0.02) )
     =>
 		(printout t "Eliminado " ?nombre  " en eliminar-platos-hipertension" crlf) ;Línea a borrar
     (send ?plato delete)
@@ -2817,9 +2818,9 @@
 
 	(test (< (+ ?calorias4 ?calorias5) (* 0.8 (+ ?calorias2 ?calorias3) ) )) ;las calorias de la cena deben ser como mucho els 80 % de las de la comida
 	(test (and (< (+ ?carbs1 ?carbs2 ?carbs3 ?carbs4 ?carbs5) ?maxCarbos) (< (+ ?gras1 ?gras2 ?gras3 ?gras4 ?gras5) ?maxGrasas) )) ;los menus no pueden superar el maximo recomendado de grassas y carbohidratos
-	(test (and (> (+ ?prot1 ?prot2 ?prot3 ?prot4 ?prot5) (* 0.8 ?proteinas) ) (> (+ ?fib1 ?fib2 ?fib3 ?fib4 ?fib5) (* 0.6 ?fibras) ) (> (+ ?calcio1 ?calcio2 ?calcio3 ?calcio4 ?calcio5) (* 0.6 ?calcio) )
+	(test (and (> (+ ?prot1 ?prot2 ?prot3 ?prot4 ?prot5) (* 0.6 ?proteinas) ) (> (+ ?fib1 ?fib2 ?fib3 ?fib4 ?fib5) (* 0.6 ?fibras) ) (> (+ ?calcio1 ?calcio2 ?calcio3 ?calcio4 ?calcio5) (* 0.6 ?calcio) )
 	 		(> (+ ?pot1 ?pot2 ?pot3 ?pot4 ?pot5) (* 0.6 ?potasio) ) (> (+ ?hierro1 ?hierro2 ?hierro3 ?hierro4 ?hierro5) (* 0.6 ?hierro) ) ) )  ;garantizamos unos minimos
-	(test (and (> (/(+ ?carbs1 ?carbs2 ?carbs3 ?carbs4 ?carbs5) ?minCarbos) 0.90)  (> (/(+ ?gras1 ?gras2 ?gras3 ?gras4 ?gras5) ?minGrasas) 0.90))) ;garantimos un minimo de energia
+	(test (and (> (/(+ ?carbs1 ?carbs2 ?carbs3 ?carbs4 ?carbs5) ?minCarbos) 0.75)  (> (/(+ ?gras1 ?gras2 ?gras3 ?gras4 ?gras5) ?minGrasas) 0.75))) ;garantimos un minimo de energia
 =>
 
 	(bind ?caloriasConsumido (+ ?calorias1 ?calorias2 ?calorias3 ?calorias4 ?calorias5) )
