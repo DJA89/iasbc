@@ -1191,7 +1191,7 @@
 (Peso 85)
 (Temporada Verano)
 (Tipo Postre)
-(Compatibilidad AptoVegetariano)
+(Compatibilidad NoAptoV)
 (Coccion Crudo)
 (AcidoPantotenico 0.01200000)
 (AcidosGrasosSaturados 0.00000000)
