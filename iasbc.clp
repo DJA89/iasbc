@@ -3191,6 +3191,7 @@
 	(assert (ordenar))
 	(assert (MenuSemanal))
 	(assert (indice 1))
+	(assert (continue menus))
 	)
 
 	(deffunction CREATESOLUTION::cut-to-one (?x)
@@ -3203,11 +3204,13 @@
 	)
 
 
-	(deftemplate CREATESOLUTION::aux
-		(slot menu-dia (type INSTANCE))
-	)
+(deftemplate CREATESOLUTION::aux
+	(slot menu-dia (type INSTANCE))
+)
+
 
 (defrule CREATESOLUTION::crear-menusDiarios
+	?stop <- (continue menus)
 
 	(Requisitos (calorias ?calorias) (minCarbos ?minCarbos) (maxCarbos ?maxCarbos) (minGrasas ?minGrasas) (maxGrasas ?maxGrasas) (fibras ?fibras) (proteinas ?proteinas) (calcio ?calcio) (potasio ?potasio)
 		(Hierro ?hierro) (Cobalamina ?cobalamina) (Cobre ?cobre) (Colina ?colina) (Folato ?folato) (Fosforo ?fosforo) (Magnesio ?magnesio) (Manganeso ?manganeso) (Niacina ?niacina) (Riboflavina ?riboflavina)
