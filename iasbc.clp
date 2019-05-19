@@ -3208,7 +3208,6 @@
 	(slot menu-dia (type INSTANCE))
 )
 
-(defglobal ?*menudias* = 0)
 
 (defrule CREATESOLUTION::crear-menusDiarios
 	?stop <- (continue menus)
@@ -3259,9 +3258,6 @@
 	(bind ?tipo1 (send ?ingred-Comida get-TipoIngrediente))
 	(bind ?tipo2 (send ?ingred-Cena get-TipoIngrediente))
 	(if (not (eq ?tipo1 ?tipo2)) then
-
-		(bind ?*menudias* (+ ?*menudias* 1))
-		(if (> ?*menudias* 150000) then (retract ?stop))
 
 		(bind ?caloriasConsumido (+ ?calorias1 ?calorias2 ?calorias3 ?calorias4 ?calorias5) )
 		(bind ?carbsConsumido (+ ?carbs1 ?carbs2 ?carbs3 ?carbs4 ?carbs5) )
