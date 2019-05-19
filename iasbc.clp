@@ -2470,7 +2470,7 @@
 				(cut-to-one ?niacinaRatio) (cut-to-one ?riboflavinaRatio) (cut-to-one ?selenioRatio) (cut-to-one ?tiaminaRatio) (cut-to-one ?vitaminaARatio) (cut-to-one ?vitaminaB6Ratio) (cut-to-one ?vitaminaCRatio)(cut-to-one ?vitaminaERatio)
 				(cut-to-one ?vitaminaKRatio) (cut-to-one ?zincRatio)))
 
-			(bind ?valorNutricional (+ ?valorNutricional1 (* 0.4 ?valorNutricional2)))
+			(bind ?valorNutricional (/ (+ ?valorNutricional1 (* 0.4 ?valorNutricional2)) 13.8)) ;valorNutricional del menu entre 0 - 1, 13.8 es la puntuacion maxima que puede obtener
 
 
 	(assert (MenuDia (calorias ?caloriasRatio)(carbos ?carbsRatio) (proteinas ?protsRatio) (grasas ?grasasRatio) (fibras ?fibrasRatio) (potasio ?potasioRatio) (calcio ?calcioRatio)
@@ -2482,7 +2482,9 @@
 	)
 )
 
-(defrule add-aux-helper
+
+
+(defrule CREATESOLUTION::add-aux-helper
 	 ?menu-dia <- (MenuDia)
 =>
 (assert (aux (menu-dia ?menu-dia)))
@@ -2719,6 +2721,16 @@ do
 	(deffunction PRESENTSOLUTION:imprimir-dia (?menu-dia)
 
 		)
+
+
+; (defrule PRESENTSOLUTION::printVNmenusDia
+; 	?l <- (MenuDias (lista $?list))
+; 	=>
+; 	(bind ?first (nth$ 1 ?list))
+; 	(bind ?v (fact-slot-value ?first valorNutricional))
+; 	(printout t "Valor: " ?v crlf)
+; 	(modify ?l (lista (delete$ ?list 1 1)))
+; 	)
 
 
 ; (defrule PRESENTSOLUTION::imprimir-solucion
