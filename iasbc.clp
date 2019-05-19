@@ -3245,7 +3245,6 @@
 		(Tipo Postre))
 
 	(test (not (or(eq ?postre1 ?postre2) (eq ?postre2 ?postre3) (eq ?postre1 ?postre3)))) ;postres diferentes
-; (test ( not (eq(send ?ingred-Comida get-TipoIngrediente) (send ?ingred-Cena get-TipoIngrediente) ))) ;la comida y la cena deben tener un tipo de ingrediente diferente
 
 	(test (< (+ ?calorias4 ?calorias5) (* 0.8 (+ ?calorias2 ?calorias3) ) )) ;las calorias de la cena deben ser como mucho els 80 % de las de la comida
 	(test (and (< (+ ?carbs1 ?carbs2 ?carbs3 ?carbs4 ?carbs5) ?maxCarbos) (< (+ ?gras1 ?gras2 ?gras3 ?gras4 ?gras5) ?maxGrasas) )) ;los menus no pueden superar el maximo recomendado de grassas y carbohidratos
@@ -3380,45 +3379,27 @@
 
 (deffunction CREATESOLUTION::have-x-elements-in-common (?lista-a ?lista-b ?porcentaje)
 (bind ?too-many FALSE)
-;(printout t "?lista-a: " ?lista-a crlf)
 (bind ?lista-a (fact-slot-value ?lista-a IngrPrincipalesUsados))
-;(printout t "?lista-b: " ?lista-b crlf)
 (bind ?lista-b (fact-slot-value ?lista-b IngrPrincipalesUsados))
 (bind ?largo-lista-a (length$ ?lista-a))
-;(printout t "?largo-lista-a: " ?largo-lista-a crlf)
 (bind ?largo-lista-b (length$ ?lista-b))
-;(printout t "?largo-lista-b: " ?largo-lista-b crlf)
 (bind ?cantidad-de-elementos-maxima (/ (* ?largo-lista-a ?porcentaje) 100))
-;(printout t "?cantidad-de-elementos-maxima: " ?cantidad-de-elementos-maxima crlf)
 (bind ?elements-in-common 0)
-;(printout t "?elements-in-common: " ?elements-in-common crlf)
 (bind ?i 0)
-;(printout t "?i: " ?i crlf)
 (while (and (not ?too-many) (< ?i ?largo-lista-a))
 do
-;(printout t "Entré a primer while" crlf)
 (bind ?i (+ ?i 1))
-;(printout t "?i: " ?i crlf)
 (bind ?j 0)
-;(printout t "?j: " ?j crlf)
 (while (and (not ?too-many) (< ?j ?largo-lista-b)) do
-;(printout t "Entré a segundo while" crlf)
 
 	(bind ?j (+ ?j 1))
-;	(printout t "?j: " ?j crlf)
-;	(printout t "(nth$ ?i ?lista-a): " (nth$ ?i ?lista-a) crlf)
-;	(printout t "(nth$ ?j ?lista-b): " (nth$ ?j ?lista-b) crlf)
-;	(printout t "(eq (nth$ ?i ?lista-a) (nth$ ?j ?lista-b)): " (eq (nth$ ?i ?lista-a) (nth$ ?j ?lista-b)) crlf)
 	(if (eq (nth$ ?i ?lista-a) (nth$ ?j ?lista-b))
 	then
 		(bind ?elements-in-common (+ ?elements-in-common 1))
-;		(printout t "?elements-in-common: " ?elements-in-common crlf)
 		(bind ?too-many (> ?elements-in-common ?cantidad-de-elementos-maxima))
-;		(printout t "?too-many: " ?too-many crlf)
 		)
 	)
 )
-;(printout t "?too-many final: " ?too-many crlf crlf crlf)
 ?too-many
 )
 
@@ -3651,76 +3632,3 @@ do
 	(retract ?f)
 
 	)
-
-
-
-	; (printout t "Cobre: " (send ?plato get-Cobre) crlf)
-	; (printout t "Folato: " (send ?plato get-Folato) crlf)
-	; (printout t "Compatibilidad: " (send ?plato get-Compatibilidad) crlf)
-	; (printout t "Potasio: " (send ?plato get-Potasio) crlf)
-	; (printout t "Hierro: " (send ?plato get-Hierro) crlf)
-	; (printout t "Calcio: " (send ?plato get-Calcio) crlf)
-	; (printout t "Ingrediente Principal :" crlf)
-	;(imprimir-ingrediente (send ?plato get-IngredientePrincipal))
-	; (printout t "VitaminaD: " (send ?plato get-VitaminaD) crlf)
-	; (printout t "VitaminaC: " (send ?plato get-VitaminaC) crlf)
-	; (printout t "Acido Pantotenico: " (send ?plato get-AcidoPantotenico) crlf)
-	; (printout t "Vitamina A: " (send ?plato get-VitaminaA) crlf)
-	; (printout t "Colina: " (send ?plato get-Colina) crlf)
-	; (printout t "Tipo: " (send ?plato get-Tipo) crlf)
-	; (printout t "Tiamina: " (send ?plato get-Tiamina) crlf)
-	; (printout t "Vitamina B6: " (send ?plato get-VitaminaB6) crlf)
-	; (printout t "Peso: " (send ?plato get-Peso) crlf)
-	; (printout t "Proteinas: " (send ?plato get-Proteinas) crlf)
-	; (printout t "Coccion: " (send ?plato get-Coccion) crlf)
-	; (printout t "Temporada: " (send ?plato get-Temporada) crlf)
-	; (printout t "Selenio: " (send ?plato get-Selenio) crlf)
-	; (printout t "Azucares: " (send ?plato get-Azucares) crlf)
-	; (printout t "Manganeso: " (send ?plato get-Manganeso) crlf)
-	; (printout t "Vitamina K: " (send ?plato get-VitaminaK) crlf)
-	; (printout t "Cobalamina: " (send ?plato get-Cobalamina) crlf)
-	; (printout t "Vitamina E: " (send ?plato get-VitaminaE) crlf)
-	; (printout t "Fosforo: " (send ?plato get-Fosforo) crlf)
-	; (printout t "Fibras Alimenticias: " (send ?plato get-FibrasAlimenticias) crlf)
-	; (printout t "Calorias " (send ?plato get-Calorias) crlf)
-	; (printout t "Magnesio: " (send ?plato get-Magnesio) crlf)
-	; (printout t "Carbohidratos Totales: " (send ?plato get-CarbohidratosTotales) crlf)
-	; (printout t "Acidos Grasos Saturados: " (send ?plato get-AcidosGrasosSaturados) crlf)
-	; (printout t "GrasaTotal: " (send ?plato get-GrasaTotal) crlf)
-	; (printout t "Niacina: " (send ?plato get-Niacina) crlf)
-	; (printout t "Acidos Grasos Trans: " (send ?plato get-AcidosGrasosTrans) crlf)
-	; (progn$ (?ingrediente (send ?plato get-Ingredientes)) (imprimir-ingrediente ?ingrediente))
-	; (printout t "Riboflavina: " (send ?plato get-Riboflavina) crlf)
-	; (printout t "Agua: " (send ?plato get-Agua) crlf)
-	; (printout t "Zinc: " (send ?plato get-Zinc) crlf)
-
-	;
-	; (defrule CREATESOLUTION::day-two
-	; 	?mdias <- (MenuDias (lista $?principio-lista ?seleccionado-lista $?resto-lista))
-	; 	(MenuDias (lista ?lista-completa))
-	; 	?indice <- (indice ?lugar-en-lista)
-	; 	?nth-menu-dia <- (nth ?lugar-en-lista ?lista-completa)
-	; 	(eq ?seleccionado-lista ?nth-menu-dia)
-	; 	?msemanal <- (MenuSemanal (dia1 ?menu-dia-1))
-	; 	?a-borrar <- (dia1 done)
-	; 	=>
-	; 	(if (not (have-x-elements-in-common ?menu-dia-1 ?seleccionado-lista 0)) then
-	; 	(modify ?msemanal (dia2 ?seleccionado-lista))
-	; 	(modify ?mdias (lista ?principio-lista ?resto-lista))
-	; 	(assert (dia2 done))
-	; 	(retract ?a-borrar)
-	; 	(assert (indice 1))
-	; 	(retract ?indice)
-	; 	else
-	; 	(assert (indice (+ ?lugar-en-lista 1)))
-	; 	(retract ?indice)
-	; 	)
-	; )
-
-
-	; (defrule CREATESOLUTION::print-sol
-	; 	(dia2 done)
-	; 	?msemanal <- (MenuSemanal (dia1 ?menu-dia-1)) (dia2 ?menu-dia-2)
-	; =>
-	; (printout t (fact-slot-value ?menu-dia-1 valorNutricional) crlf (fact-slot-value ?menu-dia-2 valorNutricional))
-	; 	)
