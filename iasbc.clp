@@ -2542,7 +2542,7 @@
 	(VitaminaE 15.65000000)
 	(VitaminaK 0.00000000)
 	(Zinc 6.35000000))
-	
+
 	([Arroz] of Ingrediente
 
 	(NombreIngrediente "Arroz")
@@ -2836,7 +2836,15 @@
 )
 
 ;;PREGUNTAS
-
+(defrule MAIN::say-hello
+  =>
+	(printout t "Bienvenido/a al sistema de Menu Semanales" crlf "Favor responda algunas preguntas para que podamos ayudarle" crlf)
+	(assert (welcome-given TRUE))
+	(assert (preguntar-enfermedad))
+	(assert (Requisitos))
+  (focus RECOPILACION)
+	(assert (Plato))
+)
 
 ;;; Funcion para hacer una pregunta con respuesta en un rango dado
 (deffunction RECOPILACION::pregunta-numerica (?pregunta ?rangini ?rangfi)
@@ -2885,15 +2893,7 @@
 	)
 	?answer)
 
-(defrule MAIN::say-hello
-  =>
-	(printout t "Bienvenido/a al sistema de Menu Semanales" crlf "Favor responda algunas preguntas para que podamos ayudarle" crlf)
-	(assert (welcome-given TRUE))
-	(assert (preguntar-enfermedad))
-	(assert (Requisitos))
-  (focus RECOPILACION)
-	(assert (Plato))
-)
+
 
 
 (defrule RECOPILACION::ask-age
@@ -2941,7 +2941,7 @@
 (defrule RECOPILACION::more-sickness
 	(sexo ?)
   (edad ?)
-	(not (preguntar-enfermedad))
+	; (not (preguntar-enfermedad))
 	(enfermedad ?qual)
 =>
 	(printout t "Sufre de alguna otra enfermedad? (si, no)" crlf)
@@ -3008,6 +3008,7 @@
 	(printout t "Eliminado " ?nombre  " en eliminar-platos-no-temporada" crlf) ;Línea a borrar
 	(send ?plato delete)
 )
+
 
 ;calculamos la energia a consumir necesaria a partir de la edad,sexo y NAF de la persona
 (defrule PREPROCESS::calcula-energia
@@ -3118,6 +3119,14 @@
 	(modify ?requisitos (calcio 1200.0) )
 )
 
+(defrule PREPROCESS::requisitos-artritis
+	(enfermedad problemas-articulares)
+	?requisitos <- (Requisitos (calcio ?c) (Fosforo ?fosforo) (Magnesio ?magnesio) (VitaminaC ?vitC))
+	(test (eq ?magnesio 350.0))
+=>
+	(modify ?requisitos (calcio 1200.0) (Fosforo (* ?fosforo 0.5)) (Magnesio (* ?magnesio 0.5)) (VitaminaC (* ?vitC 0.5)) )
+)
+
 ;elimina aquellas comidas con mas de un 5% de azucares
 (defrule PREPROCESS::eliminar-platos-diabetes
     (enfermedad diabetes)
@@ -3155,6 +3164,7 @@
 
 ;guarda las enfermedades en el template usuario
 (defrule PREPROCESS::guardar-enfermedades
+	(declare (salience -1))
 	?f1 <- (enfermedad ?e)
 	?usuario <-(Usuario (enfermedades $?x) )
 =>
@@ -3205,7 +3215,7 @@
 	?Desayuno <- (object (is-a Plato) (Calorias ?calorias1) (CarbohidratosTotales ?carbs1) (GrasaTotal ?gras1) (Proteinas ?prot1) (Calcio ?calcio1) (Potasio ?pot1) (FibrasAlimenticias ?fib1)
 		(Hierro ?hierro1) (Cobalamina ?cobalamina1) (Cobre ?cobre1) (Colina ?colina1) (Folato ?folato1) (Fosforo ?fosforo1) (Magnesio ?magnesio1) (Manganeso ?manganeso1) (Niacina ?niacina1) (Riboflavina ?riboflavina1)
 		(Selenio ?selenio1) (Tiamina ?tiamina1) (VitaminaA ?vitaminaA-1) (VitaminaB6 ?vitaminaB6-1) (VitaminaC ?vitaminaC-1) (VitaminaE ?vitaminaE-1) (VitaminaK ?vitaminaK-1) (Zinc ?zinc1)
-		(Tipo Desayuno))
+		(Tipo Desayuno) (IngredientePrincipal ?ingred-Desayuno))
 	?PostreDesayuno <- (object (is-a Plato)  (NombrePlato ?postre1) (Calorias ?calorias6) (CarbohidratosTotales ?carbs6) (GrasaTotal ?gras6) (Proteinas ?prot6) (Calcio ?calcio6) (Potasio ?pot6) (FibrasAlimenticias ?fib6)
 		(Hierro ?hierro6) (Cobalamina ?cobalamina6) (Cobre ?cobre6) (Colina ?colina6) (Folato ?folato6) (Fosforo ?fosforo6) (Magnesio ?magnesio6) (Manganeso ?manganeso6) (Niacina ?niacina6) (Riboflavina ?riboflavina6)
 		(Selenio ?selenio6) (Tiamina ?tiamina6) (VitaminaA ?vitaminaA-6) (VitaminaB6 ?vitaminaB6-6) (VitaminaC ?vitaminaC-6) (VitaminaE ?vitaminaE-6) (VitaminaK ?vitaminaK-6) (Zinc ?zinc6)
@@ -3237,7 +3247,7 @@
 	(test (and (< (+ ?carbs1 ?carbs2 ?carbs3 ?carbs4 ?carbs5) ?maxCarbos) (< (+ ?gras1 ?gras2 ?gras3 ?gras4 ?gras5) ?maxGrasas) )) ;los menus no pueden superar el maximo recomendado de grassas y carbohidratos
 	(test (and (> (+ ?prot1 ?prot2 ?prot3 ?prot4 ?prot5) (* 0.6 ?proteinas) ) (> (+ ?fib1 ?fib2 ?fib3 ?fib4 ?fib5) (* 0.6 ?fibras) ) (> (+ ?calcio1 ?calcio2 ?calcio3 ?calcio4 ?calcio5) (* 0.6 ?calcio) )
 	 		(> (+ ?pot1 ?pot2 ?pot3 ?pot4 ?pot5) (* 0.6 ?potasio) ) (> (+ ?hierro1 ?hierro2 ?hierro3 ?hierro4 ?hierro5) (* 0.6 ?hierro) ) ) )  ;garantizamos unos minimos
-	(test (and (> (/(+ ?carbs1 ?carbs2 ?carbs3 ?carbs4 ?carbs5) ?minCarbos) 0.75)  (> (/(+ ?gras1 ?gras2 ?gras3 ?gras4 ?gras5) ?minGrasas) 0.75))) ;garantimos un minimo de energia
+	(test (and (> (/(+ ?carbs1 ?carbs2 ?carbs3 ?carbs4 ?carbs5) ?minCarbos) 0.90)  (> (/(+ ?gras1 ?gras2 ?gras3 ?gras4 ?gras5) ?minGrasas) 0.90))) ;garantimos un minimo de energia
 =>
 
 	(bind ?caloriasConsumido (+ ?calorias1 ?calorias2 ?calorias3 ?calorias4 ?calorias5) )
@@ -3295,6 +3305,7 @@
 	(bind ?vitaminaKRatio ( / ?vitaminaKConsumido ?vitaminaK))
 	(bind ?zincRatio ( / ?zincConsumido ?zinc))
 
+	(bind ?IngrPrincipalDesayuno (send ?ingred-Desayuno get-NombreIngrediente) )
 	(bind ?IngrPrincipalComida (send ?ingred-Comida get-NombreIngrediente) )
 	(bind ?IngrPrincipalCena (send ?ingred-Cena get-NombreIngrediente) )
 
@@ -3311,7 +3322,7 @@
 		(Hierro ?hierroRatio) (Cobalamina ?cobalaminaRatio) (Cobre ?cobreRatio) (Colina ?colinaRatio) (Folato ?folatoRatio) (Fosforo ?fosforoRatio) (Magnesio ?magnesioRatio) (Manganeso ?manganesoRatio) (Niacina ?niacinaRatio) (Riboflavina ?riboflavinaRatio)
 		(Selenio ?selenioRatio) (Tiamina ?tiaminaRatio) (VitaminaA ?vitaminaARatio) (VitaminaB6 ?vitaminaB6Ratio) (VitaminaC ?vitaminaCRatio) (VitaminaE ?vitaminaERatio) (VitaminaK ?vitaminaKRatio) (Zinc ?zincRatio)
 	(desayuno ?Desayuno) (postreDesayuno ?PostreDesayuno) (comida ?Comida) (postreComida ?PostreComida) (cena ?Cena) (postreCena ?PostreCena)
-	(IngrPrincipalesUsados ?IngrPrincipalComida ?IngrPrincipalCena ) (valorNutricional ?valorNutricional) ) )
+	(IngrPrincipalesUsados ?IngrPrincipalDesayuno ?IngrPrincipalComida ?IngrPrincipalCena ) (valorNutricional ?valorNutricional) ) )
 )
 
 
@@ -3436,7 +3447,7 @@ do
 	?mdiasreal <- (MenuDias (lista $?lista-real) (aux 0))
 	?msemanal <- (MenuSemanal (dia1 ?menu-dia-1) (dia2 ?menu-dia-2))
 	?a-borrar <- (dia 2 done)
-	(test (not (or (have-x-elements-in-common ?menu-dia-1 ?primero-lista 33) (have-x-elements-in-common ?menu-dia-2 ?primero-lista 0))))
+	(test (not (or (have-x-elements-in-common ?menu-dia-1 ?primero-lista 80) (have-x-elements-in-common ?menu-dia-2 ?primero-lista 0))))
 	=>
 	(modify ?msemanal (dia3 ?primero-lista))
 	(modify ?mdiasreal (lista (delete-member$ ?lista-real ?primero-lista)))
@@ -3464,7 +3475,7 @@ do
 	?mdiasreal <- (MenuDias (lista $?lista-real) (aux 0))
 	?msemanal <- (MenuSemanal (dia1 ?menu-dia-1) (dia2 ?menu-dia-2) (dia3 ?menu-dia-3))
 	?a-borrar <- (dia 3 done)
-	(test (not (or (have-x-elements-in-common ?menu-dia-1 ?primero-lista 66) (have-x-elements-in-common ?menu-dia-2 ?primero-lista 33) (have-x-elements-in-common ?menu-dia-3 ?primero-lista 0))))
+	(test (not (or  (have-x-elements-in-common ?menu-dia-2 ?primero-lista 80) (have-x-elements-in-common ?menu-dia-3 ?primero-lista 0))))
 	=>
 	(modify ?msemanal (dia4 ?primero-lista))
 	(modify ?mdiasreal (lista (delete-member$ ?lista-real ?primero-lista)))
@@ -3478,7 +3489,7 @@ do
 	?mdiasreal <- (MenuDias (lista $?lista-real) (aux 0))
 	?msemanal <- (MenuSemanal (dia1 ?menu-dia-1) (dia2 ?menu-dia-2) (dia3 ?menu-dia-3) (dia4 ?menu-dia-4))
 	?a-borrar <- (dia 4 done)
-	(test (not (or (have-x-elements-in-common ?menu-dia-2 ?primero-lista 66) (have-x-elements-in-common ?menu-dia-3 ?primero-lista 33) (have-x-elements-in-common ?menu-dia-4 ?primero-lista 0))))
+	(test (not (or  (have-x-elements-in-common ?menu-dia-3 ?primero-lista 80) (have-x-elements-in-common ?menu-dia-4 ?primero-lista 0))))
 	=>
 	(modify ?msemanal (dia5 ?primero-lista))
 	(modify ?mdiasreal (lista (delete-member$ ?lista-real ?primero-lista)))
@@ -3492,7 +3503,7 @@ do
 	?mdiasreal <- (MenuDias (lista $?lista-real) (aux 0))
 	?msemanal <- (MenuSemanal (dia1 ?menu-dia-1) (dia2 ?menu-dia-2) (dia3 ?menu-dia-3) (dia4 ?menu-dia-4) (dia5 ?menu-dia-5))
 	?a-borrar <- (dia 5 done)
-	(test (not (or (have-x-elements-in-common ?menu-dia-3 ?primero-lista 66) (have-x-elements-in-common ?menu-dia-4 ?primero-lista 33) (have-x-elements-in-common ?menu-dia-5 ?primero-lista 0))))
+	(test (not (or (have-x-elements-in-common ?menu-dia-4 ?primero-lista 80) (have-x-elements-in-common ?menu-dia-5 ?primero-lista 0))))
 	=>
 	(modify ?msemanal (dia6 ?primero-lista))
 	(modify ?mdiasreal (lista (delete-member$ ?lista-real ?primero-lista)))
@@ -3506,7 +3517,7 @@ do
 	?mdiasreal <- (MenuDias (lista $?lista-real) (aux 0))
 	?msemanal <- (MenuSemanal (dia1 ?menu-dia-1) (dia2 ?menu-dia-2) (dia3 ?menu-dia-3) (dia4 ?menu-dia-4) (dia5 ?menu-dia-5) (dia6 ?menu-dia-6))
 	?a-borrar <- (dia 6 done)
-	(test (not (or (have-x-elements-in-common ?menu-dia-4 ?primero-lista 66) (have-x-elements-in-common ?menu-dia-5 ?primero-lista 33) (have-x-elements-in-common ?menu-dia-6 ?primero-lista 0))))
+	(test (not (or  (have-x-elements-in-common ?menu-dia-5 ?primero-lista 80) (have-x-elements-in-common ?menu-dia-6 ?primero-lista 0))))
 	=>
 	(modify ?msemanal (dia7 ?primero-lista))
 	(modify ?mdiasreal (lista (delete-member$ ?lista-real ?primero-lista)))
@@ -3548,6 +3559,7 @@ do
 
 ; (printout t "Ingredientes Principales: " crlf)
 ; (progn$ (?ingrediente (fact-slot-value ?menu-dia IngrPrincipalesUsados)) (printout t ?ingrediente crlf))
+(printout t " " crlf)
 (printout t "Valor Nutricional Total: "(fact-slot-value ?menu-dia valorNutricional) crlf)
 	; (printout t "IngrPrincipalesUsados: " (fact-slot-value ?menu-dia IngrPrincipalesUsados) crlf)
 	(printout t "Calorias: " (fact-slot-value ?menu-dia calorias) crlf)
@@ -3581,6 +3593,7 @@ do
 (defrule PRESENTSOLUTION::imprimir-menu
 	(MenuSemanal (dia1 ?dia1) (dia2 ?dia2) (dia3 ?dia3) (dia4 ?dia4) (dia5 ?dia5) (dia6 ?dia6) (dia7 ?dia7))
 	=>
+	(printout t " " crlf)
 	(printout t "Este es nuestro Menu preparado especialmente para usted: " crlf)
 	(printout t "Menu para el Dia 1 ---------------------------------------------------------------" crlf)
 	(imprimir-menuDia ?dia1)
