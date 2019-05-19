@@ -476,7 +476,7 @@
 	(VitaminaD 0.00000000)
 	(VitaminaE 3.04685535)
 	(VitaminaK 0.00001306)
-	(Zinc 1.35161253)
+	(Zinc 1.35161253))
 
 	([Soup_mix_dry_chicken_noodle] of Plato
 
@@ -520,7 +520,7 @@
 	(VitaminaD 0.00000000)
 	(VitaminaE 1.47110919)
 	(VitaminaK 0.00000061)
-	(Zinc 7.47813838)
+	(Zinc 7.47813838))
 
 	([Chili_con_carne_with_beans_canned_entree] of Plato
 
@@ -565,7 +565,7 @@
 	(VitaminaD 0.00011340)
 	(VitaminaE 2.26796000)
 	(VitaminaK 0.00002081)
-	(Zinc 4.02984628)
+	(Zinc 4.02984628))
 
 	([Fast_foods_with_condiments_single_patty_large_hamburger] of Plato
 
@@ -653,7 +653,7 @@
 	(VitaminaD 0.00000000)
 	(VitaminaE 0.00000000)
 	(VitaminaK 0.00000000)
-	(Zinc 4.89231371)
+	(Zinc 4.89231371))
 
 	([Sandwich_spread_beef_pork] of Plato
 
@@ -741,7 +741,7 @@
 	(VitaminaD 0.00000000)
 	(VitaminaE 4.53592000)
 	(VitaminaK 0.00016276)
-	(Zinc 2.32132376)
+	(Zinc 2.32132376))
 
 	([Macaroni_and_Cheese_canned_entree] of Plato
 
@@ -785,7 +785,7 @@
 	(VitaminaD 0.00000000)
 	(VitaminaE 0.22307803)
 	(VitaminaK 0.00000093)
-	(Zinc 2.04488197)
+	(Zinc 2.04488197))
 
 	([Salad_dressing_bacon_and_tomato] of Plato
 
@@ -830,7 +830,7 @@
 	(VitaminaD 0.00000000)
 	(VitaminaE 18.14368000)
 	(VitaminaK 0.00031336)
-	(Zinc 0.90718400)
+	(Zinc 0.90718400))
 
 	([Potato_salad_with_egg] of Plato
 
@@ -874,7 +874,7 @@
 	(VitaminaD 0.00045359)
 	(VitaminaE 3.08442560)
 	(VitaminaK 0.00006495)
-	(Zinc 1.48778176)
+	(Zinc 1.48778176))
 
 	([Egg_omelet_cooked_whole] of Plato
 
@@ -917,7 +917,7 @@
 	(VitaminaD 0.00782446)
 	(VitaminaE 5.87438820)
 	(VitaminaK 0.00002008)
-	(Zinc 4.90771672)
+	(Zinc 4.90771672))
 
 	([Ice_cream_sandwich] of Plato
 
@@ -1004,7 +1004,7 @@
 	(VitaminaD 0.00000000)
 	(VitaminaE 3.86115504)
 	(VitaminaK 0.00001050)
-	(Zinc 1.63068198)
+	(Zinc 1.63068198))
 
 	([Fish_tuna_salad] of Plato
 
@@ -1048,7 +1048,7 @@
 	(VitaminaD 0.00000000)
 	(VitaminaE 0.00000000)
 	(VitaminaK 0.00000000)
-	(Zinc 2.54454049)
+	(Zinc 2.54454049))
 
 	([Babyfood_prepared_with_whole_milk_with_honey_rice_cereal] of Plato
 
@@ -1093,7 +1093,7 @@
 	(VitaminaD 0.00000000)
 	(VitaminaE 0.00000000)
 	(VitaminaK 0.00000000)
-	(Zinc 2.87994921)
+	(Zinc 2.87994921))
 
 	([Yogurt_nonfat_plain_Greek] of Plato
 
@@ -1180,7 +1180,7 @@
 	(VitaminaD 0.00510391)
 	(VitaminaE 2.07996332)
 	(VitaminaK 0.00000160)
-	(Zinc 2.71995203)
+	(Zinc 2.71995203))
 
 	([Gelatin_desserts_dry_mix] of Plato
 
@@ -1268,7 +1268,7 @@
 	(VitaminaD 0.00000000)
 	(VitaminaE 3.21294333)
 	(VitaminaK 0.00000454)
-	(Zinc 0.49139133)
+	(Zinc 0.49139133))
 
 	([Salad_dressing_russian_dressing] of Plato
 
@@ -1312,7 +1312,7 @@
 	(VitaminaD 0.00000000)
 	(VitaminaE 15.05184882)
 	(VitaminaK 0.00024364)
-	(Zinc 0.99975380)
+	(Zinc 0.99975380))
 
 	([Pasta_with_tomato_sauce_canned_no_meat] of Plato
 
@@ -1356,7 +1356,7 @@
 	(VitaminaD 0.00000000)
 	(VitaminaE 2.82065613)
 	(VitaminaK 0.00000553)
-	(Zinc 1.71526387)
+	(Zinc 1.71526387))
 
 	([Ice_cream_sundae_cone] of Plato
 
@@ -1445,7 +1445,7 @@
 	(VitaminaD 0.00000000)
 	(VitaminaE 0.00000000)
 	(VitaminaK 0.00000000)
-	(Zinc 0.63757912)
+	(Zinc 0.63757912))
 
 	([Potato_salad_home_prepared] of Plato
 
@@ -1489,7 +1489,7 @@
 	(VitaminaD 0.00000000)
 	(VitaminaE 0.00000000)
 	(VitaminaK 0.00000000)
-	(Zinc 1.41520704)
+	(Zinc 1.41520704))
 
 	([Milk_shakes_thick_vanilla] of Plato
 
@@ -1620,7 +1620,7 @@
 	(VitaminaD 0.00294825)
 	(VitaminaE 7.89000000)
 	(VitaminaK 0.00000000)
-	(Zinc 4.99000000)
+	(Zinc 4.99000000))
 
 	([Fast_foods_taco_salad] of Plato
 
@@ -1665,7 +1665,7 @@
 	(VitaminaD 0.00000000)
 	(VitaminaE 0.00000000)
 	(VitaminaK 0.00000000)
-	(Zinc 6.16243677)
+	(Zinc 6.16243677))
 
 	([Flan_prepared_with_whole_milk_dry_mix_caramel_custard] of Plato
 
@@ -1755,7 +1755,7 @@
 	(VitaminaD 0.00000000)
 	(VitaminaE 0.00000000)
 	(VitaminaK 0.00000000)
-	(Zinc 0.37027918)
+	(Zinc 0.37027918))
 
 	([Cherries_raw_sweet] of Plato
 
@@ -3134,78 +3134,116 @@ do
 	=>
 	(focus PRESENTSOLUTION))
 
+(deffunction PRESENTSOLUTION::imprimir-ingrediente (?ingrediente)
+(printout t "Ingrediente: " crlf)
+(printout t "  NombreIngrediente: " (send ?ingrediente get-NombreIngrediente) crlf)
+(printout t "  TipoIngrediente: " (send ?ingrediente get-TipoIngrediente) crlf)
+)
 
-	(deffunction PRESENTSOLUTION:imprimir-dia (?menu-dia)
+(deffunction PRESENTSOLUTION::imprimir-plato (?plato)
+(printout t "    Nombre Plato: " (send ?plato get-NombrePlato) crlf)
+; (printout t "Cobre: " (send ?plato get-Cobre) crlf)
+; (printout t "Folato: " (send ?plato get-Folato) crlf)
+; (printout t "Compatibilidad: " (send ?plato get-Compatibilidad) crlf)
+; (printout t "Potasio: " (send ?plato get-Potasio) crlf)
+; (printout t "Hierro: " (send ?plato get-Hierro) crlf)
+; (printout t "Calcio: " (send ?plato get-Calcio) crlf)
+; (printout t "Ingrediente Principal :" crlf)
+;(imprimir-ingrediente (send ?plato get-IngredientePrincipal))
+; (printout t "VitaminaD: " (send ?plato get-VitaminaD) crlf)
+; (printout t "VitaminaC: " (send ?plato get-VitaminaC) crlf)
+; (printout t "Acido Pantotenico: " (send ?plato get-AcidoPantotenico) crlf)
+; (printout t "Vitamina A: " (send ?plato get-VitaminaA) crlf)
+; (printout t "Colina: " (send ?plato get-Colina) crlf)
+; (printout t "Tipo: " (send ?plato get-Tipo) crlf)
+; (printout t "Tiamina: " (send ?plato get-Tiamina) crlf)
+; (printout t "Vitamina B6: " (send ?plato get-VitaminaB6) crlf)
+; (printout t "Peso: " (send ?plato get-Peso) crlf)
+; (printout t "Proteinas: " (send ?plato get-Proteinas) crlf)
+(printout t "Coccion: " (send ?plato get-Coccion) crlf)
+; (printout t "Temporada: " (send ?plato get-Temporada) crlf)
+; (printout t "Selenio: " (send ?plato get-Selenio) crlf)
+; (printout t "Azucares: " (send ?plato get-Azucares) crlf)
+; (printout t "Manganeso: " (send ?plato get-Manganeso) crlf)
+; (printout t "Vitamina K: " (send ?plato get-VitaminaK) crlf)
+; (printout t "Cobalamina: " (send ?plato get-Cobalamina) crlf)
+; (printout t "Vitamina E: " (send ?plato get-VitaminaE) crlf)
+; (printout t "Fosforo: " (send ?plato get-Fosforo) crlf)
+; (printout t "Fibras Alimenticias: " (send ?plato get-FibrasAlimenticias) crlf)
+; (printout t "Calorias " (send ?plato get-Calorias) crlf)
+; (printout t "Magnesio: " (send ?plato get-Magnesio) crlf)
+; (printout t "Carbohidratos Totales: " (send ?plato get-CarbohidratosTotales) crlf)
+; (printout t "Acidos Grasos Saturados: " (send ?plato get-AcidosGrasosSaturados) crlf)
+; (printout t "GrasaTotal: " (send ?plato get-GrasaTotal) crlf)
+; (printout t "Niacina: " (send ?plato get-Niacina) crlf)
+; (printout t "Acidos Grasos Trans: " (send ?plato get-AcidosGrasosTrans) crlf)
+(printout t "Ingrediente :" crlf)
+(progn$ (?ingrediente (send ?plato get-Ingredientes)) (imprimir-ingrediente ?ingrediente))
+; (printout t "Riboflavina: " (send ?plato get-Riboflavina) crlf)
+; (printout t "Agua: " (send ?plato get-Agua) crlf)
+; (printout t "Zinc: " (send ?plato get-Zinc) crlf)
+)
 
-		)
+(deffunction PRESENTSOLUTION::imprimir-dia (?menu-dia)
+(printout t "  Desayuno: " crlf)
+(imprimir-plato (fact-slot-value ?menu-dia desayuno))
+(imprimir-plato (fact-slot-value ?menu-dia postreDesayuno))
+(printout t "  Comida: " crlf)
+(imprimir-plato (fact-slot-value ?menu-dia comida))
+(printout t "  Postre Comida: " crlf)
+(imprimir-plato (fact-slot-value ?menu-dia postreComida))
+(printout t "  Cena: " crlf)
+(imprimir-plato (fact-slot-value ?menu-dia cena))
+(printout t "  Postre Cena: " crlf)
+(imprimir-plato (fact-slot-value ?menu-dia postreCena))
+;(printout t "Ingredientes Principales: " crlf)
+;(progn$ (?ingrediente (fact-slot-value ?menu-dia IngrPrincipalesUsados)) (printout t ?ingrediente crlf))
+;(printout t "  Valor Nutricional: "(fact-slot-value ?menu-dia valorNutricional) crlf)
+	;(printout t "IngrPrincipalesUsados: " (fact-slot-value ?menu-dia IngrPrincipalesUsados) crlf)
+	; (printout t "grasas: " (fact-slot-value ?menu-dia grasas) crlf)
+	; (printout t "carbos: " (fact-slot-value ?menu-dia carbos) crlf)
+	; (printout t "fibras: " (fact-slot-value ?menu-dia fibras) crlf)
+	; (printout t "calorias: " (fact-slot-value ?menu-dia calorias) crlf)
+	; (printout t "proteinas: " (fact-slot-value ?menu-dia proteinas) crlf)
+	; (printout t "calcio: " (fact-slot-value ?menu-dia calcio) crlf)
+	; (printout t "potasio: " (fact-slot-value ?menu-dia potasio) crlf)
+	; (printout t "Hierro: " (fact-slot-value ?menu-dia Hierro) crlf)
+	; (printout t "Cobalamina: " (fact-slot-value ?menu-dia Cobalamina) crlf)
+	; (printout t "Cobre: " (fact-slot-value ?menu-dia Cobre) crlf)
+	; (printout t "Colina: " (fact-slot-value ?menu-dia Colina) crlf)
+	; (printout t "Folato: " (fact-slot-value ?menu-dia Folato) crlf)
+	; (printout t "Fosforo: " (fact-slot-value ?menu-dia Fosforo) crlf)
+	; (printout t "Magnesio: " (fact-slot-value ?menu-dia Magnesio) crlf)
+	; (printout t "Manganeso: " (fact-slot-value ?menu-dia Manganeso) crlf)
+	; (printout t "Niacina: " (fact-slot-value ?menu-dia Niacina) crlf)
+	; (printout t "Riboflavina: " (fact-slot-value ?menu-dia Riboflavina) crlf)
+	; (printout t "Selenio: " (fact-slot-value ?menu-dia Selenio) crlf)
+	; (printout t "Tiamina: " (fact-slot-value ?menu-dia Tiamina) crlf)
+	; (printout t "VitaminaA: " (fact-slot-value ?menu-dia VitaminaA) crlf)
+	; (printout t "VitaminaB6: " (fact-slot-value ?menu-dia VitaminaB6) crlf)
+	; (printout t "VitaminaC: " (fact-slot-value ?menu-dia VitaminaC) crlf)
+	; (printout t "VitaminaE: " (fact-slot-value ?menu-dia VitaminaE) crlf)
+	; (printout t "VitaminaK: " (fact-slot-value ?menu-dia VitaminaK) crlf)
+	; (printout t "Zinc: " (fact-slot-value ?menu-dia Zinc) crlf)
+	(printout t crlf crlf)
+)
 
-
-; (defrule PRESENTSOLUTION::printVNmenusDia
-; 	?l <- (MenuDias (lista $?list))
-; 	=>
-; 	(bind ?first (nth$ 1 ?list))
-; 	(bind ?v (fact-slot-value ?first valorNutricional))
-; 	(printout t "Valor: " ?v crlf)
-; 	(modify ?l (lista (delete$ ?list 1 1)))
-; 	)
-
-
-; (defrule PRESENTSOLUTION::imprimir-solucion
-; 	?Sol-Dia-1 <- (SolucionDia (dia 1) (desayuno ?des-1) (comida ?com-1) (postreComida ?post-com-1) (cena ?cen-1) (postreCena ?post-cen-1))
-; 	?Sol-Dia-2 <- (SolucionDia (dia 2) (desayuno ?des-2) (comida ?com-2) (postreComida ?post-com-2) (cena ?cen-2) (postreCena ?post-cen-2))
-; 	?Sol-Dia-3 <- (SolucionDia (dia 3) (desayuno ?des-3) (comida ?com-3) (postreComida ?post-com-3) (cena ?cen-3) (postreCena ?post-cen-3))
-; 	?Sol-Dia-4 <- (SolucionDia (dia 4) (desayuno ?des-4) (comida ?com-4) (postreComida ?post-com-4) (cena ?cen-4) (postreCena ?post-cen-4))
-; 	?Sol-Dia-5 <- (SolucionDia (dia 5) (desayuno ?des-5) (comida ?com-5) (postreComida ?post-com-5) (cena ?cen-5) (postreCena ?post-cen-5))
-; 	?Sol-Dia-6 <- (SolucionDia (dia 6) (desayuno ?des-6) (comida ?com-6) (postreComida ?post-com-6) (cena ?cen-6) (postreCena ?post-cen-6))
-; 	?Sol-Dia-7 <- (SolucionDia (dia 7) (desayuno ?des-7) (comida ?com-7) (postreComida ?post-com-7) (cena ?cen-7) (postreCena ?post-cen-7))
-; 	=>
-; 	(printout t "Esta es nuestra propuesta de menú especialmente preparada para usted: " crlf)
-; 	(printout t "Solucion dia 1: " crlf)
-; 	(printout t "Desayuno: " ?des-1 crlf)
-; 	(printout t "Comida: " ?com-1 crlf)
-; 	(printout t "Postre comida: " ?post-com-1 crlf)
-; 	(printout t "Cena: " ?cen-1 crlf)
-; 	(printout t "Postre cena: " ?post-cen-1 crlf crlf)
-;
-; 	(printout t "Solucion dia 2: " crlf)
-; 	(printout t "Desayuno: " ?des-2 crlf)
-; 	(printout t "Comida: " ?com-2 crlf)
-; 	(printout t "Postre comida: " ?post-com-2 crlf)
-; 	(printout t "Cena: " ?cen-2 crlf)
-; 	(printout t "Postre cena: " ?post-cen-2 crlf crlf)
-;
-; 	(printout t "Solucion dia 3: " crlf)
-; 	(printout t "Desayuno: " ?des-3 crlf)
-; 	(printout t "Comida: " ?com-3 crlf)
-; 	(printout t "Postre comida: " ?post-com-3 crlf)
-; 	(printout t "Cena: " ?cen-3 crlf)
-; 	(printout t "Postre cena: " ?post-cen-3 crlf crlf)
-;
-; 	(printout t "Solucion dia 4: " crlf)
-; 	(printout t "Desayuno: " ?des-4 crlf)
-; 	(printout t "Comida: " ?com-4 crlf)
-; 	(printout t "Postre comida: " ?post-com-4 crlf)
-; 	(printout t "Cena: " ?cen-4 crlf)
-; 	(printout t "Postre cena: " ?post-cen-4 crlf crlf)
-;
-; 	(printout t "Solucion dia 5: " crlf)
-; 	(printout t "Desayuno: " ?des-5 crlf)
-; 	(printout t "Comida: " ?com-5 crlf)
-; 	(printout t "Postre comida: " ?post-com-5 crlf)
-; 	(printout t "Cena: " ?cen-5 crlf)
-; 	(printout t "Postre cena: " ?post-cen-5 crlf crlf)
-;
-; 	(printout t "Solucion dia 6: " crlf)
-; 	(printout t "Desayuno: " ?des-6 crlf)
-; 	(printout t "Comida: " ?com-6 crlf)
-; 	(printout t "Postre comida: " ?post-com-6 crlf)
-; 	(printout t "Cena: " ?cen-6 crlf)
-; 	(printout t "Postre cena: " ?post-cen-6 crlf crlf)
-;
-; 	(printout t "Solucion dia 7: " crlf)
-; 	(printout t "Desayuno: " ?des-7 crlf)
-; 	(printout t "Comida: " ?com-7 crlf)
-; 	(printout t "Postre comida: " ?post-com-7 crlf)
-; 	(printout t "Cena: " ?cen-7 crlf)
-; 	(printout t "Postre cena: " ?post-cen-7 crlf crlf)
-; )
+(defrule PRESENTSOLUTION::imprimir-todo
+	(MenuSemanal (dia1 ?dia1) (dia2 ?dia2) (dia3 ?dia3) (dia4 ?dia4) (dia5 ?dia5) (dia6 ?dia6) (dia7 ?dia7))
+	=>
+	(printout t "Este es nuestro menú preparado especialmente para usted: " crlf)
+	(printout t "Menú para el día 1:" crlf)
+	(imprimir-dia ?dia1)
+	(printout t "Menú para el día 2:" crlf)
+	(imprimir-dia ?dia2)
+	(printout t "Menú para el día 3:" crlf)
+	(imprimir-dia ?dia3)
+	(printout t "Menú para el día 4:" crlf)
+	(imprimir-dia ?dia4)
+	(printout t "Menú para el día 5:" crlf)
+	(imprimir-dia ?dia5)
+	(printout t "Menú para el día 6:" crlf)
+	(imprimir-dia ?dia6)
+	(printout t "Menú para el día 7:" crlf)
+	(imprimir-dia ?dia7)
+	)
