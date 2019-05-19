@@ -1,4 +1,64 @@
-; Thu May 16 22:01:42 GMT+01:00 2019
+; Sun May 19 19:25:49 GMT+01:00 2019
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
+
+([Arroz] of  Ingrediente
+
+	(NombreIngrediente "Arroz")
+	(TipoIngrediente Cereal))
+
+([Margarina] of  Ingrediente
+
+	(NombreIngrediente "Margarina")
+	(TipoIngrediente Lacteo))
+
+([Spanish_rice_mix_prepared_with_canola_vegetable_oil_blend_or_diced_tomatoes_and_margarine_dry_mix] of  Plato
+
+	(AcidoPantotenico 0.0)
+	(AcidosGrasosSaturados 0.0)
+	(AcidosGrasosTrans 0.0)
+	(Agua 0.0)
+	(Azucares 0.0)
+	(Calcio 0.0)
+	(Calorias 0.0)
+	(CarbohidratosTotales 0.0)
+	(Cobalamina 0.0)
+	(Cobre 0.0)
+	(Coccion Frito)
+	(Colina 0.0)
+	(Compatibilidad AptoVegetariano)
+	(FibrasAlimenticias 0.0)
+	(Folato 0.0)
+	(Fosforo 0.0)
+	(GrasaTotal 0.0)
+	(Hierro 0.0)
+	(IngredientePrincipal [Arroz])
+	(Ingredientes
+		[Arroz]
+		[Margarina]
+		[Tomate])
+	(Magnesio 0.0)
+	(Manganeso 0.0)
+	(Niacina 0.0)
+	(NombrePlato "Spanish rice mix, prepared (with canola/vegetable oil blend or diced tomatoes and margarine), dry mix")
+	(Peso 453.592)
+	(Potasio 0.0)
+	(Proteinas 0.0)
+	(Riboflavina 0.0)
+	(Selenio 0.0)
+	(Temporada Cualquiera)
+	(Tiamina 0.0)
+	(Tipo Principal)
+	(VitaminaA 0.0)
+	(VitaminaB6 0.0)
+	(VitaminaC 0.0)
+	(VitaminaD 0.0)
+	(VitaminaE 0.0)
+	(VitaminaK 0.0)
+	(Zinc 0.0))
+
+([Tomate] of  Ingrediente
+
+	(NombreIngrediente "Tomate")
+	(TipoIngrediente Verdura))
